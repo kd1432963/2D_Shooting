@@ -83,24 +83,13 @@ void Player::Action()
 	else if (KEY.IsPress('S'))move.y -= kWalkPow;
 	else if (KEY.IsPress('D'))move.x += kWalkPow;
 
-	// ˆÚ‘——Ê‚Å•ûŒüŒˆ’è
-	if (move.x > 0.0f)
-	{
-		scale.x = kScaleX;
-	}
-	else if (move.x < 0.0f)
-	{
-		scale.x = -kScaleX;
-	}
-
 	// ‹Ê”­ŽË
 	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
 	{
-		float dir = (scale.x > 0) ? 1.0f : -1.0f;
-		BulletBase* straightBullet = new StraightBullet("Bullet", pos, { kShotPow * dir, 0.0f });
+		BulletBase* straightBullet = new StraightBullet("Bullet", pos, { kShotPow, 0.0f });
 		mp_bulletList.push_back(straightBullet);
 		mp_bulletList.back()->Init();
-		m_shotRecast = 60.0f;
+		m_shotRecast = 30.0f;
 	}
 
 
