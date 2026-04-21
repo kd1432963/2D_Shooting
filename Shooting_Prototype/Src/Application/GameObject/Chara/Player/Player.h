@@ -30,4 +30,7 @@ private:
 
 	float m_shotRecast = 0.0f;
 
+
+
+	int Test = 0;
 };
