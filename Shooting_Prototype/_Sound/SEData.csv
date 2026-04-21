@@ -1,0 +1,5 @@
+﻿タグ名,ファイルパス,個別音量設定
+Sample,_Sound/Sample/Sample.wav,1.0f
+Click,_Sound/Sample/Click.wav,0.1f
+Hover,_Sound/Sample/Hover.wav,1.0f
+Trigger,_Sound/Sample/Trigger.wav,1.0f

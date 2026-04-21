@@ -1,0 +1,4 @@
+タグ名,画像の横幅,画像の縦幅,画像のパス
+Player,16,16,_Texture/Chara/Player/player.png
+Bullet,16,16,_Texture/Bullet/bullet.png
+Enemy1,64,64,_Texture/Chara/Enemy/enemy1.png
