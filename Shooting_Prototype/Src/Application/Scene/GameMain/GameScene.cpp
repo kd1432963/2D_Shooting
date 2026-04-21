@@ -4,8 +4,12 @@
 
 #include"Application/Scene/Result/ResultScene.h"
 
+#include"Application/GameObject/HitBox.h"
+
 #include"Application/GameObject/Chara/Enemy/EnemyBase.h"
 #include"Application/GameObject/Chara/Enemy/Enemy1/Enemy1.h"
+
+#include"Application/GameObject/Bullet/BulletBase.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
 // シーンができたときに一度だけ通る関数
@@ -64,6 +68,10 @@ void GameScene::Update()
 		e->Action();
 	}
 
+	// 当たり判定
+	CheckCollition();
+
+
 	// 敵更新
 	for (auto& e : mp_enemyList)
 	{
@@ -97,4 +105,24 @@ void GameScene::Draw2D()
 void GameScene::ImGuiUpdate()
 {
 
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// 当たり判定呼び出し関数
+//+++++++++++++++++++++++++++++++++++++++++
+void GameScene::CheckCollition()
+{
+	auto bullets = m_player.GetBullets();
+
+	for (auto& b : bullets)
+	{
+		for (auto& e : mp_enemyList)
+		{
+			if (b->GetHitBox().IsHit(e->GetHitBox()))
+			{
+				b->SetDead();
+			}
+		}
+	}
+	
 }

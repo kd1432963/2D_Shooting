@@ -1,5 +1,7 @@
 #pragma once
 
+#include"Application/GameObject/HitBox.h"
+
 //**********************************
 // ゲーム内オブジェクトの基底クラス
 //**********************************
@@ -24,10 +26,24 @@ public:
 public:
 
 	//**********************************
+	// ゲッター
+	//**********************************
+	const HitBox& GetHitBox() const { return hitbox; }
+
+public:
+
+	//**********************************
 	// 便利関数
 	//**********************************
 	void UpdateMatrix();						// 行列更新
 	void UpdateMatrix(Math::Vector2 cameraPos);	// 行列更新（カメラ）
+
+protected:
+
+	//**********************************
+	// 便利関数
+	//**********************************
+	void UpdatePos();
 
 protected:
 
@@ -40,4 +56,5 @@ protected:
 	Math::Vector2 move = { 0.0f,0.0f };			// 移動量
 	Math::Matrix mat = Math::Matrix::Identity;	// 行列
 	KdTexture* tex;								// 画像
+	HitBox hitbox;								// 当たり判定情報
 };

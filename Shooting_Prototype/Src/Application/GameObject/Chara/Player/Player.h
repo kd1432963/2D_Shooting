@@ -18,6 +18,10 @@ public:
 
 public:
 
+	//**********************************
+	// ÉQÉbÉ^Å[
+	//**********************************
+	std::vector<BulletBase*>GetBullets()const { return mp_bulletList; }
 
 
 

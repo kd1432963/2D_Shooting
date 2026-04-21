@@ -12,6 +12,10 @@ using namespace PlayerConst;
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Init()
 {
+	//=== 判定情報 ========================
+
+	hitbox.radius = kRadius;
+
 	//=== 画像情報取得 ====================
 
 	tex = ASSET.GetTexture("Player");
@@ -36,7 +40,7 @@ void Player::Init()
 void Player::Update()
 {
 	// 座標確定
-	pos += move;
+	UpdatePos();
 
 	// 弾更新
 	for (auto& b : mp_bulletList)

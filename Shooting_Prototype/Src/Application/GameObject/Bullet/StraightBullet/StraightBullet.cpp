@@ -5,6 +5,11 @@
 //+++++++++++++++++++++++++++++++++++++++++
 StraightBullet::StraightBullet(const std::string& texTag, const Math::Vector2& p, const Math::Vector2& m)
 {
+	//=== 当たり判定情報 ==================
+
+	hitbox.pos = p;
+	hitbox.radius = 8.0f;
+
 	//=== 画像タグ保存 ====================
 
 	tag = texTag;
@@ -26,7 +31,6 @@ void StraightBullet::Init()
 
 	scale = { 1.0f,1.0f };
 	rotate = 0.0f;
-	radius = 8.0f * scale.x;
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -35,7 +39,7 @@ void StraightBullet::Init()
 void StraightBullet::Update()
 {
 	// 座標確定
-	pos += move;
+	UpdatePos();
 
 	// 画面外にでていたら消す
 	if (pos.x >= 640 + radius || pos.x <= -640 - radius)

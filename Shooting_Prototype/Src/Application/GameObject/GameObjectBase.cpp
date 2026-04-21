@@ -27,3 +27,12 @@ void GameObjectBase::UpdateMatrix(Math::Vector2 cameraPos)
 	// 行列合成
 	mat = S * R * T;
 }
+
+//+++++++++++++++++++++++++++++++++++++++++
+// 座標更新
+//+++++++++++++++++++++++++++++++++++++++++
+void GameObjectBase::UpdatePos()
+{
+	pos += move;
+	hitbox.pos = pos;
+}

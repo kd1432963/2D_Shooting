@@ -14,6 +14,7 @@ namespace PlayerConst
 	constexpr float kPosY = 0.0f;
 	constexpr float kScaleX = 2.0f;
 	constexpr float kScaleY = 2.0f;
+	constexpr float kRadius = 16.0f;
 
 	//+++ スピード ++++++++++++++++
 

@@ -17,6 +17,7 @@ void Enemy1::Init()
 	scale = { kScaleX,kScaleY };
 	rotate = 0.0f;
 	move = { 0.0f,0.0f };
+	hitbox.radius = 16.0f;
 
 	//=== 初期化した情報で行列更新 ========
 
@@ -26,7 +27,7 @@ void Enemy1::Init()
 void Enemy1::Update()
 {
 	// 座標確定
-	pos += move;
+	UpdatePos();
 
 
 
