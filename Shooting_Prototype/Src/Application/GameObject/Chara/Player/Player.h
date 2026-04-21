@@ -29,8 +29,4 @@ private:
 	std::vector<BulletBase*>mp_bulletList;
 
 	float m_shotRecast = 0.0f;
-
-
-
-	int Test = 0;
 };
