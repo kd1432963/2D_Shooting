@@ -53,7 +53,6 @@ void Player::Update()
 	{
 		if ((*it)->IsDead())
 		{
-			delete* it;
 			it = mp_bulletList.erase(it);
 		}
 		else
@@ -86,8 +85,8 @@ void Player::Action()
 	// ‹Ê”­ŽË
 	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
 	{
-		BulletBase* straightBullet = new StraightBullet("Bullet", pos, { kShotPow, 0.0f });
-		mp_bulletList.push_back(straightBullet);
+		std::unique_ptr<BulletBase, BulletDeleter> bullet{ new StraightBullet("Bullet", pos, Math::Vector2{ kShotPow, 0.0f }),BulletDeleter{} };
+		mp_bulletList.emplace_back(std::move(bullet));
 		mp_bulletList.back()->Init();
 		m_shotRecast = 30.0f;
 	}
@@ -108,4 +107,9 @@ void Player::Draw2D()
 
 	// Ž©‹@•`‰æ
 	DrawChara();
+}
+
+void Player::BulletDeleter::operator()(BulletBase* p)
+{
+	delete p;
 }

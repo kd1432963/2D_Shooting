@@ -16,12 +16,19 @@ public:
 	void Action()override;	// 行動決定
 	void Draw2D()override;	// 描画
 
+private:
+
+	struct BulletDeleter
+	{
+		void operator()(BulletBase* p);
+	};
+
 public:
 
 	//**********************************
 	// ゲッター
 	//**********************************
-	const std::vector<BulletBase*>& GetBullets()const { return mp_bulletList; }
+	const std::vector<std::unique_ptr<BulletBase,BulletDeleter>>& GetBullets()const { return mp_bulletList; }
 
 
 
@@ -30,7 +37,8 @@ private:
 	//**********************************
 	// メンバ変数
 	//**********************************
-	std::vector<BulletBase*>mp_bulletList;
+	
+	std::vector < std::unique_ptr <BulletBase, BulletDeleter >> mp_bulletList;
 
 	float m_shotRecast = 0.0f;
 };
