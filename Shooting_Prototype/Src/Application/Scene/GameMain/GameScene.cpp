@@ -126,7 +126,9 @@ void GameScene::ImGuiUpdate()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::CheckCollition()
 {
-	auto bullets = m_player.GetBullets();
+	//=== ’e & “G =========================
+
+	auto& bullets = m_player.GetBullets();
 
 	for (auto& b : bullets)
 	{
@@ -139,6 +141,9 @@ void GameScene::CheckCollition()
 			}
 		}
 	}
+
+	//===  =========================
+
 
 }
 

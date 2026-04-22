@@ -21,7 +21,7 @@ public:
 	//**********************************
 	// ÉQÉbÉ^Å[
 	//**********************************
-	std::vector<BulletBase*>GetBullets()const { return mp_bulletList; }
+	const std::vector<BulletBase*>& GetBullets()const { return mp_bulletList; }
 
 
 
