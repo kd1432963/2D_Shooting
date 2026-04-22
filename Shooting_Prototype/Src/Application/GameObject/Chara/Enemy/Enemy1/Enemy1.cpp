@@ -18,6 +18,7 @@ void Enemy1::Init()
 	rotate = 0.0f;
 	move = { 0.0f,0.0f };
 	hitbox.radius = 16.0f;
+	status.hp = kHp;
 
 	//=== ‰Šú‰»‚µ‚½î•ñ‚Ås—ñXV ========
 

@@ -21,8 +21,14 @@ public:
 	virtual void Action() = 0;			// s“®Œˆ’è
 	virtual void Init() = 0;			// ‰Šú‰»
 
+public:
+
+	void TakeDamage(int damage) { status.hp -= damage; }
+	bool IsDead()const { return status.hp <= 0; }
+
 protected:
 
+	
 
 
 

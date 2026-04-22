@@ -74,6 +74,17 @@ void GameScene::Update()
 	// “–‚½‚è”»’è
 	CheckCollition();
 
+	for (auto& it = mp_enemyList.begin(); it != mp_enemyList.end();)
+	{
+		if ((*it)->IsDead())
+		{
+			it = mp_enemyList.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 
 	// “GXV
 	for (auto& e : mp_enemyList)
@@ -123,6 +134,7 @@ void GameScene::CheckCollition()
 		{
 			if (b->GetHitBox().IsHit(e->GetHitBox()))
 			{
+				e->TakeDamage(10);
 				b->SetDead();
 			}
 		}
