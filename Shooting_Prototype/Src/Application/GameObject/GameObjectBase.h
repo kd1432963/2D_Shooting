@@ -12,7 +12,7 @@ public:
 	//**********************************
 	// 仮想デストラクタ
 	//**********************************
-	~GameObjectBase() = default;
+	virtual ~GameObjectBase() = default;
 
 
 public:

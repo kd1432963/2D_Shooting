@@ -59,6 +59,14 @@ private:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// 敵リスト
 	//+++++++++++++++++++++++++++++++++++++++++
-	std::vector<EnemyBase*>mp_enemyList;
-
+	//+++++++++++++++++++++++++++++++++++++++++
+	// EnemyBase を前方宣言のまま unique_ptr で保持するため、
+	// デフォルトの delete（default_delete）を使わず、
+	// 実際の delete 処理を cpp 側で定義するカスタムデリータを使用する。
+	// これにより、ヘッダでは EnemyBase の完全型を要求されない。
+	//+++++++++++++++++++++++++++++++++++++++++
+	struct EnemyDeleter {
+		void operator()(EnemyBase* p);
+	};
+	std::vector<std::unique_ptr<EnemyBase,EnemyDeleter>>mp_enemyList;
 };

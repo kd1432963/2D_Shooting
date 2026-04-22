@@ -19,10 +19,13 @@ void GameScene::OnEnter()
 	// ÉvÉåÉCÉÑÅ[èâä˙âª
 	m_player.Init();
 
-	// èâä˙ìGê∂ê¨
-	EnemyBase* enemy = new Enemy1();
-	mp_enemyList.push_back(enemy);
-	mp_enemyList.back()->Init();
+	// ìGê∂ê¨
+	for (int i = 0; i < 5; ++i)
+	{
+		std::unique_ptr<EnemyBase, EnemyDeleter> enemy(new Enemy1(),EnemyDeleter{});
+		mp_enemyList.emplace_back(std::move(enemy));
+		mp_enemyList.back()->Init();
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -124,5 +127,10 @@ void GameScene::CheckCollition()
 			}
 		}
 	}
-	
+
+}
+
+void GameScene::EnemyDeleter::operator()(EnemyBase* p)
+{
+	delete p;
 }
