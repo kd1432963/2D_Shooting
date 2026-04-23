@@ -2,6 +2,8 @@
 
 #include"Application/GameObject/GameObjectBase.h"
 
+#include"BulletOwner.h"
+
 class BulletBase :public GameObjectBase
 {
 public:
@@ -26,6 +28,7 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	bool IsDead()const { return isDead; }
 	int GetAtk()const { return atk; }
+	BulletOwner GetOwner()const { return owner; }
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// セッター
@@ -41,6 +44,7 @@ protected:
 	int lifeTime = 0;	// 生存時間
 	bool isDead = false;// 死んでいるか
 	float radius = 0.0f;// 半径
+	BulletOwner owner = BulletOwner::Player;
 
 	std::string tag;	// 画像のタグ
 

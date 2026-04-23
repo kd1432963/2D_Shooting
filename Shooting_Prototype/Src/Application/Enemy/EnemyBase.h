@@ -23,7 +23,6 @@ public:
 
 public:
 
-	void TakeDamage(int damage) { status.hp -= damage; }
 	bool IsDead()const { return status.hp <= 0; }
 
 protected:

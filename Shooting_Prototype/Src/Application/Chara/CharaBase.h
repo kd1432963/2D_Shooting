@@ -21,6 +21,9 @@ public:
 	virtual void Action() = 0;			// s“®Œˆ’è
 	virtual void Init() = 0;			// ‰Šú‰»
 
+
+	void TakeDamage(int damage) { status.hp -= damage; }
+
 protected:
 
 	//**********************************

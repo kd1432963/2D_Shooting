@@ -90,7 +90,8 @@ void Player::Shot(BulletManager& b)
 		"Bullet",
 		pos,
 		{kShotPow,0.0f},
-		kAtk
+		kAtk,
+		BulletOwner::Player
 	};
 
 	auto bullet = std::make_unique<StraightBullet>(cfg);

@@ -20,6 +20,7 @@ StraightBullet::StraightBullet(const BulletConfig& cfg)
 	move = cfg.move;
 	scale = { 1.0f, 1.0f };
 	rotate = 0.0f;
+	owner = cfg.owner;
 
 	atk = cfg.atk;
 }

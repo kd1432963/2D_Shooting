@@ -255,6 +255,9 @@
     <ClInclude Include="Src\Application\Bullet\BulletConfig.h">
       <Filter>Src\Application\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\BulletOwner.h">
+      <Filter>Src\Application\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">

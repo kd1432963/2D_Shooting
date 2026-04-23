@@ -147,6 +147,16 @@ void GameScene::CheckCollision()
 
 	for (auto& b : bullets)
 	{
+		if (b->GetOwner() != BulletOwner::Player)
+		{
+			if (b->GetHitBox().IsHit(m_player.GetHitBox()))
+			{
+				m_player.TakeDamage(b->GetAtk());
+				b->SetDead();
+			}
+			continue;
+		}
+
 		for (auto& e : enemies)
 		{
 			if (b->GetHitBox().IsHit(e->GetHitBox()))

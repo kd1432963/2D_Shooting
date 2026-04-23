@@ -162,6 +162,7 @@
     <ClInclude Include="Src\Application\Bullet\BulletBase.h" />
     <ClInclude Include="Src\Application\Bullet\BulletConfig.h" />
     <ClInclude Include="Src\Application\Bullet\BulletManager.h" />
+    <ClInclude Include="Src\Application\Bullet\BulletOwner.h" />
     <ClInclude Include="Src\Application\Bullet\StraightBullet\StraightBullet.h" />
     <ClInclude Include="Src\Application\Chara\CharaBase.h" />
     <ClInclude Include="Src\Application\Chara\Player.h" />
