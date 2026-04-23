@@ -18,8 +18,6 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	virtual void Update()override = 0;
 	virtual void Draw2D()override = 0;
-	virtual void Init() = 0;
-	virtual void Action() {};
 
 public:
 
@@ -27,6 +25,7 @@ public:
 	// ゲッター
 	//+++++++++++++++++++++++++++++++++++++++++
 	bool IsDead()const { return isDead; }
+	int GetAtk()const { return atk; }
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// セッター

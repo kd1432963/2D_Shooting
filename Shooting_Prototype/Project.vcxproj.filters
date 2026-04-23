@@ -249,6 +249,9 @@
     <ClInclude Include="Src\Application\Enemy\EnemySpawner.h">
       <Filter>Src\Application\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\BulletManager.h">
+      <Filter>Src\Application\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -361,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Enemy\EnemySpawner.cpp">
       <Filter>Src\Application\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Bullet\BulletManager.cpp">
+      <Filter>Src\Application\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

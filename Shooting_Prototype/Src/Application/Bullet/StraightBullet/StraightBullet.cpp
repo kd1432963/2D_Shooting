@@ -5,31 +5,18 @@
 //+++++++++++++++++++++++++++++++++++++++++
 StraightBullet::StraightBullet(const std::string& texTag, const Math::Vector2& p, const Math::Vector2& m)
 {
-	//=== 当たり判定情報 ==================
-
+	// 当たり判定
 	hitbox.pos = p;
 	hitbox.radius = 8.0f;
 
-	//=== 画像タグ保存 ====================
+	// テクスチャ取得
+	tex = ASSET.GetTexture(texTag);
+	m_rect = ASSET.GetRectangle(texTag);
 
-	tag = texTag;
-
-	//=== 情報保存 ========================
-
+	// 情報保存
 	pos = p;
 	move = m;
-}
-
-void StraightBullet::Init()
-{
-	//=== 画像情報取得 ====================
-
-	tex = ASSET.GetTexture(tag);
-	m_rect = ASSET.GetRectangle(tag);
-
-	//===  情報初期化 =====================
-
-	scale = { 1.0f,1.0f };
+	scale = { 1.0f, 1.0f };
 	rotate = 0.0f;
 }
 

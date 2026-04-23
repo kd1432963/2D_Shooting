@@ -68,6 +68,8 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
+	mp_enemySpawner->SpawnWave2(*mp_enemyManager);
+
 	if (KEY.IsTrigger(VK_SPACE))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<ResultScene>());
@@ -130,7 +132,7 @@ void GameScene::CheckCollision()
 		{
 			if (b->GetHitBox().IsHit(e->GetHitBox()))
 			{
-				e->TakeDamage(10);
+				e->TakeDamage(b->GetAtk());
 				b->SetDead();
 			}
 		}

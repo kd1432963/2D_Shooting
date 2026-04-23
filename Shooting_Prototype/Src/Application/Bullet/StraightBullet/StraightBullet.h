@@ -16,7 +16,6 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// 基本ライフサイクル 
 	//+++++++++++++++++++++++++++++++++++++++++
-	void Init()override;
 	void Update()override;
 	void Draw2D()override;
 

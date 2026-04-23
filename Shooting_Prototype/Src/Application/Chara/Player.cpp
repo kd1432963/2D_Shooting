@@ -87,7 +87,6 @@ void Player::Action()
 	{
 		std::unique_ptr<BulletBase, BulletDeleter> bullet{ new StraightBullet("Bullet", pos, Math::Vector2{ kShotPow, 0.0f }),BulletDeleter{} };
 		mp_bulletList.emplace_back(std::move(bullet));
-		mp_bulletList.back()->Init();
 		m_shotRecast = 30.0f;
 	}
 
