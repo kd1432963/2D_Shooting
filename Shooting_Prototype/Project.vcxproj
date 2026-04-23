@@ -167,6 +167,7 @@
     <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1.h" />
     <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1Config.h" />
     <ClInclude Include="Src\Application\Enemy\EnemyBase.h" />
+    <ClInclude Include="Src\Application\Enemy\EnemyManager.h" />
     <ClInclude Include="Src\Application\GameObject\GameObjectBase.h" />
     <ClInclude Include="Src\Application\GameObject\HitBox.h" />
     <ClInclude Include="Src\Application\main.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Src\Application\Chara\Player.cpp" />
     <ClCompile Include="Src\Application\Enemy\Enemy1\Enemy1.cpp" />
     <ClCompile Include="Src\Application\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Src\Application\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Src\Application\GameObject\GameObjectBase.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\Application\Scene\GameMain\GameScene.cpp" />

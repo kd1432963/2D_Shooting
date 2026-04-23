@@ -243,6 +243,9 @@
     <ClInclude Include="Src\Application\Enemy\EnemyBase.h">
       <Filter>Src\Application\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\EnemyManager.h">
+      <Filter>Src\Application\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -348,6 +351,9 @@
       <Filter>Src\Application\Enemy\Enemy1</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Enemy\EnemyBase.cpp">
+      <Filter>Src\Application\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Enemy\EnemyManager.cpp">
       <Filter>Src\Application\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
