@@ -2,7 +2,7 @@
 
 #include"PlayerConfig.h"
 
-#include"Application/Bullet/BulletBase.h"
+#include"Application/Bullet/BulletManager.h"
 #include"Application/Bullet/StraightBullet/StraightBullet.h"
 
 using namespace PlayerConst;
@@ -42,25 +42,6 @@ void Player::Update()
 	// ç¿ïWämíË
 	UpdatePos();
 
-	// íeçXêV
-	for (auto& b : mp_bulletList)
-	{
-		b->Update();
-	}
-
-	// Ç¢ÇÁÇ»Ç¢íeÇçÌèú
-	for (auto it = mp_bulletList.begin(); it != mp_bulletList.end();)
-	{
-		if ((*it)->IsDead())
-		{
-			it = mp_bulletList.erase(it);
-		}
-		else
-		{
-			++it;
-		}
-	}
-
 	// çsóÒçXêV
 	UpdateMatrix();
 }
@@ -85,9 +66,8 @@ void Player::Action()
 	// ã î≠éÀ
 	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
 	{
-		std::unique_ptr<BulletBase, BulletDeleter> bullet{ new StraightBullet("Bullet", pos, Math::Vector2{ kShotPow, 0.0f }),BulletDeleter{} };
-		mp_bulletList.emplace_back(std::move(bullet));
-		m_shotRecast = 30.0f;
+		m_wantToShot = true;
+		m_shotRecast = kShotRecastTime;
 	}
 
 
@@ -98,17 +78,15 @@ void Player::Action()
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Draw2D()
 {
-	// íeï`âÊ
-	for (auto& b : mp_bulletList)
-	{
-		b->Draw2D();
-	}
-
 	// é©ã@ï`âÊ
 	DrawChara();
 }
 
-void Player::BulletDeleter::operator()(BulletBase* p)
+void Player::Shot(BulletManager& b)
 {
-	delete p;
+	auto bullet = std::make_unique<StraightBullet>(std::string("Bullet"), pos, Math::Vector2{ kShotPow, 0.0f });
+
+	b.Add(std::move(bullet));
+
+	m_wantToShot = false;
 }

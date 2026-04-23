@@ -2,7 +2,7 @@
 
 #include"Application/Chara/CharaBase.h"
 
-class BulletBase;
+class BulletManager;
 
 class Player :public CharaBase
 {
@@ -16,29 +16,22 @@ public:
 	void Action()override;	// s“®Œˆ’è
 	void Draw2D()override;	// •`‰æ
 
-private:
-
-	struct BulletDeleter
-	{
-		void operator()(BulletBase* p);
-	};
-
 public:
 
 	//**********************************
-	// ƒQƒbƒ^[
+	// ’eŠÖŒW
 	//**********************************
-	const std::vector<std::unique_ptr<BulletBase,BulletDeleter>>& GetBullets()const { return mp_bulletList; }
+	bool WantToShot()const { return m_wantToShot; }
+	void Shot(BulletManager& b);
 
+private:
 
+	bool m_wantToShot = false;
 
 private:
 
 	//**********************************
 	// ƒƒ“ƒo•Ï”
 	//**********************************
-	
-	std::vector < std::unique_ptr <BulletBase, BulletDeleter >> mp_bulletList;
-
 	float m_shotRecast = 0.0f;
 };

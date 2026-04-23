@@ -8,6 +8,7 @@
 
 class EnemyManager;
 class EnemySpawner;
+class BulletManager;
 
 //********************************************************
 // ゲームシーンのクラス
@@ -72,4 +73,9 @@ private:
 	//+++++++++++++++++++++++++++++++++++++++++
 	EnemyManager* mp_enemyManager = nullptr;
 	EnemySpawner* mp_enemySpawner = nullptr;
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// 弾
+	//+++++++++++++++++++++++++++++++++++++++++
+	BulletManager* mp_bulletManager = nullptr;
 };

@@ -5,14 +5,16 @@
 #include"Application/Scene/Result/ResultScene.h"
 
 #include"Application/GameObject/HitBox.h"
-#include"Application/Bullet/BulletBase.h"
+
 #include"Application/Enemy/EnemyManager.h"
 #include"Application/Enemy/EnemySpawner.h"
+#include"Application/Bullet/BulletManager.h"
 
 GameScene::GameScene()
 {
 	mp_enemyManager = new EnemyManager();
 	mp_enemySpawner = new EnemySpawner();
+	mp_bulletManager = new BulletManager();
 }
 
 GameScene::~GameScene()
@@ -20,10 +22,17 @@ GameScene::~GameScene()
 	if (mp_enemyManager)
 	{
 		delete mp_enemyManager;
+		mp_enemyManager = nullptr;
 	}
 	if (mp_enemySpawner)
 	{
 		delete mp_enemySpawner;
+		mp_enemySpawner = nullptr;
+	}
+	if (mp_bulletManager)
+	{
+		delete mp_bulletManager;
+		mp_bulletManager = nullptr;
 	}
 }
 
@@ -68,8 +77,6 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
-	mp_enemySpawner->SpawnWave2(*mp_enemyManager);
-
 	if (KEY.IsTrigger(VK_SPACE))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<ResultScene>());
@@ -78,8 +85,17 @@ void GameScene::Update()
 	// ƒvƒŒƒCƒ„[s“®Œˆ’è
 	m_player.Action();
 
+	// ‹Ê”­ŽË
+	if (m_player.WantToShot())
+	{
+		m_player.Shot(*mp_bulletManager);
+	}
+
 	// “Gs“®Œˆ’è
 	mp_enemyManager->Action();
+
+	// ’eXV
+	mp_bulletManager->Update();
 
 	// “–‚½‚è”»’è
 	CheckCollision();
@@ -102,6 +118,9 @@ void GameScene::Draw2D()
 	// “G•`‰æ
 	mp_enemyManager->Draw2D();
 
+	// ’e•`‰æ
+	mp_bulletManager->Draw2D();
+
 	// ƒvƒŒƒCƒ„[•`‰æ
 	m_player.Draw2D();
 
@@ -123,7 +142,7 @@ void GameScene::CheckCollision()
 {
 	//=== ’e & “G =========================
 
-	auto& bullets = m_player.GetBullets();
+	auto& bullets = mp_bulletManager->GetBullets();
 	auto& enemies = mp_enemyManager->GetEnemies();
 
 	for (auto& b : bullets)

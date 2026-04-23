@@ -1,6 +1,6 @@
 #pragma once
 
-class BulletBase;
+#include"BulletBase.h"
 
 class BulletManager
 {
@@ -20,7 +20,7 @@ public:
     //+++++++++++++++++++++++++++++++++++++++++
     // ’eƒŠƒXƒg‚ÌQÆ‚ğ•Ô‚·
     //+++++++++++++++++++++++++++++++++++++++++
-    const std::vector<std::unique_ptr<BulletBase>>& GetBullets() const;
+    const std::vector<std::unique_ptr<BulletBase>>& GetBullets() const { return m_bullets; }
 
 private:
 

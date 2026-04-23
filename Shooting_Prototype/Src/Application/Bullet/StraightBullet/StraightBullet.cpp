@@ -18,6 +18,8 @@ StraightBullet::StraightBullet(const std::string& texTag, const Math::Vector2& p
 	move = m;
 	scale = { 1.0f, 1.0f };
 	rotate = 0.0f;
+
+	atk = 10;
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

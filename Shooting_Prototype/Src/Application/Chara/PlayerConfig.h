@@ -22,6 +22,7 @@ namespace PlayerConst
 
 	//+++ ”­ŽË‘¬“x ++++++++++++++++
 
-	constexpr float kShotPow = 8.0f;
+	constexpr float kShotRecastTime = 5.0f;
+	constexpr float kShotPow = 10.0f;
 
 }
