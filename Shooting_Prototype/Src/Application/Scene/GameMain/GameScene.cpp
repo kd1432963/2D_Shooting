@@ -5,11 +5,27 @@
 #include"Application/Scene/Result/ResultScene.h"
 
 #include"Application/GameObject/HitBox.h"
-
-#include"Application/Enemy/EnemyBase.h"
-#include"Application/Enemy/Enemy1/Enemy1.h"
-
 #include"Application/Bullet/BulletBase.h"
+#include"Application/Enemy/EnemyManager.h"
+#include"Application/Enemy/EnemySpawner.h"
+
+GameScene::GameScene()
+{
+	mp_enemyManager = new EnemyManager();
+	mp_enemySpawner = new EnemySpawner();
+}
+
+GameScene::~GameScene()
+{
+	if (mp_enemyManager)
+	{
+		delete mp_enemyManager;
+	}
+	if (mp_enemySpawner)
+	{
+		delete mp_enemySpawner;
+	}
+}
 
 //+++++++++++++++++++++++++++++++++++++++++
 // シーンができたときに一度だけ通る関数
@@ -20,12 +36,7 @@ void GameScene::OnEnter()
 	m_player.Init();
 
 	// 敵生成
-	for (int i = 0; i < 5; ++i)
-	{
-		std::unique_ptr<EnemyBase, EnemyDeleter> enemy(new Enemy1(),EnemyDeleter{});
-		mp_enemyList.emplace_back(std::move(enemy));
-		mp_enemyList.back()->Init();
-	}
+	mp_enemySpawner->SpawnWave1(*mp_enemyManager);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -66,31 +77,16 @@ void GameScene::Update()
 	m_player.Action();
 
 	// 敵行動決定
-	for (auto& e : mp_enemyList)
-	{
-		e->Action();
-	}
+	mp_enemyManager->Action();
 
 	// 当たり判定
-	CheckCollition();
+	CheckCollision();
 
-	for (auto& it = mp_enemyList.begin(); it != mp_enemyList.end();)
-	{
-		if ((*it)->IsDead())
-		{
-			it = mp_enemyList.erase(it);
-		}
-		else
-		{
-			++it;
-		}
-	}
+	// 死亡処理
+	mp_enemyManager->DeleteDead();
 
 	// 敵更新
-	for (auto& e : mp_enemyList)
-	{
-		e->Update();
-	}
+	mp_enemyManager->Update();
 
 	// プレイヤー更新
 	m_player.Update();
@@ -102,10 +98,7 @@ void GameScene::Update()
 void GameScene::Draw2D()
 {
 	// 敵描画
-	for (auto& e : mp_enemyList)
-	{
-		e->Draw2D();
-	}
+	mp_enemyManager->Draw2D();
 
 	// プレイヤー描画
 	m_player.Draw2D();
@@ -124,15 +117,16 @@ void GameScene::ImGuiUpdate()
 //+++++++++++++++++++++++++++++++++++++++++
 // 当たり判定呼び出し関数
 //+++++++++++++++++++++++++++++++++++++++++
-void GameScene::CheckCollition()
+void GameScene::CheckCollision()
 {
 	//=== 弾 & 敵 =========================
 
 	auto& bullets = m_player.GetBullets();
+	auto& enemies = mp_enemyManager->GetEnemies();
 
 	for (auto& b : bullets)
 	{
-		for (auto& e : mp_enemyList)
+		for (auto& e : enemies)
 		{
 			if (b->GetHitBox().IsHit(e->GetHitBox()))
 			{
@@ -143,11 +137,4 @@ void GameScene::CheckCollition()
 	}
 
 	//===  =========================
-
-
-}
-
-void GameScene::EnemyDeleter::operator()(EnemyBase* p)
-{
-	delete p;
 }

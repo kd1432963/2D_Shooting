@@ -4,13 +4,24 @@
 
 #include"Application/Chara/Player.h"
 
-class EnemyBase;
+
+
+class EnemyManager;
+class EnemySpawner;
 
 //********************************************************
 // ゲームシーンのクラス
 //********************************************************
 class GameScene :public SceneBase
 {
+public:
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// コンストラクタ・デストラクタ
+	//+++++++++++++++++++++++++++++++++++++++++
+	GameScene();
+	~GameScene();
+
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
@@ -47,7 +58,7 @@ private:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// 当たり判定処理
 	//+++++++++++++++++++++++++++++++++++++++++
-	void CheckCollition();
+	void CheckCollision();
 
 private:
 
@@ -57,16 +68,8 @@ private:
 	Player m_player;
 
 	//+++++++++++++++++++++++++++++++++++++++++
-	// 敵リスト
+	// 敵
 	//+++++++++++++++++++++++++++++++++++++++++
-	//+++++++++++++++++++++++++++++++++++++++++
-	// EnemyBase を前方宣言のまま unique_ptr で保持するため、
-	// デフォルトの delete（default_delete）を使わず、
-	// 実際の delete 処理を cpp 側で定義するカスタムデリータを使用する。
-	// これにより、ヘッダでは EnemyBase の完全型を要求されない。
-	//+++++++++++++++++++++++++++++++++++++++++
-	struct EnemyDeleter {
-		void operator()(EnemyBase* p);
-	};
-	std::vector<std::unique_ptr<EnemyBase,EnemyDeleter>>mp_enemyList;
+	EnemyManager* mp_enemyManager = nullptr;
+	EnemySpawner* mp_enemySpawner = nullptr;
 };

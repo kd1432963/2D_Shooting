@@ -33,7 +33,8 @@ public:
     // 基本ライフサイクル
     //+++++++++++++++++++++++++++++++++++++++++
     void Update();
-    void Draw();
+    void Action();
+    void Draw2D();
     void DeleteDead();
 
     //+++++++++++++++++++++++++++++++++++++++++

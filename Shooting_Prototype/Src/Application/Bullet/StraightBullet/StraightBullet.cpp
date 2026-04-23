@@ -51,11 +51,6 @@ void StraightBullet::Update()
 	UpdateMatrix();
 }
 
-void StraightBullet::Action()
-{
-
-}
-
 //+++++++++++++++++++++++++++++++++++++++++
 // ï`âÊä÷êî
 //+++++++++++++++++++++++++++++++++++++++++

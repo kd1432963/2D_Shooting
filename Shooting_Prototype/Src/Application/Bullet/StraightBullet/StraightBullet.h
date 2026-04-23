@@ -18,7 +18,6 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	void Init()override;
 	void Update()override;
-	void Action()override;
 	void Draw2D()override;
 
 
