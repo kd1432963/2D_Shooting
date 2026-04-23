@@ -160,6 +160,7 @@
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="Src\Application\Bullet\BulletBase.h" />
+    <ClInclude Include="Src\Application\Bullet\BulletConfig.h" />
     <ClInclude Include="Src\Application\Bullet\BulletManager.h" />
     <ClInclude Include="Src\Application\Bullet\StraightBullet\StraightBullet.h" />
     <ClInclude Include="Src\Application\Chara\CharaBase.h" />

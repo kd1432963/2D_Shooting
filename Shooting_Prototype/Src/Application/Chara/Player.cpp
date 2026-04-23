@@ -3,6 +3,7 @@
 #include"PlayerConfig.h"
 
 #include"Application/Bullet/BulletManager.h"
+#include"Application/Bullet/BulletConfig.h"
 #include"Application/Bullet/StraightBullet/StraightBullet.h"
 
 using namespace PlayerConst;
@@ -84,7 +85,15 @@ void Player::Draw2D()
 
 void Player::Shot(BulletManager& b)
 {
-	auto bullet = std::make_unique<StraightBullet>(std::string("Bullet"), pos, Math::Vector2{ kShotPow, 0.0f });
+	BulletConfig cfg =
+	{
+		"Bullet",
+		pos,
+		{kShotPow,0.0f},
+		kAtk
+	};
+
+	auto bullet = std::make_unique<StraightBullet>(cfg);
 
 	b.Add(std::move(bullet));
 

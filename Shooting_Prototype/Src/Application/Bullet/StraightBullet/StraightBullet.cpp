@@ -1,26 +1,29 @@
 #include "StraightBullet.h"
 
+#include"Application/Bullet/BulletConfig.h"
+
 //+++++++++++++++++++++++++++++++++++++++++
 // コンストラクタ
 //+++++++++++++++++++++++++++++++++++++++++
-StraightBullet::StraightBullet(const std::string& texTag, const Math::Vector2& p, const Math::Vector2& m)
+StraightBullet::StraightBullet(const BulletConfig& cfg)
 {
 	// 当たり判定
-	hitbox.pos = p;
+	hitbox.pos = cfg.pos;
 	hitbox.radius = 8.0f;
 
 	// テクスチャ取得
-	tex = ASSET.GetTexture(texTag);
-	m_rect = ASSET.GetRectangle(texTag);
+	tex = ASSET.GetTexture(cfg.texTag);
+	m_rect = ASSET.GetRectangle(cfg.texTag);
 
 	// 情報保存
-	pos = p;
-	move = m;
+	pos = cfg.pos;
+	move = cfg.move;
 	scale = { 1.0f, 1.0f };
 	rotate = 0.0f;
 
-	atk = 10;
+	atk = cfg.atk;
 }
+
 
 //+++++++++++++++++++++++++++++++++++++++++
 // 更新関数

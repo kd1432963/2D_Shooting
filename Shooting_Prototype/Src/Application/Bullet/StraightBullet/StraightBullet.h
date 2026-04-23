@@ -2,6 +2,8 @@
 
 #include"Application/Bullet/BulletBase.h"
 
+struct BulletConfig;
+
 class StraightBullet :public BulletBase
 {
 public:
@@ -9,7 +11,7 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// コンストラクタ
 	//+++++++++++++++++++++++++++++++++++++++++
-	StraightBullet(const std::string& texTug, const Math::Vector2& p, const Math::Vector2& m);
+	StraightBullet(const BulletConfig& cfg);
 
 public:
 
