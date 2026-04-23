@@ -73,23 +73,20 @@
     <Filter Include="Src\Application\GameObject">
       <UniqueIdentifier>{7956977a-d343-418d-9e79-22565b5f6109}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\GameObject\Chara">
-      <UniqueIdentifier>{4623444f-e4d6-4a4c-aa77-c44e68b8db1d}</UniqueIdentifier>
+    <Filter Include="Src\Application\Chara">
+      <UniqueIdentifier>{68b8f747-55ea-45fd-a93d-835ee850d2d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\GameObject\Chara\Player">
-      <UniqueIdentifier>{42cd6d45-f7e3-41b2-9a25-b9046e9109d7}</UniqueIdentifier>
+    <Filter Include="Src\Application\Enemy">
+      <UniqueIdentifier>{86bcc2d0-86ed-44ce-a2c6-aeede10dcc75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\GameObject\Chara\Enemy">
-      <UniqueIdentifier>{ed146b91-56c0-4522-bd34-b7a07ebdb4bf}</UniqueIdentifier>
+    <Filter Include="Src\Application\Enemy\Enemy1">
+      <UniqueIdentifier>{f55435db-9cc6-4b4d-a9a0-4e3d5ce9767b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\GameObject\Bullet">
-      <UniqueIdentifier>{d224e954-4fb4-465d-ac8f-509d514faf6d}</UniqueIdentifier>
+    <Filter Include="Src\Application\Bullet">
+      <UniqueIdentifier>{afa5ae43-71a7-4f76-8763-51e099358fea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\GameObject\Bullet\StraightBullet">
-      <UniqueIdentifier>{2ef27a8e-f080-457d-8281-f26b7dfa962d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\GameObject\Chara\Enemy\Enemy1">
-      <UniqueIdentifier>{c6e5b7fa-f0ef-40ec-b198-500bdf723fad}</UniqueIdentifier>
+    <Filter Include="Src\Application\Bullet\StraightBullet">
+      <UniqueIdentifier>{0881c851-58ef-4649-9544-3d35836a40a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,32 +216,32 @@
     <ClInclude Include="Src\Application\GameObject\GameObjectBase.h">
       <Filter>Src\Application\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\CharaBase.h">
-      <Filter>Src\Application\GameObject\Chara</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\Player\Player.h">
-      <Filter>Src\Application\GameObject\Chara\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\Player\PlayerConfig.h">
-      <Filter>Src\Application\GameObject\Chara\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Bullet\BulletBase.h">
-      <Filter>Src\Application\GameObject\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Bullet\StraightBullet\StraightBullet.h">
-      <Filter>Src\Application\GameObject\Bullet\StraightBullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\Enemy\EnemyBase.h">
-      <Filter>Src\Application\GameObject\Chara\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\Enemy\Enemy1\Enemy1.h">
-      <Filter>Src\Application\GameObject\Chara\Enemy\Enemy1</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\GameObject\Chara\Enemy\Enemy1\Enemy1Config.h">
-      <Filter>Src\Application\GameObject\Chara\Enemy\Enemy1</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\GameObject\HitBox.h">
       <Filter>Src\Application\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\BulletBase.h">
+      <Filter>Src\Application\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\StraightBullet\StraightBullet.h">
+      <Filter>Src\Application\Bullet\StraightBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Chara\PlayerConfig.h">
+      <Filter>Src\Application\Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Chara\Player.h">
+      <Filter>Src\Application\Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Chara\CharaBase.h">
+      <Filter>Src\Application\Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1.h">
+      <Filter>Src\Application\Enemy\Enemy1</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1Config.h">
+      <Filter>Src\Application\Enemy\Enemy1</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\EnemyBase.h">
+      <Filter>Src\Application\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,20 +335,20 @@
     <ClCompile Include="Src\Application\GameObject\GameObjectBase.cpp">
       <Filter>Src\Application\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\GameObject\Chara\CharaBase.cpp">
-      <Filter>Src\Application\GameObject\Chara</Filter>
+    <ClCompile Include="Src\Application\Bullet\StraightBullet\StraightBullet.cpp">
+      <Filter>Src\Application\Bullet\StraightBullet</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\GameObject\Chara\Player\Player.cpp">
-      <Filter>Src\Application\GameObject\Chara\Player</Filter>
+    <ClCompile Include="Src\Application\Chara\Player.cpp">
+      <Filter>Src\Application\Chara</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\GameObject\Bullet\StraightBullet\StraightBullet.cpp">
-      <Filter>Src\Application\GameObject\Bullet\StraightBullet</Filter>
+    <ClCompile Include="Src\Application\Chara\CharaBase.cpp">
+      <Filter>Src\Application\Chara</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\GameObject\Chara\Enemy\EnemyBase.cpp">
-      <Filter>Src\Application\GameObject\Chara\Enemy</Filter>
+    <ClCompile Include="Src\Application\Enemy\Enemy1\Enemy1.cpp">
+      <Filter>Src\Application\Enemy\Enemy1</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\GameObject\Chara\Enemy\Enemy1\Enemy1.cpp">
-      <Filter>Src\Application\GameObject\Chara\Enemy\Enemy1</Filter>
+    <ClCompile Include="Src\Application\Enemy\EnemyBase.cpp">
+      <Filter>Src\Application\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

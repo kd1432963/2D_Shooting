@@ -2,7 +2,7 @@
 
 #include"Application/Scene/Core/SceneBase.h"
 
-#include"Application//GameObject/Chara/Player/Player.h"
+#include"Application/Chara/Player.h"
 
 class EnemyBase;
 

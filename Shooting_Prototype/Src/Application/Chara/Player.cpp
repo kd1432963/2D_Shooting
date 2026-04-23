@@ -2,8 +2,8 @@
 
 #include"PlayerConfig.h"
 
-#include"Application/GameObject/Bullet/BulletBase.h"
-#include"Application/GameObject/Bullet/StraightBullet/StraightBullet.h"
+#include"Application/Bullet/BulletBase.h"
+#include"Application/Bullet/StraightBullet/StraightBullet.h"
 
 using namespace PlayerConst;
 

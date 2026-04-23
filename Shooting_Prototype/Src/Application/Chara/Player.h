@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Application/GameObject/Chara/CharaBase.h"
+#include"Application/Chara/CharaBase.h"
 
 class BulletBase;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Application/GameObject/Bullet/BulletBase.h"
+#include"Application/Bullet/BulletBase.h"
 
 class StraightBullet :public BulletBase
 {

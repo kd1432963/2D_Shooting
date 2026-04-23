@@ -6,10 +6,10 @@
 
 #include"Application/GameObject/HitBox.h"
 
-#include"Application/GameObject/Chara/Enemy/EnemyBase.h"
-#include"Application/GameObject/Chara/Enemy/Enemy1/Enemy1.h"
+#include"Application/Enemy/EnemyBase.h"
+#include"Application/Enemy/Enemy1/Enemy1.h"
 
-#include"Application/GameObject/Bullet/BulletBase.h"
+#include"Application/Bullet/BulletBase.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
 // ƒV[ƒ“‚ª‚Å‚«‚½‚Æ‚«‚Éˆê“x‚¾‚¯’Ê‚éŠÖ”
