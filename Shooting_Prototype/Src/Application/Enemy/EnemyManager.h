@@ -21,9 +21,6 @@ public:
         auto enemy = std::make_unique<T>(std::forward<Args>(args)...);
         T* raw = enemy.get();
 
-        // ‰Šú‰»ˆ—‚ð’Ê‚·
-        enemy->Init();
-
         // vector ‚É•Û‘¶
         m_enemies.emplace_back(std::move(enemy));
         

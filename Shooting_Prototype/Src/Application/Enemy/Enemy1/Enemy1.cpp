@@ -8,7 +8,27 @@
 
 using namespace Enemy1Const;
 
-void Enemy1::Init()
+Enemy1::Enemy1()
+{//=== ‰æ‘œî•ñæ“¾ ====================
+
+	tex = ASSET.GetTexture("Enemy1");
+	rect = ASSET.GetRectangle("Enemy1");
+
+	//=== î•ñ‰Šú‰» ======================
+
+	pos = {kPosX,kPosY};
+	scale = { kScaleX,kScaleY };
+	rotate = 0.0f;
+	move = { 0.0f,0.0f };
+	hitbox.radius = 16.0f;
+	status.hp = kHp;
+
+	//=== ‰Šú‰»‚µ‚½î•ñ‚Ås—ñXV ========
+
+	UpdateMatrix();
+}
+
+Enemy1::Enemy1(const Math::Vector2 p)
 {
 	//=== ‰æ‘œî•ñæ“¾ ====================
 
@@ -17,7 +37,7 @@ void Enemy1::Init()
 
 	//=== î•ñ‰Šú‰» ======================
 
-	pos = { kPosX,kPosY };
+	pos =  p ;
 	scale = { kScaleX,kScaleY };
 	rotate = 0.0f;
 	move = { 0.0f,0.0f };

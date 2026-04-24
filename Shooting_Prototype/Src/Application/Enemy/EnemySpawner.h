@@ -12,4 +12,5 @@ public:
     void SpawnWave2(EnemyManager& manager);
 
     // 必要ならスポーンポイントやランダム生成もここに追加
+    void RandomSpawn(EnemyManager& manager);
 };

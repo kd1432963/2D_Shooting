@@ -5,7 +5,7 @@ namespace PlayerConst
 	//+++ 初期ステータス ++++++++++
 
 	constexpr int kHp = 50;
-	constexpr int kAtk = 5;
+	constexpr int kAtk = 50;
 	constexpr int kDef = 5;
 
 	//+++ 初期設定 ++++++++++++++++

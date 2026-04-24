@@ -41,9 +41,6 @@ GameScene::~GameScene()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::OnEnter()
 {
-	// ƒvƒŒƒCƒ„[‰Šú‰»
-	m_player.Init();
-
 	// “G¶¬
 	mp_enemySpawner->SpawnWave1(*mp_enemyManager);
 
@@ -81,6 +78,11 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
+	if (KEY.IsTrigger('M'))
+	{
+		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
+	}
+
 	if (KEY.IsTrigger(VK_SPACE))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<ResultScene>());

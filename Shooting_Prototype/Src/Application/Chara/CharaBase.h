@@ -19,10 +19,11 @@ public:
 	virtual void Update()override = 0;	// XV
 	virtual void Draw2D()override = 0;	// •`‰æ
 	virtual void Action() = 0;			// s“®Œˆ’è
-	virtual void Init() = 0;			// ‰Šú‰»
 
 	bool WantToShot()const { return m_wantToShot; }
 	void TakeDamage(int damage) { status.hp -= damage; }
+
+	bool IsDead()const { return status.hp <= 0; }
 
 protected:
 

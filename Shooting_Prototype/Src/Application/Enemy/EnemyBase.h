@@ -21,15 +21,10 @@ public:
 	virtual void Update()override = 0;	// XV
 	virtual void Draw2D()override = 0;	// •`‰æ
 	virtual void Action() = 0;			// s“®Œˆ’è
-	virtual void Init() = 0;			// ‰Šú‰»
 
 public:
 
 	virtual void Shot(BulletManager& bulletManager) {};
-
-
-
-	bool IsDead()const { return status.hp <= 0; }
 
 protected:
 

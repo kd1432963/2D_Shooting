@@ -10,11 +10,12 @@ using namespace PlayerConst;
 //+++++++++++++++++++++++++++++++++++++++++
 // 初期化処理
 //+++++++++++++++++++++++++++++++++++++++++
-void Player::Init()
+Player::Player()
 {
 	//=== 判定情報 ========================
 
 	hitbox.radius = kRadius;
+	hitbox.pos = { kPosX,kPosY };
 
 	//=== 画像情報取得 ====================
 
@@ -28,10 +29,16 @@ void Player::Init()
 	rotate = 90.0f;
 	move = { 0.0f,0.0f };
 
+	//=== ステータス初期化 ================
+
+	status.atk = kAtk;
+	status.def = kDef;
+	status.hp = kHp;
+	status.maxHp = kHp;
+
 	//=== 初期化した情報で行列更新 ========
 
 	UpdateMatrix();
-
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -63,14 +70,22 @@ void Player::Action()
 	else if (KEY.IsPress('S'))move.y -= kWalkPow;
 	else if (KEY.IsPress('D'))move.x += kWalkPow;
 
+	if (KEY.IsTrigger('Q'))
+	{
+		m_shotMode = BulletType::Homing;
+	}
+
+	else if (KEY.IsTrigger('E'))
+	{
+		m_shotMode = BulletType::Straight;
+	}
+
 	// 玉発射
 	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
 	{
 		m_wantToShot = true;
 		m_shotRecast = kShotRecastTime;
 	}
-
-
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -89,7 +104,7 @@ void Player::Shot(BulletManager& b)
 		"Bullet",
 		pos,
 		{8,0.0f},
-		5,
+		status.atk,
 		BulletOwner::Player
 	};
 
