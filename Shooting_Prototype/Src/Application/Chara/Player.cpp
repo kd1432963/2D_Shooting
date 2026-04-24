@@ -89,8 +89,8 @@ void Player::Shot(BulletManager& b)
 	{
 		"Bullet",
 		pos,
-		{kShotPow,0.0f},
-		kAtk,
+		{8,0.0f},
+		5,
 		BulletOwner::Player
 	};
 

@@ -2,6 +2,8 @@
 
 #include"EnemyBase.h"
 
+class BulletManager;
+
 class EnemyManager
 {
 public:
@@ -35,6 +37,7 @@ public:
     void Update();
     void Action();
     void Draw2D();
+    void Shot(BulletManager&b);
     void DeleteDead();
 
     //+++++++++++++++++++++++++++++++++++++++++

@@ -94,6 +94,9 @@ void GameScene::Update()
 	// “Gs“®Œˆ’è
 	mp_enemyManager->Action();
 
+	mp_enemyManager->Shot(*mp_bulletManager);
+	
+
 	// ’eXV
 	mp_bulletManager->Update();
 

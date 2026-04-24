@@ -2,6 +2,8 @@
 
 #include"Application/Enemy/EnemyBase.h"
 
+class BulletManager;
+
 class Enemy1 :public EnemyBase
 {
 public:
@@ -16,6 +18,10 @@ public:
 
 public:
 
+	//**********************************
+	// 
+	//**********************************
+	void Shot(BulletManager& b)override;
 
 
 
@@ -24,6 +30,6 @@ private:
 	//**********************************
 	// ƒƒ“ƒo•Ï”
 	//**********************************
-
+	int t = 0;
 
 };

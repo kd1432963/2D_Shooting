@@ -1,5 +1,6 @@
 #include "EnemyManager.h"
 
+#include"Application/Bullet/BulletManager.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
 // XVˆ—
@@ -31,6 +32,17 @@ void EnemyManager::Draw2D()
     for (auto& e : m_enemies) 
     {
         e->Draw2D();
+    }
+}
+
+void EnemyManager::Shot(BulletManager& b)
+{
+    for (auto& e : m_enemies)
+    {
+        if (e->WantToShot())
+        {
+            e->Shot(b);
+        }
     }
 }
 

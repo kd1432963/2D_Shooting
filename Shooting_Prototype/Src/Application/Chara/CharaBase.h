@@ -21,7 +21,7 @@ public:
 	virtual void Action() = 0;			// s“®Œˆ’è
 	virtual void Init() = 0;			// ‰Šú‰»
 
-
+	bool WantToShot()const { return m_wantToShot; }
 	void TakeDamage(int damage) { status.hp -= damage; }
 
 protected:
@@ -51,4 +51,5 @@ protected:
 	//**********************************
 	Status status;
 	Math::Rectangle rect;
+	bool m_wantToShot = false;
 };

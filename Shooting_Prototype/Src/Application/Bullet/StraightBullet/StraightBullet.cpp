@@ -10,6 +10,7 @@ StraightBullet::StraightBullet(const BulletConfig& cfg)
 	// 当たり判定
 	hitbox.pos = cfg.pos;
 	hitbox.radius = 8.0f;
+	radius = 8.0f;
 
 	// テクスチャ取得
 	tex = ASSET.GetTexture(cfg.texTag);

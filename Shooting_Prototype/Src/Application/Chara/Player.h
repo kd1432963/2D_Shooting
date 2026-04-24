@@ -21,12 +21,11 @@ public:
 	//**********************************
 	// ’eŠÖŒW
 	//**********************************
-	bool WantToShot()const { return m_wantToShot; }
 	void Shot(BulletManager& b);
 
 private:
 
-	bool m_wantToShot = false;
+	
 
 private:
 

@@ -2,6 +2,8 @@
 
 #include"Application/Chara/CharaBase.h"
 
+class BulletManager;
+
 class EnemyBase :public CharaBase
 {
 public:
@@ -22,6 +24,10 @@ public:
 	virtual void Init() = 0;			// ‰Šú‰»
 
 public:
+
+	virtual void Shot(BulletManager& bulletManager);
+
+
 
 	bool IsDead()const { return status.hp <= 0; }
 

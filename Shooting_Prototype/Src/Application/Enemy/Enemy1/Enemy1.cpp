@@ -2,6 +2,10 @@
 
 #include"Enemy1Config.h"
 
+#include"Application/Bullet/BulletManager.h"
+#include"Application/Bullet/BulletConfig.h"
+#include"Application/Bullet/StraightBullet/StraightBullet.h"
+
 using namespace Enemy1Const;
 
 void Enemy1::Init()
@@ -44,6 +48,14 @@ void Enemy1::Action()
 
 	move.x = RandomRangeF(-3.0f, 3.0f);
 	move.y = RandomRangeF(-3.0f, 3.0f);
+
+
+
+	++t;
+	if (t %20  == 0)
+	{
+		m_wantToShot = true;
+	}
 }
 
 void Enemy1::Draw2D()
@@ -51,3 +63,20 @@ void Enemy1::Draw2D()
 	// “G•`‰æ
 	DrawChara();
 }
+
+void Enemy1::Shot(BulletManager& b)
+{
+	BulletConfig cfg;
+	cfg.texTag = "Bullet";
+	cfg.pos = pos;
+	cfg.move = { -5, 0 };
+	cfg.atk = 5;
+	cfg.owner = BulletOwner::Enemy;
+
+	auto bullet = std::make_unique<StraightBullet>(cfg);
+
+	b.Add(std::move(bullet));
+
+	m_wantToShot = false;
+}
+
