@@ -1,67 +1,65 @@
 #include "EnemyManager.h"
 
-#include"Application/Bullet/BulletManager.h"
+#include "Application/Bullet/BulletManager.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
-// XVˆ—
+// XV
 //+++++++++++++++++++++++++++++++++++++++++
-void EnemyManager::Update() 
+void EnemyManager::Update()
 {
-    for (auto& e : m_enemies) 
-    {
-        e->Update();
-    }
+	for (auto& e : m_enemies)
+	{
+		e->Update();
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// s“®Œˆ’è
+// s“®
 //+++++++++++++++++++++++++++++++++++++++++
 void EnemyManager::Action()
 {
-    for (auto& e : m_enemies)
-    {
-        e->Action();
-    }
+	for (auto& e : m_enemies)
+	{
+		e->Action();
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// •`‰æˆ—
+// •`‰æ
 //+++++++++++++++++++++++++++++++++++++++++
-void EnemyManager::Draw2D() 
+void EnemyManager::Draw2D()
 {
-    for (auto& e : m_enemies) 
-    {
-        e->Draw2D();
-    }
+	for (auto& e : m_enemies)
+	{
+		e->Draw2D();
+	}
 }
 
+//+++++++++++++++++++++++++++++++++++++++++
+// ’eˆ—
+//+++++++++++++++++++++++++++++++++++++++++
 void EnemyManager::Shot(BulletManager& b)
 {
-    for (auto& e : m_enemies)
-    {
-        if (e->WantToShot())
-        {
-            e->Shot(b);
-        }
-    }
+	for (auto& e : m_enemies)
+	{
+		if (e->WantToShot())
+		{
+			e->Shot(b);
+		}
+	}
 }
 
-
 //+++++++++++++++++++++++++++++++++++++++++
-// €‚ñ‚Å‚é—v‘f‚ğÁ‚·
+// €–Síœ
 //+++++++++++++++++++++++++++++++++++++++++
-void EnemyManager::DeleteDead() 
+void EnemyManager::DeleteDead()
 {
-    m_enemies.erase
-    (
-        //=== ğŒ‚Ì‡‚¤—v‘f‚ğŒã‚ë‚É‰Ÿ‚µo‚· ==========
-        //=== –ß‚è’l‚ÍğŒ‚É‡‚í‚È‚©‚Á‚½—v‘f‚ÌI’[ ====
-        std::remove_if
-        (
-            m_enemies.begin(),
-            m_enemies.end(),
-            [](const auto& e) { return e->IsDead(); }
-        ),
-        m_enemies.end()
-    );
+	m_enemies.erase(
+		std::remove_if(
+			m_enemies.begin(),
+			m_enemies.end(),
+			[](const auto& e) { return e->IsDead(); }
+		),
+		m_enemies.end()
+	);
 }

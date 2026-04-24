@@ -1,22 +1,19 @@
 #include "StraightBullet.h"
 
-#include"Application/Bullet/BulletConfig.h"
+#include "Application/Bullet/BulletConfig.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
 // コンストラクタ
 //+++++++++++++++++++++++++++++++++++++++++
 StraightBullet::StraightBullet(const BulletConfig& cfg)
 {
-	// 当たり判定
 	hitbox.pos = cfg.pos;
 	hitbox.radius = 8.0f;
 	radius = 8.0f;
 
-	// テクスチャ取得
 	tex = ASSET.GetTexture(cfg.texTag);
 	m_rect = ASSET.GetRectangle(cfg.texTag);
 
-	// 情報保存
 	pos = cfg.pos;
 	move = cfg.move;
 	scale = { 1.0f, 1.0f };
@@ -26,31 +23,28 @@ StraightBullet::StraightBullet(const BulletConfig& cfg)
 	atk = cfg.atk;
 }
 
-
 //+++++++++++++++++++++++++++++++++++++++++
-// 更新関数
+// 更新
 //+++++++++++++++++++++++++++++++++++++++++
 void StraightBullet::Update()
 {
-	// 座標確定
 	UpdatePos();
 
-	// 画面外にでていたら消す
-	if (pos.x >= 640 + radius || pos.x <= -640 - radius)
+	// 画面外で消す（上下も対応）
+	if (pos.x >= 640 + radius || pos.x <= -640 - radius ||
+		pos.y >= 360 + radius || pos.y <= -360 - radius)
 	{
 		isDead = true;
 	}
 
-	// 行列作成
 	UpdateMatrix();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 描画関数
+// 描画
 //+++++++++++++++++++++++++++++++++++++++++
 void StraightBullet::Draw2D()
 {
-	// 弾描画
 	SHADER.m_spriteShader.SetMatrix(mat);
 	SHADER.m_spriteShader.DrawTex(tex, m_rect);
 }

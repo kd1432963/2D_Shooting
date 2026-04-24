@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Application/GameObject/HitBox.h"
+#include "Application/GameObject/HitBox.h"
 
 //**********************************
 // ゲーム内オブジェクトの基底クラス
@@ -14,49 +14,49 @@ public:
 	//**********************************
 	virtual ~GameObjectBase() = default;
 
+public:
+
+	//**********************************
+	// 基本処理
+	//**********************************
+	virtual void Update() = 0;
+	virtual void Draw2D() = 0;
 
 public:
 
 	//**********************************
-	// 基本ライフサイクル
-	//**********************************
-	virtual void Update() = 0;	// 更新
-	virtual void Draw2D() = 0;	// 描画
-
-public:
-
-	//**********************************
-	// ゲッター
+	// アクセサ
 	//**********************************
 	const HitBox& GetHitBox() const { return hitbox; }
-	Math::Vector2 GetPos()const { return pos; }
-
+	Math::Vector2 GetPos() const { return pos; }
 
 public:
 
 	//**********************************
-	// 便利関数
+	// 行列更新
 	//**********************************
-	void UpdateMatrix();						// 行列更新
-	void UpdateMatrix(Math::Vector2 cameraPos);	// 行列更新（カメラ）
+	void UpdateMatrix();
+	void UpdateMatrix(Math::Vector2 cameraPos);
 
 protected:
 
 	//**********************************
-	// 便利関数
+	// 内部処理
 	//**********************************
 	void UpdatePos();
 
 protected:
 
 	//**********************************
-	// 共通変数
+	// ステート
 	//**********************************
-	Math::Vector2 pos = { 0.0f,0.0f };			// 座標
-	Math::Vector2 scale = { 1.0f,1.0f };		// 拡大率
-	float rotate = 0.0f;						// 回転
-	Math::Vector2 move = { 0.0f,0.0f };			// 移動量
-	Math::Matrix mat = Math::Matrix::Identity;	// 行列
-	KdTexture* tex;								// 画像
-	HitBox hitbox;								// 当たり判定情報
+	Math::Vector2	pos		= {};
+	Math::Vector2	scale	= { 1.0f, 1.0f };
+	float			rotate	= 0.0f;
+	Math::Vector2	move	= { 0.0f, 0.0f };
+
+	Math::Matrix	mat		= Math::Matrix::Identity;
+
+	KdTexture*		tex		= nullptr;
+	HitBox			hitbox	= {};
 };

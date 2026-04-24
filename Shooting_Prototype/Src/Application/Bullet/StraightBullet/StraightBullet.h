@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Application/Bullet/BulletBase.h"
+#include "Application/Bullet/BulletBase.h"
 
 struct BulletConfig;
 
-class StraightBullet :public BulletBase
+class StraightBullet : public BulletBase
 {
 public:
 
@@ -16,15 +16,12 @@ public:
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
-	// 基本ライフサイクル 
+	// 基本処理
 	//+++++++++++++++++++++++++++++++++++++++++
-	void Update()override;
-	void Draw2D()override;
-
+	void Update() override;
+	void Draw2D() override;
 
 private:
 
-	// 切り取り範囲
 	Math::Rectangle m_rect = { 0,0,0,0 };
-
 };

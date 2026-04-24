@@ -1,86 +1,86 @@
 #include "Player.h"
 
-#include"PlayerConfig.h"
-
-#include"Application/Bullet/BulletManager.h"
-#include"Application/Bullet/BulletConfig.h"
+#include "PlayerConfig.h"
+#include "Application/Bullet/BulletManager.h"
+#include "Application/Bullet/BulletConfig.h"
 
 using namespace PlayerConst;
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 初期化処理
+// 初期化
 //+++++++++++++++++++++++++++++++++++++++++
 Player::Player()
 {
-	//=== 判定情報 ========================
-
 	hitbox.radius = kRadius;
-	hitbox.pos = { kPosX,kPosY };
-
-	//=== 画像情報取得 ====================
+	hitbox.pos = { kPosX, kPosY };
 
 	tex = ASSET.GetTexture("Player");
 	rect = ASSET.GetRectangle("Player");
 
-	//=== 情報初期化 ======================
-
-	pos = { kPosX,kPosY };
-	scale = { kScaleX,kScaleY };
+	pos = { kPosX, kPosY };
+	scale = { kScaleX, kScaleY };
 	rotate = 90.0f;
-	move = { 0.0f,0.0f };
-
-	//=== ステータス初期化 ================
+	move = { 0.0f, 0.0f };
 
 	status.atk = kAtk;
 	status.def = kDef;
 	status.hp = kHp;
 	status.maxHp = kHp;
 
-	//=== 初期化した情報で行列更新 ========
-
 	UpdateMatrix();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 更新処理
+// 更新
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Update()
 {
-	// 座標確定
 	UpdatePos();
-
-	// 行列更新
 	UpdateMatrix();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 行動確定
+// 行動
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Action()
 {
-	// リキャストを減らす
-	if (m_shotRecast >= 0.0f)--m_shotRecast;
+	if (m_shotRecast > 0.0f)
+		--m_shotRecast;
 
-	// 毎フレーム初期化
-	move = { 0.0f,0.0f };
+	MoveInput();
+	ChangeShotMode();
+	ShotInput();
+}
 
-	// 入力されてるキーによって移動量決定
-	if (KEY.IsPress('W'))move.y += kWalkPow;
-	else if (KEY.IsPress('A'))move.x -= kWalkPow;
-	else if (KEY.IsPress('S'))move.y -= kWalkPow;
-	else if (KEY.IsPress('D'))move.x += kWalkPow;
+//+++++++++++++++++++++++++++++++++++++++++
+// 入力：移動
+//+++++++++++++++++++++++++++++++++++++++++
+void Player::MoveInput()
+{
+	move = { 0.0f, 0.0f };
 
+	if (KEY.IsPress('W')) move.y += kWalkPow;
+	else if (KEY.IsPress('A')) move.x -= kWalkPow;
+	else if (KEY.IsPress('S')) move.y -= kWalkPow;
+	else if (KEY.IsPress('D')) move.x += kWalkPow;
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// 入力：ショットモード変更
+//+++++++++++++++++++++++++++++++++++++++++
+void Player::ChangeShotMode()
+{
 	if (KEY.IsTrigger('Q'))
-	{
 		m_shotMode = BulletType::Homing;
-	}
-
 	else if (KEY.IsTrigger('E'))
-	{
 		m_shotMode = BulletType::Straight;
-	}
+}
 
-	// 玉発射
+//+++++++++++++++++++++++++++++++++++++++++
+// 入力：発射判定
+//+++++++++++++++++++++++++++++++++++++++++
+void Player::ShotInput()
+{
 	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
 	{
 		m_wantToShot = true;
@@ -89,21 +89,23 @@ void Player::Action()
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 描画処理
+// 描画
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Draw2D()
 {
-	// 自機描画
 	DrawChara();
 }
 
+//+++++++++++++++++++++++++++++++++++++++++
+// 弾発射
+//+++++++++++++++++++++++++++++++++++++++++
 void Player::Shot(BulletManager& b)
 {
 	BulletConfig cfg =
 	{
 		"Bullet",
 		pos,
-		{8,0.0f},
+		{kShotPow, 0.0f},
 		status.atk,
 		BulletOwner::Player
 	};

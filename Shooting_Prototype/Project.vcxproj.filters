@@ -371,9 +371,6 @@
     <ClCompile Include="Src\Application\Enemy\Enemy1\Enemy1.cpp">
       <Filter>Src\Application\Enemy\Enemy1</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Enemy\EnemyBase.cpp">
-      <Filter>Src\Application\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Enemy\EnemyManager.cpp">
       <Filter>Src\Application\Enemy</Filter>
     </ClCompile>

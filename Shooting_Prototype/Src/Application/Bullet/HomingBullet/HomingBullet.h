@@ -1,12 +1,13 @@
 #pragma once
 
-#include"Application/Bullet/BulletBase.h"
+#include "Application/Bullet/BulletBase.h"
 
 struct BulletConfig;
 class EnemyManager;
 class CharaBase;
+class Player;
 
-class HomingBullet :public BulletBase
+class HomingBullet : public BulletBase
 {
 public:
 
@@ -18,31 +19,26 @@ public:
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
-	// 基本ライフサイクル 
+	// 基本処理
 	//+++++++++++++++++++++++++++++++++++++++++
-	void Update()override;
-	void Draw2D()override;
+	void Update() override;
+	void Draw2D() override;
 
-
-	void SetEnemyManager(EnemyManager* e) { m_enemyManager = e; }
+	void SetPlayer(Player* p) { mp_player = p; }
+	void SetEnemyManager(EnemyManager* e) { mp_enemyManager = e; }
 
 private:
 
-	//+++++++++++++++++++++++++++++++++++++++++
-	// ターゲット取得関数
-	//+++++++++++++++++++++++++++++++++++++++++
 	CharaBase* FindTarget();
 
 private:
 
-	// 切り取り範囲
 	Math::Rectangle m_rect = { 0,0,0,0 };
 
-	EnemyManager* m_enemyManager = nullptr;
-
-	// ターゲット
+	Player* mp_player = nullptr;
+	EnemyManager* mp_enemyManager = nullptr;
 	CharaBase* m_target = nullptr;
 
-	Math::Vector2 m_dir;
-	float speed = 8.0f;
+	Math::Vector2 m_dir = { 0.0f, 0.0f };
+	float m_speed = 8.0f;
 };

@@ -1,21 +1,21 @@
-#include"BulletManager.h"
+#include "BulletManager.h"
 
-#include"Application/Enemy/EnemyManager.h"
+#include "Application/Enemy/EnemyManager.h"
 
-#include"Application/Bullet/BulletConfig.h"
-#include"Application/Bullet/StraightBullet/StraightBullet.h"
-#include"Application/Bullet/HomingBullet/HomingBullet.h"
+#include "Application/Bullet/BulletConfig.h"
+#include "Application/Bullet/StraightBullet/StraightBullet.h"
+#include "Application/Bullet/HomingBullet/HomingBullet.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
-// í«â¡ä÷êî
+// í«â¡
 //+++++++++++++++++++++++++++++++++++++++++
 void BulletManager::Add(const BulletConfig& cfg, BulletType type)
 {
-	m_bullets.emplace_back(CreateBullet(cfg,type));
+	m_bullets.emplace_back(CreateBullet(cfg, type));
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// çXêVèàóù
+// çXêV
 //+++++++++++++++++++++++++++++++++++++++++
 void BulletManager::Update()
 {
@@ -31,14 +31,16 @@ void BulletManager::Update()
 			m_bullets.begin(),
 			m_bullets.end(),
 			[](const std::unique_ptr<BulletBase>& b)
-			{return b->IsDead(); }
+			{
+				return b->IsDead();
+			}
 		),
 		m_bullets.end()
 	);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// ï`âÊèàóù
+// ï`âÊ
 //+++++++++++++++++++++++++++++++++++++++++
 void BulletManager::Draw2D()
 {
@@ -49,7 +51,7 @@ void BulletManager::Draw2D()
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// íeê∂ê¨èàóù
+// ê∂ê¨
 //+++++++++++++++++++++++++++++++++++++++++
 std::unique_ptr<BulletBase> BulletManager::CreateBullet(const BulletConfig& cfg, BulletType type)
 {
@@ -61,6 +63,7 @@ std::unique_ptr<BulletBase> BulletManager::CreateBullet(const BulletConfig& cfg,
 	case BulletType::Homing:
 	{
 		auto b = std::make_unique<HomingBullet>(cfg);
+		b->SetPlayer(mp_player);
 		b->SetEnemyManager(mp_enemyManager);
 		return b;
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include"EnemyBase.h"
+#include "EnemyBase.h"
 
 class BulletManager;
 
@@ -8,43 +8,44 @@ class EnemyManager
 {
 public:
 
-    //+++++++++++++++++++++++++++++++++++++++++
-    // 敵追加関数
-    //+++++++++++++++++++++++++++++++++++++++++
-    template <class T, class... Args>
-    T* AddEnemy(Args&&... args) 
-    {
-        // T が EnemyBase を継承しているかチェック
-        static_assert(std::is_base_of_v<EnemyBase, T>, "T must inherit EnemyBase");
+	//**********************************
+	// 敵追加
+	//**********************************
+	template <class T, class... Args>
+	T* AddEnemy(Args&&... args)
+	{
+		static_assert(std::is_base_of_v<EnemyBase, T>, "T must inherit EnemyBase");
 
-        // T を new する(引数は各コンストラクタに合わせて)
-        auto enemy = std::make_unique<T>(std::forward<Args>(args)...);
-        T* raw = enemy.get();
+		auto enemy = std::make_unique<T>(std::forward<Args>(args)...);
+		T* raw = enemy.get();
 
-        // vector に保存
-        m_enemies.emplace_back(std::move(enemy));
-        
-        // 所有権は渡さず呼び出し元へ返す
-        return raw;
-    }
+		m_enemies.emplace_back(std::move(enemy));
 
-    //+++++++++++++++++++++++++++++++++++++++++
-    // 基本ライフサイクル
-    //+++++++++++++++++++++++++++++++++++++++++
-    void Update();
-    void Action();
-    void Draw2D();
-    void Shot(BulletManager&b);
-    void DeleteDead();
+		return raw;
+	}
 
-    //+++++++++++++++++++++++++++++++++++++++++
-    // 敵リストの参照を返す
-    //+++++++++++++++++++++++++++++++++++++++++
-    const std::vector<std::unique_ptr<EnemyBase>>& GetEnemies() const { return m_enemies; }
+public:
+
+	//**********************************
+	// 基本処理
+	//**********************************
+	void Update();
+	void Action();
+	void Draw2D();
+	void Shot(BulletManager& b);
+	void DeleteDead();
+
+public:
+
+	//**********************************
+	// 敵リスト取得
+	//**********************************
+	const std::vector<std::unique_ptr<EnemyBase>>& GetEnemies() const
+	{
+		return m_enemies;
+	}
 
 private:
-    //+++++++++++++++++++++++++++++++++++++++++
-    // 敵リスト
-    //+++++++++++++++++++++++++++++++++++++++++
-    std::vector<std::unique_ptr<EnemyBase>> m_enemies;
+
+	std::vector<std::unique_ptr<EnemyBase>> m_enemies;
 };

@@ -1,10 +1,9 @@
 #pragma once
 
-#include"Application/GameObject/GameObjectBase.h"
+#include "Application/GameObject/GameObjectBase.h"
+#include "BulletOwner.h"
 
-#include"BulletOwner.h"
-
-class BulletBase :public GameObjectBase
+class BulletBase : public GameObjectBase
 {
 public:
 
@@ -16,19 +15,21 @@ public:
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
-	// 基本ライフサイクル 
+	// 基本処理
 	//+++++++++++++++++++++++++++++++++++++++++
-	virtual void Update()override = 0;
-	virtual void Draw2D()override = 0;
+	virtual void Update() override = 0;
+	virtual void Draw2D() override = 0;
 
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// ゲッター
 	//+++++++++++++++++++++++++++++++++++++++++
-	bool IsDead()const { return isDead; }
-	int GetAtk()const { return atk; }
-	BulletOwner GetOwner()const { return owner; }
+	bool IsDead() const { return isDead; }
+	int GetAtk() const { return atk; }
+	BulletOwner GetOwner() const { return owner; }
+
+public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// セッター
@@ -37,15 +38,11 @@ public:
 
 protected:
 
-	//+++++++++++++++++++++++++++++++++++++++++
-	// 共通変数
-	//+++++++++++++++++++++++++++++++++++++++++
-	int atk = 0;		// 攻撃力
-	int lifeTime = 0;	// 生存時間
-	bool isDead = false;// 死んでいるか
-	float radius = 0.0f;// 半径
+	int atk = 0;
+	int lifeTime = 0;
+	bool isDead = false;
+	float radius = 0.0f;
 	BulletOwner owner = BulletOwner::Player;
 
-	std::string tag;	// 画像のタグ
-
+	std::string tag;
 };
