@@ -29,6 +29,8 @@ public:
 	// ÉQÉbÉ^Å[
 	//**********************************
 	const HitBox& GetHitBox() const { return hitbox; }
+	Math::Vector2 GetPos()const { return pos; }
+
 
 public:
 

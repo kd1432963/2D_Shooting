@@ -25,7 +25,7 @@ public:
 
 public:
 
-	virtual void Shot(BulletManager& bulletManager);
+	virtual void Shot(BulletManager& bulletManager) {};
 
 
 

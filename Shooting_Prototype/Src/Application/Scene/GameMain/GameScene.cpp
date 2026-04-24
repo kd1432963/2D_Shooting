@@ -46,6 +46,10 @@ void GameScene::OnEnter()
 
 	// “G¶¬
 	mp_enemySpawner->SpawnWave1(*mp_enemyManager);
+
+	// ƒz[ƒ~ƒ“ƒO—p‚É“o˜^
+	mp_bulletManager->SetPlayer(&m_player);
+	mp_bulletManager->SetEnemyManager(mp_enemyManager);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

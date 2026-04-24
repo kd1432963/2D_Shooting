@@ -1,11 +1,17 @@
 #include"BulletManager.h"
 
+#include"Application/Enemy/EnemyManager.h"
+
+#include"Application/Bullet/BulletConfig.h"
+#include"Application/Bullet/StraightBullet/StraightBullet.h"
+#include"Application/Bullet/HomingBullet/HomingBullet.h"
+
 //+++++++++++++++++++++++++++++++++++++++++
 // í«â¡ä÷êî
 //+++++++++++++++++++++++++++++++++++++++++
-void BulletManager::Add(std::unique_ptr<BulletBase> bullet)
+void BulletManager::Add(const BulletConfig& cfg, BulletType type)
 {
-	m_bullets.emplace_back(std::move(bullet));
+	m_bullets.emplace_back(CreateBullet(cfg,type));
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -40,4 +46,25 @@ void BulletManager::Draw2D()
 	{
 		b->Draw2D();
 	}
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// íeê∂ê¨èàóù
+//+++++++++++++++++++++++++++++++++++++++++
+std::unique_ptr<BulletBase> BulletManager::CreateBullet(const BulletConfig& cfg, BulletType type)
+{
+	switch (type)
+	{
+	case BulletType::Straight:
+		return std::make_unique<StraightBullet>(cfg);
+
+	case BulletType::Homing:
+	{
+		auto b = std::make_unique<HomingBullet>(cfg);
+		b->SetEnemyManager(mp_enemyManager);
+		return b;
+	}
+	}
+
+	return nullptr;
 }

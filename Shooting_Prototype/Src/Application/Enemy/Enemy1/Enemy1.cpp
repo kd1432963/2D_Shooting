@@ -4,7 +4,7 @@
 
 #include"Application/Bullet/BulletManager.h"
 #include"Application/Bullet/BulletConfig.h"
-#include"Application/Bullet/StraightBullet/StraightBullet.h"
+#include"Application/Bullet/BulletType.h"
 
 using namespace Enemy1Const;
 
@@ -73,9 +73,7 @@ void Enemy1::Shot(BulletManager& b)
 	cfg.atk = 5;
 	cfg.owner = BulletOwner::Enemy;
 
-	auto bullet = std::make_unique<StraightBullet>(cfg);
-
-	b.Add(std::move(bullet));
+	b.Add(cfg, BulletType::Straight);
 
 	m_wantToShot = false;
 }

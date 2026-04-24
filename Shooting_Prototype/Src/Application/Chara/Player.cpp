@@ -4,7 +4,6 @@
 
 #include"Application/Bullet/BulletManager.h"
 #include"Application/Bullet/BulletConfig.h"
-#include"Application/Bullet/StraightBullet/StraightBullet.h"
 
 using namespace PlayerConst;
 
@@ -94,9 +93,7 @@ void Player::Shot(BulletManager& b)
 		BulletOwner::Player
 	};
 
-	auto bullet = std::make_unique<StraightBullet>(cfg);
-
-	b.Add(std::move(bullet));
+	b.Add(cfg, m_shotMode);
 
 	m_wantToShot = false;
 }

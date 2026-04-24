@@ -2,7 +2,10 @@
 
 #include"Application/Chara/CharaBase.h"
 
+#include"Application/Bullet/BulletType.h"
+
 class BulletManager;
+
 
 class Player :public CharaBase
 {
@@ -25,7 +28,10 @@ public:
 
 private:
 
-	
+	//**********************************
+	// ‘Å‚ÂŽí—Þ
+	//**********************************
+	BulletType m_shotMode = BulletType::Straight;
 
 private:
 

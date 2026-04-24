@@ -88,6 +88,9 @@
     <Filter Include="Src\Application\Bullet\StraightBullet">
       <UniqueIdentifier>{0881c851-58ef-4649-9544-3d35836a40a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Bullet\HomingBullet">
+      <UniqueIdentifier>{de767505-041c-4411-975a-8ae20faa9860}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -258,6 +261,12 @@
     <ClInclude Include="Src\Application\Bullet\BulletOwner.h">
       <Filter>Src\Application\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\HomingBullet\HomingBullet.h">
+      <Filter>Src\Application\Bullet\HomingBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\BulletType.h">
+      <Filter>Src\Application\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -373,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Bullet\BulletManager.cpp">
       <Filter>Src\Application\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Bullet\HomingBullet\HomingBullet.cpp">
+      <Filter>Src\Application\Bullet\HomingBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
