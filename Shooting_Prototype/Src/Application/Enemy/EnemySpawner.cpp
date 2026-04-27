@@ -31,7 +31,7 @@ void EnemySpawner::RandomSpawn(EnemyManager& manager)
 	manager.AddEnemy<Enemy1>(
 		Math::Vector2{
 			RandomRangeF(100.0f, 600.0f),
-			RandomRangeF(-300.0f, 300.0f)
+			RandomRangeF(-200.0f, 200.0f)
 		}
 	);
 }

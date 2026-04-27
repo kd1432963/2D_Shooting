@@ -5,3 +5,5 @@ Enemy1,64,64,_Texture/Chara/Enemy/enemy1.png
 Homing,24,24,_Texture/Bullet/Homing.png
 BackGround1,256,128,_Texture/BackGround/BackGround1.png
 BackGround2,256,128,_Texture/BackGround/BackGround2.png
+HitEffect,32,32,_Texture/Effect/HitEffect.png
+ExplosionEffect,32,32,_Texture/Effect/ExplosionEffect.png

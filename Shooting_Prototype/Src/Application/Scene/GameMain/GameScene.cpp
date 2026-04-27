@@ -10,6 +10,10 @@
 #include"Application/Enemy/EnemySpawner.h"
 #include"Application/Bullet/BulletManager.h"
 #include"Application/UI/UIManager.h"
+#include"Application/Effect/EffectManager.h"
+
+#include"Application/Effect/HitEffect/HitEffect.h"
+#include"Application/Effect/ExplosionEffect/ExplosionEffect.h"
 
 GameScene::GameScene()
 {
@@ -17,6 +21,7 @@ GameScene::GameScene()
 	mp_enemySpawner = new EnemySpawner();
 	mp_bulletManager = new BulletManager();
 	mp_uiManager = new UIManager();
+	mp_effectManager = new EffectManager();
 }
 
 GameScene::~GameScene()
@@ -41,6 +46,11 @@ GameScene::~GameScene()
 		delete mp_uiManager;
 		mp_uiManager = nullptr;
 	}
+	if (mp_effectManager)
+	{
+		delete mp_effectManager;
+		mp_effectManager = nullptr;
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -54,6 +64,8 @@ void GameScene::OnEnter()
 	// ホーミング用に登録
 	mp_bulletManager->SetPlayer(&m_player);
 	mp_bulletManager->SetEnemyManager(mp_enemyManager);
+
+	m_score = 0;
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -116,8 +128,23 @@ void GameScene::Update()
 	// 当たり判定
 	CheckCollision();
 
+	// エフェクト更新
+	mp_effectManager->Update();
+
 	// 死亡処理
 	mp_bulletManager->DeleteDead();
+	
+	// エネミーは消す前にエフェクトをたく
+	for (auto& e : mp_enemyManager->GetEnemies())
+	{
+		if (e->IsDead())
+		{
+			auto effect = std::make_unique<ExplosionEffect>(e->GetPos());
+			mp_effectManager->AddEffect(std::move(effect));
+			m_score += 10;
+		}
+	}
+	
 	mp_enemyManager->DeleteDead();
 
 	// UI 更新
@@ -157,13 +184,16 @@ void GameScene::Draw2D()
 	//===================================================================================================
 
 	// UI 描画
-	mp_uiManager->Draw2D();
+	mp_uiManager->Draw2D(m_score);
 
 	// 敵描画
 	mp_enemyManager->Draw2D();
 
 	// 弾描画
 	mp_bulletManager->Draw2D();
+
+	// エフェクト描画
+	mp_effectManager->Draw2D();
 
 	// プレイヤー描画
 	m_player.Draw2D();
@@ -207,6 +237,8 @@ void GameScene::CheckCollision()
 			{
 				e->TakeDamage(b->GetAtk());
 				b->SetDead();
+				auto effect = std::make_unique<HitEffect>(b->GetPos());
+				mp_effectManager->AddEffect(std::move(effect));
 			}
 		}
 	}

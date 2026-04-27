@@ -7,7 +7,7 @@ public:
 	UIManager() { Init(); }
 	
 	void Update();
-	void Draw2D();
+	void Draw2D(int score);
 
 private:
 

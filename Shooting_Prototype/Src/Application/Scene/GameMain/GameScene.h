@@ -10,6 +10,7 @@ class EnemyManager;
 class EnemySpawner;
 class BulletManager;
 class UIManager;
+class EffectManager;
 
 //********************************************************
 // ゲームシーンのクラス
@@ -64,6 +65,10 @@ private:
 
 private:
 
+	int m_score = 0;
+
+private:
+
 	//+++++++++++++++++++++++++++++++++++++++++
 	// プレイヤー
 	//+++++++++++++++++++++++++++++++++++++++++
@@ -84,4 +89,9 @@ private:
 	// UI
 	//+++++++++++++++++++++++++++++++++++++++++
 	UIManager* mp_uiManager = nullptr;
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// Effect
+	//+++++++++++++++++++++++++++++++++++++++++
+	EffectManager* mp_effectManager = nullptr;
 };

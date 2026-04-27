@@ -40,5 +40,5 @@ private:
 	CharaBase* m_target = nullptr;
 
 	Math::Vector2 m_dir = { 0.0f, 0.0f };
-	float m_speed = 8.0f;
+	float m_speed = 12.0f;
 };

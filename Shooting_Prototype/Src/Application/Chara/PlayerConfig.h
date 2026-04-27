@@ -3,7 +3,7 @@
 namespace PlayerConst
 {
 	constexpr int kHp = 50;
-	constexpr int kAtk = 5;
+	constexpr int kAtk = 25;
 	constexpr int kDef = 5;
 
 	constexpr float kPosX = 0.0f;
@@ -15,5 +15,5 @@ namespace PlayerConst
 	constexpr float kWalkPow = 6.5f;
 
 	constexpr float kShotRecastTime = 5.0f;
-	constexpr float kShotPow = 8.0f;
+	constexpr float kShotPow = 12.0f;
 }

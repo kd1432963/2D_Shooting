@@ -94,6 +94,15 @@
     <Filter Include="Src\Application\UI">
       <UniqueIdentifier>{6a2a1c92-0aeb-4c7c-93ba-c84d578e4acf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Effect">
+      <UniqueIdentifier>{34b6dc99-55fb-4354-b947-c77b07e7015d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Effect\HitEffect">
+      <UniqueIdentifier>{47219a6c-de56-44bf-b342-aec65fe32455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Effect\ExplosionEffect">
+      <UniqueIdentifier>{f98d14f3-3f5e-4ec7-b14e-15daecbabf23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -273,6 +282,18 @@
     <ClInclude Include="Src\Application\UI\UIManager.h">
       <Filter>Src\Application\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Effect\EffectBase.h">
+      <Filter>Src\Application\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Effect\HitEffect\HitEffect.h">
+      <Filter>Src\Application\Effect\HitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Effect\EffectManager.h">
+      <Filter>Src\Application\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.h">
+      <Filter>Src\Application\Effect\ExplosionEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -394,6 +415,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Bullet\BulletBase.cpp">
       <Filter>Src\Application\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Effect\HitEffect\HitEffect.cpp">
+      <Filter>Src\Application\Effect\HitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Effect\EffectManager.cpp">
+      <Filter>Src\Application\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.cpp">
+      <Filter>Src\Application\Effect\ExplosionEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

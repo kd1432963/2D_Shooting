@@ -169,6 +169,10 @@
     <ClInclude Include="Src\Application\Chara\CharaBase.h" />
     <ClInclude Include="Src\Application\Chara\Player.h" />
     <ClInclude Include="Src\Application\Chara\PlayerConfig.h" />
+    <ClInclude Include="Src\Application\Effect\EffectBase.h" />
+    <ClInclude Include="Src\Application\Effect\EffectManager.h" />
+    <ClInclude Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.h" />
+    <ClInclude Include="Src\Application\Effect\HitEffect\HitEffect.h" />
     <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1.h" />
     <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1Config.h" />
     <ClInclude Include="Src\Application\Enemy\EnemyBase.h" />
@@ -218,6 +222,9 @@
     <ClCompile Include="Src\Application\Bullet\StraightBullet\StraightBullet.cpp" />
     <ClCompile Include="Src\Application\Chara\CharaBase.cpp" />
     <ClCompile Include="Src\Application\Chara\Player.cpp" />
+    <ClCompile Include="Src\Application\Effect\EffectManager.cpp" />
+    <ClCompile Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.cpp" />
+    <ClCompile Include="Src\Application\Effect\HitEffect\HitEffect.cpp" />
     <ClCompile Include="Src\Application\Enemy\Enemy1\Enemy1.cpp" />
     <ClCompile Include="Src\Application\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Src\Application\Enemy\EnemySpawner.cpp" />
