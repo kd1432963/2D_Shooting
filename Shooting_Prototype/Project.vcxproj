@@ -183,6 +183,7 @@
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\Title\TitleScene.h" />
     <ClInclude Include="Src\Application\Scene\TransitionController.h" />
+    <ClInclude Include="Src\Application\UI\UIManager.h" />
     <ClInclude Include="Src\System\AssetManager\AssetManager.h" />
     <ClInclude Include="Src\System\Audio\KdAudio.h" />
     <ClInclude Include="src\System\Direct3D\KdDirect3D.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="..\Library\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Src\Application\Bullet\BulletBase.cpp" />
     <ClCompile Include="Src\Application\Bullet\BulletManager.cpp" />
     <ClCompile Include="Src\Application\Bullet\HomingBullet\HomingBullet.cpp" />
     <ClCompile Include="Src\Application\Bullet\StraightBullet\StraightBullet.cpp" />
@@ -226,6 +228,7 @@
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\Title\TitleScene.cpp" />
     <ClCompile Include="Src\Application\Scene\TransitionController.cpp" />
+    <ClCompile Include="Src\Application\UI\UIManager.cpp" />
     <ClCompile Include="Src\System\AssetManager\AssetManager.cpp" />
     <ClCompile Include="Src\System\Audio\KdAudio.cpp" />
     <ClCompile Include="src\System\Direct3D\KdDirect3D.cpp" />

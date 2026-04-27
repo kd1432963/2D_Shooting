@@ -1,4 +1,7 @@
 タグ名,画像の横幅,画像の縦幅,画像のパス
 Player,16,16,_Texture/Chara/Player/player.png
-Bullet,16,16,_Texture/Bullet/bullet.png
+Straight,24,24,_Texture/Bullet/Straight.png
 Enemy1,64,64,_Texture/Chara/Enemy/enemy1.png
+Homing,24,24,_Texture/Bullet/Homing.png
+BackGround1,256,128,_Texture/BackGround/BackGround1.png
+BackGround2,256,128,_Texture/BackGround/BackGround2.png

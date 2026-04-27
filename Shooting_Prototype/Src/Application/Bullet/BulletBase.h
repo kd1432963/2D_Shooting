@@ -38,11 +38,20 @@ public:
 
 protected:
 
+	void UpdateAnim();
+
+protected:
+
 	int atk = 0;
 	int lifeTime = 0;
 	bool isDead = false;
 	float radius = 0.0f;
 	BulletOwner owner = BulletOwner::Player;
+
+	int animFrame = 0;   
+	int animMaxFrame = 1;
+	int animTimer = 0;   
+	int animStep = 5;
 
 	std::string tag;
 };

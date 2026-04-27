@@ -7,8 +7,8 @@
 //+++++++++++++++++++++++++++++++++++++++++
 void EnemySpawner::SpawnWave1(EnemyManager& manager)
 {
-	manager.AddEnemy<Enemy1>();
-	manager.AddEnemy<Enemy1>();
+	RandomSpawn(manager);
+	RandomSpawn(manager);
 	RandomSpawn(manager);
 }
 

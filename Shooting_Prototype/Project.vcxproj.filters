@@ -91,6 +91,9 @@
     <Filter Include="Src\Application\Bullet\HomingBullet">
       <UniqueIdentifier>{de767505-041c-4411-975a-8ae20faa9860}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\UI">
+      <UniqueIdentifier>{6a2a1c92-0aeb-4c7c-93ba-c84d578e4acf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -267,6 +270,9 @@
     <ClInclude Include="Src\Application\Bullet\BulletType.h">
       <Filter>Src\Application\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\UI\UIManager.h">
+      <Filter>Src\Application\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -382,6 +388,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Bullet\HomingBullet\HomingBullet.cpp">
       <Filter>Src\Application\Bullet\HomingBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\UIManager.cpp">
+      <Filter>Src\Application\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Bullet\BulletBase.cpp">
+      <Filter>Src\Application\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

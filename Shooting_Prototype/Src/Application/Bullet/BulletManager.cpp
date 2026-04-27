@@ -23,7 +23,24 @@ void BulletManager::Update()
 	{
 		b->Update();
 	}
+}
 
+//+++++++++++++++++++++++++++++++++++++++++
+// •`‰æ
+//+++++++++++++++++++++++++++++++++++++++++
+void BulletManager::Draw2D()
+{
+	for (auto& b : m_bullets)
+	{
+		b->Draw2D();
+	}
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// Ž€–Síœ
+//+++++++++++++++++++++++++++++++++++++++++
+void BulletManager::DeleteDead()
+{
 	m_bullets.erase
 	(
 		std::remove_if
@@ -37,17 +54,6 @@ void BulletManager::Update()
 		),
 		m_bullets.end()
 	);
-}
-
-//+++++++++++++++++++++++++++++++++++++++++
-// •`‰æ
-//+++++++++++++++++++++++++++++++++++++++++
-void BulletManager::Draw2D()
-{
-	for (auto& b : m_bullets)
-	{
-		b->Draw2D();
-	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

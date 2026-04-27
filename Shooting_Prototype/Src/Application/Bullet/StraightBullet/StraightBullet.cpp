@@ -21,6 +21,9 @@ StraightBullet::StraightBullet(const BulletConfig& cfg)
 	owner = cfg.owner;
 
 	atk = cfg.atk;
+
+	animMaxFrame = 8;
+	animStep = 5;
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -37,6 +40,8 @@ void StraightBullet::Update()
 		isDead = true;
 	}
 
+	UpdateAnim();
+
 	UpdateMatrix();
 }
 
@@ -46,5 +51,14 @@ void StraightBullet::Update()
 void StraightBullet::Draw2D()
 {
 	SHADER.m_spriteShader.SetMatrix(mat);
-	SHADER.m_spriteShader.DrawTex(tex, m_rect);
+
+	// åªç›ÇÃÉtÉåÅ[ÉÄÇÃãÈå`
+	Math::Rectangle animRect(
+		m_rect.x + 24 * animFrame,
+		m_rect.y,
+		24,
+		m_rect.height
+	);
+
+	SHADER.m_spriteShader.DrawTex(tex, animRect);
 }

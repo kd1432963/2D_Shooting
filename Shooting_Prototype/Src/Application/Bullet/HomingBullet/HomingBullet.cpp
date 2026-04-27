@@ -27,6 +27,9 @@ HomingBullet::HomingBullet(const BulletConfig& cfg)
 	{
 		m_dir.Normalize();
 	}
+
+	animMaxFrame = 8;
+	animStep = 5;
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -65,6 +68,8 @@ void HomingBullet::Update()
 		isDead = true;
 	}
 
+	UpdateAnim();
+
 	UpdateMatrix();
 }
 
@@ -74,7 +79,15 @@ void HomingBullet::Update()
 void HomingBullet::Draw2D()
 {
 	SHADER.m_spriteShader.SetMatrix(mat);
-	SHADER.m_spriteShader.DrawTex(tex, m_rect);
+	// åªç›ÇÃÉtÉåÅ[ÉÄÇÃãÈå`
+	Math::Rectangle animRect(
+		m_rect.x + 24 * animFrame,
+		m_rect.y,
+		24,
+		m_rect.height
+	);
+
+	SHADER.m_spriteShader.DrawTex(tex, animRect);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

@@ -41,8 +41,8 @@ Enemy1::Enemy1(const Math::Vector2&p)
 	rotate = 0.0f;
 	move = { 0.0f, 0.0f };
 
-	hitbox.radius = 16.0f;
-	hitbox.pos = { kPosX, kPosY };
+	hitbox.radius = kRadius;
+	hitbox.pos = p;
 
 	status.hp = kHp;
 	status.maxHp = kHp;
@@ -68,14 +68,14 @@ void Enemy1::Action()
 {
 	move = { 0.0f, 0.0f };
 
-	move.x = RandomRangeF(-3.0f, 3.0f);
-	move.y = RandomRangeF(-3.0f, 3.0f);
+	//move.x = RandomRangeF(-3.0f, 3.0f);
+	//move.y = RandomRangeF(-3.0f, 3.0f);
 
 	++t;
 
 	if (t % 20 == 0)
 	{
-		m_wantToShot = true;
+		//m_wantToShot = true;
 	}
 }
 

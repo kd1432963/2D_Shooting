@@ -24,6 +24,7 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	void Update();
 	void Draw2D();
+	void DeleteDead();
 
 public:
 

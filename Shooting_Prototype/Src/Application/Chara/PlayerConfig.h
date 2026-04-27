@@ -10,9 +10,9 @@ namespace PlayerConst
 	constexpr float kPosY = 0.0f;
 	constexpr float kScaleX = 2.0f;
 	constexpr float kScaleY = 2.0f;
-	constexpr float kRadius = 16.0f;
+	constexpr float kRadius = 14.0f;
 
-	constexpr float kWalkPow = 5.0f;
+	constexpr float kWalkPow = 6.5f;
 
 	constexpr float kShotRecastTime = 5.0f;
 	constexpr float kShotPow = 8.0f;

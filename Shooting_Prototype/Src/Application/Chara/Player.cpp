@@ -63,6 +63,20 @@ void Player::MoveInput()
 	else if (KEY.IsPress('A')) move.x -= kWalkPow;
 	else if (KEY.IsPress('S')) move.y -= kWalkPow;
 	else if (KEY.IsPress('D')) move.x += kWalkPow;
+
+	float fPosX = pos.x + move.x;
+	float fPosY = pos.y + move.y;
+
+	if (fPosX + kRadius >= 640 || fPosX - kRadius <= -640)
+	{
+		move.x = 0.0f;
+	}
+
+	if (fPosY + kRadius >= 241.5f || fPosY - kRadius <= -241.5f)
+	{
+		move.y = 0.0f;
+	}
+
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -103,12 +117,23 @@ void Player::Shot(BulletManager& b)
 {
 	BulletConfig cfg =
 	{
-		"Bullet",
+		"Straight",
 		pos,
 		{kShotPow, 0.0f},
 		status.atk,
 		BulletOwner::Player
 	};
+
+	switch (m_shotMode)
+	{
+	case BulletType::Straight:
+		cfg.texTag = "Straight";
+			break;
+
+	case BulletType::Homing:
+		cfg.texTag = "Homing";
+		break;
+	}
 
 	b.Add(cfg, m_shotMode);
 

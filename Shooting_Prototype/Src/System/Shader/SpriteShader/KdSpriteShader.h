@@ -89,11 +89,11 @@ public:
 	void DrawString(float _x, float _y, const char _text[], const Math::Vector4& _color)
 	{
 		//ワイド文字列に変換する必要がある
-		WCHAR *_wtext = new WCHAR[strlen(_text) + 1];
+		WCHAR* _wtext = new WCHAR[strlen(_text) + 1];
 		mbstowcs_s(nullptr, _wtext, strlen(_text) + 1, _text, _TRUNCATE);
 
 		//Begin前のBlendStateを取得
-		ID3D11BlendState *oldBlendState = 0;
+		ID3D11BlendState* oldBlendState = 0;
 		float oldFactor[4];
 		UINT oldMask = 0;
 		D3D.GetDevContext()->OMGetBlendState(&oldBlendState, oldFactor, &oldMask);
@@ -108,7 +108,34 @@ public:
 
 		//一時取得したBlendStateを解放 (解放しないと参照カウントが減らない)
 		KdSafeRelease(oldBlendState);
-		
+
+		delete[] _wtext;
+	}
+
+	//拡縮可能
+	void DrawString(float _x, float _y, const char _text[], const Math::Vector4& _color, float scale)
+	{
+		//ワイド文字列に変換する必要がある
+		WCHAR* _wtext = new WCHAR[strlen(_text) + 1];
+		mbstowcs_s(nullptr, _wtext, strlen(_text) + 1, _text, _TRUNCATE);
+
+		//Begin前のBlendStateを取得
+		ID3D11BlendState* oldBlendState = 0;
+		float oldFactor[4];
+		UINT oldMask = 0;
+		D3D.GetDevContext()->OMGetBlendState(&oldBlendState, oldFactor, &oldMask);
+
+		//BlendStateを引き継いでBegin
+		spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, oldBlendState);
+		spriteFont->DrawString(spriteBatch, _wtext, Math::Vector2(_x + 640, -_y + 360), _color, 0.0f, DirectX::XMFLOAT2{}, scale);
+		spriteBatch->End();
+
+		//Begin前のBlendStateを復元
+		D3D.GetDevContext()->OMSetBlendState(oldBlendState, oldFactor, oldMask);
+
+		//一時取得したBlendStateを解放 (解放しないと参照カウントが減らない)
+		KdSafeRelease(oldBlendState);
+
 		delete[] _wtext;
 	}
 
@@ -169,10 +196,10 @@ public:
 
 private:
 
-	ID3D11VertexShader*		m_VS = nullptr;				// 頂点シェーダー
-	ID3D11InputLayout*		m_VLayout = nullptr;		// 頂点レイアウト
+	ID3D11VertexShader* m_VS = nullptr;				// 頂点シェーダー
+	ID3D11InputLayout* m_VLayout = nullptr;		// 頂点レイアウト
 
-	ID3D11PixelShader*		m_PS = nullptr;				// ピクセルシェーダー
+	ID3D11PixelShader* m_PS = nullptr;				// ピクセルシェーダー
 
 	// 定数バッファ
 	struct cbSprite {
@@ -194,17 +221,17 @@ private:
 	Math::Matrix			m_mProj2D;
 
 	// 使用するステート
-	ID3D11DepthStencilState*	m_ds = nullptr;
-	ID3D11RasterizerState*		m_rs = nullptr;
-	ID3D11SamplerState*			m_smp0_Point = nullptr;
-	ID3D11SamplerState*			m_smp0_Linear = nullptr;
+	ID3D11DepthStencilState* m_ds = nullptr;
+	ID3D11RasterizerState* m_rs = nullptr;
+	ID3D11SamplerState* m_smp0_Point = nullptr;
+	ID3D11SamplerState* m_smp0_Linear = nullptr;
 
 	// ステート記憶/復元用
 	struct SaveState {
-		ID3D11DepthStencilState*	DS = nullptr;
-		ID3D11RasterizerState*		RS = nullptr;
+		ID3D11DepthStencilState* DS = nullptr;
+		ID3D11RasterizerState* RS = nullptr;
 		UINT						StencilRef = 0;
-		ID3D11SamplerState*			Smp0 = nullptr;
+		ID3D11SamplerState* Smp0 = nullptr;
 	};
 	SaveState					m_saveState;
 

@@ -9,12 +9,14 @@
 #include"Application/Enemy/EnemyManager.h"
 #include"Application/Enemy/EnemySpawner.h"
 #include"Application/Bullet/BulletManager.h"
+#include"Application/UI/UIManager.h"
 
 GameScene::GameScene()
 {
 	mp_enemyManager = new EnemyManager();
 	mp_enemySpawner = new EnemySpawner();
 	mp_bulletManager = new BulletManager();
+	mp_uiManager = new UIManager();
 }
 
 GameScene::~GameScene()
@@ -33,6 +35,11 @@ GameScene::~GameScene()
 	{
 		delete mp_bulletManager;
 		mp_bulletManager = nullptr;
+	}
+	if (mp_uiManager)
+	{
+		delete mp_uiManager;
+		mp_uiManager = nullptr;
 	}
 }
 
@@ -101,7 +108,7 @@ void GameScene::Update()
 	mp_enemyManager->Action();
 
 	mp_enemyManager->Shot(*mp_bulletManager);
-	
+
 
 	// íeçXêV
 	mp_bulletManager->Update();
@@ -110,7 +117,11 @@ void GameScene::Update()
 	CheckCollision();
 
 	// éÄñSèàóù
+	mp_bulletManager->DeleteDead();
 	mp_enemyManager->DeleteDead();
+
+	// UI çXêV
+	mp_uiManager->Update();
 
 	// ìGçXêV
 	mp_enemyManager->Update();
@@ -124,6 +135,30 @@ void GameScene::Update()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Draw2D()
 {
+	//=== îwåi ===========================================================================================
+	static float x = 0;
+
+	x -= 5;
+
+	if (x <= -2560) x += 2560;
+
+	Math::Matrix S = Math::Matrix::CreateScale(5.0f, 3.75f, 1.0f);
+	Math::Matrix T = Math::Matrix::CreateTranslation(x, 0, 0);
+	SHADER.m_spriteShader.SetMatrix(S * T);
+	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("BackGround1"), ASSET.GetRectangle("BackGround1"));
+
+	T = Math::Matrix::CreateTranslation(x + 1280, 0, 0);
+	SHADER.m_spriteShader.SetMatrix(S * T);
+	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("BackGround2"), ASSET.GetRectangle("BackGround2"));
+
+	T = Math::Matrix::CreateTranslation(x + 2560, 0, 0);
+	SHADER.m_spriteShader.SetMatrix(S * T);
+	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("BackGround1"), ASSET.GetRectangle("BackGround1"));
+	//===================================================================================================
+
+	// UI ï`âÊ
+	mp_uiManager->Draw2D();
+
 	// ìGï`âÊ
 	mp_enemyManager->Draw2D();
 
