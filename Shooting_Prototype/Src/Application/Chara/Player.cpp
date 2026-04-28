@@ -13,7 +13,7 @@ using namespace PlayerConst;
 //+++++++++++++++++++++++++++++++++++++++++
 Player::Player()
 {
-	hitbox = std::make_unique<RectHitBox>(3,3);
+	hitbox = std::make_unique<RectHitBox>(10,5);
 	if (hitbox)
 	{
 		hitbox->pos = { kPosX, kPosY };
@@ -120,6 +120,7 @@ void Player::ShotInput()
 void Player::Draw2D()
 {
 	DrawChara();
+
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

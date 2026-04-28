@@ -30,6 +30,17 @@ void GameObjectBase::UpdateMatrix(Math::Vector2 cameraPos)
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
+// デバッグ描画
+//+++++++++++++++++++++++++++++++++++++++++
+void GameObjectBase::DebugDraw()
+{
+	if (hitbox)
+	{
+		hitbox->Draw();
+	}
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
 // 座標更新
 //+++++++++++++++++++++++++++++++++++++++++
 void GameObjectBase::UpdatePos()

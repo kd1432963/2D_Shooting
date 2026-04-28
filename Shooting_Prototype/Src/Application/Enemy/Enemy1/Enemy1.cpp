@@ -40,7 +40,7 @@ Enemy1::Enemy1(const Math::Vector2&p)
 	hitbox = std::make_unique<CircleHitBox>(kRadius);
 	if (hitbox)
 	{
-		hitbox->pos = { kPosX, kPosY };
+		hitbox->pos = p;
 	}
 
 	tex = ASSET.GetTexture("Enemy1");

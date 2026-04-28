@@ -99,6 +99,8 @@ void HomingBullet::Draw2D()
 	);
 
 	SHADER.m_spriteShader.DrawTex(tex, animRect);
+
+	DebugDraw();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

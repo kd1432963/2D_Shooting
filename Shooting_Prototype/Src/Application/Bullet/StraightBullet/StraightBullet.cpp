@@ -9,7 +9,7 @@
 //+++++++++++++++++++++++++++++++++++++++++
 StraightBullet::StraightBullet(const BulletConfig& cfg)
 {
-	hitbox = std::make_unique<RectHitBox>(3,1);
+	hitbox = std::make_unique<RectHitBox>(8,3);
 	if (hitbox)
 	{
 		hitbox->pos = cfg.pos;
@@ -65,4 +65,6 @@ void StraightBullet::Draw2D()
 	);
 
 	SHADER.m_spriteShader.DrawTex(tex, animRect);
+
+	DebugDraw();
 }

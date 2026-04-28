@@ -10,4 +10,6 @@ public:
     CircleHitBox(float r);
 
     bool IsHit(const HitBoxBase& other) const noexcept override;
+
+    void Draw() const noexcept override;
 };

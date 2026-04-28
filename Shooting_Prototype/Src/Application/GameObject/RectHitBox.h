@@ -16,4 +16,6 @@ public:
     float Bottom() const { return pos.y + halfH; }
 
     bool IsHit(const HitBoxBase& other) const noexcept override;
+
+    void Draw() const noexcept override;
 };

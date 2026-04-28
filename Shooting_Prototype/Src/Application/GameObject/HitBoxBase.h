@@ -17,4 +17,7 @@ public:
     virtual ~HitBoxBase() = default;
 
     virtual bool IsHit(const HitBoxBase& other) const noexcept = 0;
+
+    // デバッグ描画用
+    virtual void Draw() const noexcept = 0;
 };

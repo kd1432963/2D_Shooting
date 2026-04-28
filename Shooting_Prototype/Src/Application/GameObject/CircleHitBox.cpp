@@ -27,3 +27,11 @@ bool CircleHitBox::IsHit(const HitBoxBase& other) const noexcept
 
     return false;
 }
+
+void CircleHitBox::Draw() const noexcept
+{
+    SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
+    SHADER.m_spriteShader.DrawCircle(pos.x, pos.y, radius,&Math::Color(0,0,0,1),false);
+    SHADER.m_spriteShader.End();
+    SHADER.m_spriteShader.Begin();
+}
