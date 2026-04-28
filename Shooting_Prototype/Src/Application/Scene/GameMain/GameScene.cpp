@@ -11,6 +11,7 @@
 #include"Application/Bullet/BulletManager.h"
 #include"Application/UI/UIManager.h"
 #include"Application/Effect/EffectManager.h"
+#include"Application/Collision/CollisionManager.h"
 
 #include"Application/Effect/HitEffect/HitEffect.h"
 #include"Application/Effect/ExplosionEffect/ExplosionEffect.h"
@@ -97,12 +98,23 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
+	static int a = 0;
+
+	++a;
+
+	if (a == 20)
+	{
+		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
+		a = 0;
+	}
+
+
 	if (KEY.IsTrigger('M'))
 	{
 		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
 	}
 
-	if (KEY.IsTrigger(VK_SPACE))
+	if (KEY.IsTrigger(VK_RETURN))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<ResultScene>());
 	}
@@ -133,7 +145,7 @@ void GameScene::Update()
 
 	// 死亡処理
 	mp_bulletManager->DeleteDead();
-	
+
 	// エネミーは消す前にエフェクトをたく
 	for (auto& e : mp_enemyManager->GetEnemies())
 	{
@@ -144,7 +156,7 @@ void GameScene::Update()
 			m_score += 10;
 		}
 	}
-	
+
 	mp_enemyManager->DeleteDead();
 
 	// UI 更新
@@ -214,34 +226,11 @@ void GameScene::ImGuiUpdate()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::CheckCollision()
 {
-	//=== 弾 & 敵 =========================
-
-	auto& bullets = mp_bulletManager->GetBullets();
-	auto& enemies = mp_enemyManager->GetEnemies();
-
-	for (auto& b : bullets)
-	{
-		if (b->GetOwner() != BulletOwner::Player)
-		{
-			if (b->GetHitBox().IsHit(m_player.GetHitBox()))
-			{
-				m_player.TakeDamage(b->GetAtk());
-				b->SetDead();
-			}
-			continue;
-		}
-
-		for (auto& e : enemies)
-		{
-			if (b->GetHitBox().IsHit(e->GetHitBox()))
-			{
-				e->TakeDamage(b->GetAtk());
-				b->SetDead();
-				auto effect = std::make_unique<HitEffect>(b->GetPos());
-				mp_effectManager->AddEffect(std::move(effect));
-			}
-		}
-	}
-
-	//===  =========================
+	CollisionManager::CheckAll(
+		m_player,
+		*mp_enemyManager,
+		*mp_bulletManager,
+		*mp_effectManager,
+		m_score
+	);
 }

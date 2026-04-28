@@ -1,8 +1,16 @@
 #include"Application/Effect/EffectManager.h"
 
+#include"Application/Effect/HitEffect/HitEffect.h"
+
 void EffectManager::AddEffect(std::unique_ptr<EffectBase>&& effect)
 {
 	m_effectList.emplace_back(std::move(effect));
+}
+
+void EffectManager::SpawnHitEffect(const Math::Vector2& pos)
+{
+	auto effect = std::make_unique<HitEffect>(pos);
+	AddEffect(std::move(effect));
 }
 
 void EffectManager::Update()

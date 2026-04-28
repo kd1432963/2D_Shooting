@@ -61,3 +61,12 @@ inline Math::Color RandomColor() noexcept
 			 Random01(),
 			 1.0f };
 }
+
+//=== Clamp 関数 =============================================
+template<typename T>
+constexpr inline T Clamp(T v, T minVal, T maxVal) noexcept
+{
+	return (v < minVal) ? minVal :
+		(v > maxVal) ? maxVal :
+		v;
+}

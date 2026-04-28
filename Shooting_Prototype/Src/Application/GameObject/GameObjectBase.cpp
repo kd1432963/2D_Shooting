@@ -35,5 +35,9 @@ void GameObjectBase::UpdateMatrix(Math::Vector2 cameraPos)
 void GameObjectBase::UpdatePos()
 {
 	pos += move;
-	hitbox.pos = pos;
+
+	if (hitbox)
+	{
+		hitbox->pos = pos;
+	}
 }

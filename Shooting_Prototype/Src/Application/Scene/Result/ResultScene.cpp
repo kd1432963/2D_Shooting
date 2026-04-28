@@ -41,7 +41,7 @@ void ResultScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void ResultScene::Update()
 {
-	if (KEY.IsTrigger(VK_SPACE))
+	if (KEY.IsTrigger(VK_RETURN))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<TitleScene>());
 	}

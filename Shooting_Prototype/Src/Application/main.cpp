@@ -33,7 +33,7 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	// ウィンドウ作成
 	//===================================================================
-	if (m_window.Create(w, h, "DirectX", "Window") == false) {
+	if (m_window.Create(w, h, "SHOOTING", "Window") == false) {
 		MessageBoxA(nullptr, "ウィンドウ作成に失敗", "エラー", MB_OK);
 		return false;
 	}
@@ -257,6 +257,9 @@ void Application::Execute()
 			m_fps = (count * 1000) / (st - baseTime);
 			baseTime = st;
 			count = 0;
+
+			std::string title = "SHOOTING  |  FPS: " + std::to_string(m_fps);
+			SetWindowTextA(m_window.GetWndHandle(), title.c_str());
 		}
 
 	}

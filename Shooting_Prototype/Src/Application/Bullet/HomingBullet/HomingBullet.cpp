@@ -5,10 +5,15 @@
 #include"Application/Chara/Player.h"
 #include "Application/Enemy/EnemyManager.h"
 
+#include"Application/GameObject/CircleHitBox.h"
+
 HomingBullet::HomingBullet(const BulletConfig& cfg)
 {
-	hitbox.pos = cfg.pos;
-	hitbox.radius = 8.0f;
+	hitbox = std::make_unique<CircleHitBox>(8.0f);
+	if (hitbox)
+	{
+		hitbox->pos = cfg.pos;
+	}
 	radius = 8.0f;
 
 	tex = ASSET.GetTexture(cfg.texTag);
@@ -40,6 +45,12 @@ void HomingBullet::Update()
 	if (!m_target || m_target->IsDead())
 	{
 		m_target = FindTarget();
+
+		if (!m_target || m_target->IsDead())
+		{
+			m_dir = { 1.0f, 0.0f };
+			move = { m_speed,0.0f };
+		}
 	}
 
 	if (m_target)
@@ -50,7 +61,7 @@ void HomingBullet::Update()
 		{
 			toTarget.Normalize();
 
-			const float homingPower = 0.1f;
+			const float homingPower = 0.15f;
 
 			m_dir = m_dir * (1.0f - homingPower) + toTarget * homingPower;
 			m_dir.Normalize();

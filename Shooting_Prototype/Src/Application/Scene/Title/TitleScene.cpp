@@ -41,7 +41,7 @@ void TitleScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void TitleScene::Update()
 {
-	if (KEY.IsTrigger(VK_SPACE))
+	if (KEY.IsTrigger(VK_RETURN))
 	{
 		SCENE_MANAGER.RequestChange(std::make_unique<GameScene>());
 	}

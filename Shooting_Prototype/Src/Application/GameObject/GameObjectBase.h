@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Application/GameObject/HitBox.h"
+#include "HitBoxBase.h"
 
 //**********************************
 // ゲーム内オブジェクトの基底クラス
@@ -27,7 +27,7 @@ public:
 	//**********************************
 	// アクセサ
 	//**********************************
-	const HitBox& GetHitBox() const { return hitbox; }
+	HitBoxBase* GetHitBox() const { return hitbox.get(); }
 	Math::Vector2 GetPos() const { return pos; }
 
 public:
@@ -58,5 +58,5 @@ protected:
 	Math::Matrix	mat		= Math::Matrix::Identity;
 
 	KdTexture*		tex		= nullptr;
-	HitBox			hitbox	= {};
+	std::unique_ptr<HitBoxBase>	hitbox	= {};
 };

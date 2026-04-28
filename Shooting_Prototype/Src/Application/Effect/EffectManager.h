@@ -8,6 +8,8 @@ public:
 
 	void AddEffect(std::unique_ptr<EffectBase>&&effect);
 
+	void SpawnHitEffect(const Math::Vector2& pos);
+
 	void Update();
 	void Draw2D();
 

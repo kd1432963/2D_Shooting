@@ -4,6 +4,8 @@
 #include "Application/Bullet/BulletManager.h"
 #include "Application/Bullet/BulletConfig.h"
 
+#include"Application/GameObject/RectHitBox.h"
+
 using namespace PlayerConst;
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -11,8 +13,11 @@ using namespace PlayerConst;
 //+++++++++++++++++++++++++++++++++++++++++
 Player::Player()
 {
-	hitbox.radius = kRadius;
-	hitbox.pos = { kPosX, kPosY };
+	hitbox = std::make_unique<RectHitBox>(3,3);
+	if (hitbox)
+	{
+		hitbox->pos = { kPosX, kPosY };
+	}
 
 	tex = ASSET.GetTexture("Player");
 	rect = ASSET.GetRectangle("Player");
@@ -84,10 +89,10 @@ void Player::MoveInput()
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::ChangeShotMode()
 {
-	if (KEY.IsTrigger('Q'))
+	/*if (MOUSE.IsPressRight())
 		m_shotMode = BulletType::Homing;
-	else if (KEY.IsTrigger('E'))
-		m_shotMode = BulletType::Straight;
+	else if (MOUSE.IsPressLeft())
+		m_shotMode = BulletType::Straight;*/
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -95,9 +100,16 @@ void Player::ChangeShotMode()
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::ShotInput()
 {
-	if (KEY.IsPress(VK_RETURN) && m_shotRecast <= 0.0f)
+	if (MOUSE.IsPressLeft() && m_shotRecast <= 0.0f)
 	{
 		m_wantToShot = true;
+		m_shotMode = BulletType::Straight;
+		m_shotRecast = kShotRecastTime;
+	}
+	else if (MOUSE.IsPressRight() && m_shotRecast <= 0.0f)
+	{
+		m_wantToShot = true;
+		m_shotMode = BulletType::Homing;
 		m_shotRecast = kShotRecastTime;
 	}
 }
@@ -128,7 +140,7 @@ void Player::Shot(BulletManager& b)
 	{
 	case BulletType::Straight:
 		cfg.texTag = "Straight";
-			break;
+		break;
 
 	case BulletType::Homing:
 		cfg.texTag = "Homing";

@@ -2,14 +2,18 @@
 
 #include "Application/Bullet/BulletConfig.h"
 
+#include"Application/GameObject/RectHitBox.h"
+
 //+++++++++++++++++++++++++++++++++++++++++
 // コンストラクタ
 //+++++++++++++++++++++++++++++++++++++++++
 StraightBullet::StraightBullet(const BulletConfig& cfg)
 {
-	hitbox.pos = cfg.pos;
-	hitbox.radius = 8.0f;
-	radius = 8.0f;
+	hitbox = std::make_unique<RectHitBox>(3,1);
+	if (hitbox)
+	{
+		hitbox->pos = cfg.pos;
+	}
 
 	tex = ASSET.GetTexture(cfg.texTag);
 	m_rect = ASSET.GetRectangle(cfg.texTag);

@@ -4,6 +4,7 @@
 #include "Application/Bullet/BulletManager.h"
 #include "Application/Bullet/BulletConfig.h"
 #include "Application/Bullet/BulletType.h"
+#include"Application/GameObject/CircleHitBox.h"
 
 using namespace Enemy1Const;
 
@@ -12,6 +13,12 @@ using namespace Enemy1Const;
 //+++++++++++++++++++++++++++++++++++++++++
 Enemy1::Enemy1()
 {
+	hitbox = std::make_unique<CircleHitBox>(kRadius);
+	if (hitbox)
+	{
+		hitbox->pos = { kPosX, kPosY };
+	}
+
 	tex = ASSET.GetTexture("Enemy1");
 	rect = ASSET.GetRectangle("Enemy1");
 
@@ -19,9 +26,6 @@ Enemy1::Enemy1()
 	scale = { kScaleX, kScaleY };
 	rotate = 0.0f;
 	move = { 0.0f, 0.0f };
-
-	hitbox.radius = kRadius;
-	hitbox.pos = { kPosX, kPosY };
 
 	status.hp = kHp;
 	status.maxHp = kHp;
@@ -33,6 +37,12 @@ Enemy1::Enemy1()
 
 Enemy1::Enemy1(const Math::Vector2&p)
 {
+	hitbox = std::make_unique<CircleHitBox>(kRadius);
+	if (hitbox)
+	{
+		hitbox->pos = { kPosX, kPosY };
+	}
+
 	tex = ASSET.GetTexture("Enemy1");
 	rect = ASSET.GetRectangle("Enemy1");
 
@@ -40,9 +50,6 @@ Enemy1::Enemy1(const Math::Vector2&p)
 	scale = { kScaleX, kScaleY };
 	rotate = 0.0f;
 	move = { 0.0f, 0.0f };
-
-	hitbox.radius = kRadius;
-	hitbox.pos = p;
 
 	status.hp = kHp;
 	status.maxHp = kHp;
@@ -73,9 +80,12 @@ void Enemy1::Action()
 
 	++t;
 
-	if (t % 20 == 0)
+	move.x = -1.0f; // ‚Ù‚ÚŒÅ’è
+	move.y = sinf(t * 0.1f) * 2.0f;
+
+	if (t % 90 == 0)
 	{
-		//m_wantToShot = true;
+		m_wantToShot = true;
 	}
 }
 
@@ -93,7 +103,7 @@ void Enemy1::Draw2D()
 void Enemy1::Shot(BulletManager& b)
 {
 	BulletConfig cfg;
-	cfg.texTag = "Bullet";
+	cfg.texTag = "Straight";
 	cfg.pos = pos;
 	cfg.move = { -5, 0 };
 	cfg.atk = 5;

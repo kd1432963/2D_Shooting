@@ -103,6 +103,9 @@
     <Filter Include="Src\Application\Effect\ExplosionEffect">
       <UniqueIdentifier>{f98d14f3-3f5e-4ec7-b14e-15daecbabf23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Collision">
+      <UniqueIdentifier>{5e11818b-ebb7-4f49-8bb0-d5c0634c819c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -294,6 +297,21 @@
     <ClInclude Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.h">
       <Filter>Src\Application\Effect\ExplosionEffect</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\GameObject\HitBoxBase.h">
+      <Filter>Src\Application\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\GameObject\CircleHitBox.h">
+      <Filter>Src\Application\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\GameObject\RectHitBox.h">
+      <Filter>Src\Application\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Collision\Collision.h">
+      <Filter>Src\Application\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Collision\CollisionManager.h">
+      <Filter>Src\Application\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -424,6 +442,18 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Effect\ExplosionEffect\ExplosionEffect.cpp">
       <Filter>Src\Application\Effect\ExplosionEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Collision\Collision.cpp">
+      <Filter>Src\Application\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Collision\CollisionManager.cpp">
+      <Filter>Src\Application\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\GameObject\RectHitBox.cpp">
+      <Filter>Src\Application\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\GameObject\CircleHitBox.cpp">
+      <Filter>Src\Application\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
