@@ -11,7 +11,7 @@ RectHitBox::RectHitBox(float w, float h)
 
 bool RectHitBox::IsHit(const HitBoxBase& other) const noexcept
 {
-    switch (other.type)
+    switch (other.GetType())
     {
     case Type::Circle:
         return Collision::CircleRect(

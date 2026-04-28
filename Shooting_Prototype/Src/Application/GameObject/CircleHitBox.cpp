@@ -10,7 +10,7 @@ CircleHitBox::CircleHitBox(float r)
 
 bool CircleHitBox::IsHit(const HitBoxBase& other) const noexcept
 {
-    switch (other.type)
+    switch (other.GetType())
     {
     case Type::Circle:
         return Collision::CircleCircle(

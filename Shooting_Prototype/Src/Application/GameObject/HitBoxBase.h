@@ -10,7 +10,7 @@ public:
         Rect,
     };
 
-    Type type;
+    
     Math::Vector2 pos;
 
     HitBoxBase(Type t) : type(t) {}
@@ -20,4 +20,9 @@ public:
 
     // デバッグ描画用
     virtual void Draw() const noexcept = 0;
+
+    Type GetType()const { return type; }
+
+protected:
+    Type type;
 };

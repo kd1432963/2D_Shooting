@@ -15,5 +15,5 @@ namespace PlayerConst
 	constexpr float kWalkPow = 6.5f;
 
 	constexpr float kShotRecastTime = 5.0f;
-	constexpr float kShotPow = 0.5f;
+	constexpr float kShotPow = 10.0f;
 }

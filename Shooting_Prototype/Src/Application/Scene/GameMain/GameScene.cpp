@@ -109,7 +109,7 @@ void GameScene::Update()
 	}
 
 
-	if (KEY.IsTrigger('M'))
+	if (KEY.IsPress('M'))
 	{
 		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
 	}
