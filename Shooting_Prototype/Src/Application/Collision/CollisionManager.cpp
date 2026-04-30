@@ -4,17 +4,21 @@
 #include "Application/Bullet/BulletManager.h"
 #include "Application/Effect/EffectManager.h"
 #include "Application/Collision/Collision.h"
+#include"Application/Item/ItemDropManager.h"
+
 
 void CollisionManager::CheckAll(
     Player& player,
     EnemyManager& enemyMgr,
     BulletManager& bulletMgr,
     EffectManager& effectMgr,
+    ItemDropManager& itemDropMgr,
     int& score
 )
 {
     auto& bullets = bulletMgr.GetBullets();
     auto& enemies = enemyMgr.GetEnemies();
+    auto& items = itemDropMgr.GetItems();
 
     // --- 弾 vs 敵 ---
     for (auto& b : bullets)
@@ -46,4 +50,15 @@ void CollisionManager::CheckAll(
             b->SetDead();
         }
     }
+
+    // --- プレイヤー vs アイテムー ---
+    for (auto& item : items)
+    {
+        if (item->GetHitBox()->IsHit(*player.GetHitBox()))
+        {
+            //player.GetItem(item->GetItemType());
+            item->SetDead();
+        }
+    }
+
 }

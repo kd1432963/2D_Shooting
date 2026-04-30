@@ -106,6 +106,9 @@
     <Filter Include="Src\Application\Collision">
       <UniqueIdentifier>{5e11818b-ebb7-4f49-8bb0-d5c0634c819c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Item">
+      <UniqueIdentifier>{48beacb1-91dc-40d1-a326-d5d5507a4214}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -312,6 +315,18 @@
     <ClInclude Include="Src\Application\Collision\CollisionManager.h">
       <Filter>Src\Application\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Item\ItemBase.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Item\HomingItem.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Item\ItemDropManager.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Item\ItemStockManager.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -454,6 +469,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\GameObject\CircleHitBox.cpp">
       <Filter>Src\Application\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\HomingItem.cpp">
+      <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\ItemBase.cpp">
+      <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\ItemDropManager.cpp">
+      <Filter>Src\Application\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

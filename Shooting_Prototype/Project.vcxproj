@@ -185,6 +185,10 @@
     <ClInclude Include="Src\Application\GameObject\HitBox.h" />
     <ClInclude Include="Src\Application\GameObject\HitBoxBase.h" />
     <ClInclude Include="Src\Application\GameObject\RectHitBox.h" />
+    <ClInclude Include="Src\Application\Item\HomingItem.h" />
+    <ClInclude Include="Src\Application\Item\ItemBase.h" />
+    <ClInclude Include="Src\Application\Item\ItemDropManager.h" />
+    <ClInclude Include="Src\Application\Item\ItemStockManager.h" />
     <ClInclude Include="Src\Application\main.h" />
     <ClInclude Include="Src\Application\Scene\Core\SceneBase.h" />
     <ClInclude Include="Src\Application\Scene\GameMain\GameScene.h" />
@@ -238,6 +242,9 @@
     <ClCompile Include="Src\Application\GameObject\CircleHitBox.cpp" />
     <ClCompile Include="Src\Application\GameObject\GameObjectBase.cpp" />
     <ClCompile Include="Src\Application\GameObject\RectHitBox.cpp" />
+    <ClCompile Include="Src\Application\Item\HomingItem.cpp" />
+    <ClCompile Include="Src\Application\Item\ItemBase.cpp" />
+    <ClCompile Include="Src\Application\Item\ItemDropManager.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\Application\Scene\GameMain\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\Result\ResultScene.cpp" />

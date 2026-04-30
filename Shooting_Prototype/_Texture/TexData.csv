@@ -7,3 +7,4 @@ BackGround1,256,128,_Texture/BackGround/BackGround1.png
 BackGround2,256,128,_Texture/BackGround/BackGround2.png
 HitEffect,32,32,_Texture/Effect/HitEffect.png
 ExplosionEffect,32,32,_Texture/Effect/ExplosionEffect.png
+HomingItem,32,32,_Texture/Item/HomingItem.png

@@ -11,6 +11,7 @@ class EnemySpawner;
 class BulletManager;
 class UIManager;
 class EffectManager;
+class ItemDropManager;
 
 //********************************************************
 // ゲームシーンのクラス
@@ -94,4 +95,9 @@ private:
 	// Effect
 	//+++++++++++++++++++++++++++++++++++++++++
 	EffectManager* mp_effectManager = nullptr;
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// Item
+	//+++++++++++++++++++++++++++++++++++++++++
+	ItemDropManager* mp_itemDropManager = nullptr;
 };

@@ -12,6 +12,7 @@
 #include"Application/UI/UIManager.h"
 #include"Application/Effect/EffectManager.h"
 #include"Application/Collision/CollisionManager.h"
+#include"Application/Item/ItemDropManager.h"
 
 #include"Application/Effect/HitEffect/HitEffect.h"
 #include"Application/Effect/ExplosionEffect/ExplosionEffect.h"
@@ -23,6 +24,7 @@ GameScene::GameScene()
 	mp_bulletManager = new BulletManager();
 	mp_uiManager = new UIManager();
 	mp_effectManager = new EffectManager();
+	mp_itemDropManager = new ItemDropManager();
 }
 
 GameScene::~GameScene()
@@ -51,6 +53,11 @@ GameScene::~GameScene()
 	{
 		delete mp_effectManager;
 		mp_effectManager = nullptr;
+	}
+	if (mp_itemDropManager)
+	{
+		delete mp_itemDropManager;
+		mp_itemDropManager = nullptr;
 	}
 }
 
@@ -137,6 +144,9 @@ void GameScene::Update()
 	// 弾更新
 	mp_bulletManager->Update();
 
+	// アイテム更新
+	mp_itemDropManager->Update();
+
 	// 当たり判定
 	CheckCollision();
 
@@ -145,6 +155,7 @@ void GameScene::Update()
 
 	// 死亡処理
 	mp_bulletManager->DeleteDead();
+	mp_itemDropManager->DeleteDead();
 
 	// エネミーは消す前にエフェクトをたく
 	for (auto& e : mp_enemyManager->GetEnemies())
@@ -153,7 +164,12 @@ void GameScene::Update()
 		{
 			auto effect = std::make_unique<ExplosionEffect>(e->GetPos());
 			mp_effectManager->AddEffect(std::move(effect));
-			m_score += 10;
+			m_score += 50;
+
+			if (RandomChance(0.1f))
+			{
+				mp_itemDropManager->DropItemRandom(e->GetPos());
+			}
 		}
 	}
 
@@ -195,11 +211,11 @@ void GameScene::Draw2D()
 	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("BackGround1"), ASSET.GetRectangle("BackGround1"));
 	//===================================================================================================
 
-	// UI 描画
-	mp_uiManager->Draw2D(m_score);
-
 	// 敵描画
 	mp_enemyManager->Draw2D();
+
+	// アイテム描画
+	mp_itemDropManager->Draw2D();
 
 	// 弾描画
 	mp_bulletManager->Draw2D();
@@ -209,6 +225,9 @@ void GameScene::Draw2D()
 
 	// プレイヤー描画
 	m_player.Draw2D();
+
+	// UI 描画
+	mp_uiManager->Draw2D(m_score);
 
 	SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
 }
@@ -231,6 +250,7 @@ void GameScene::CheckCollision()
 		*mp_enemyManager,
 		*mp_bulletManager,
 		*mp_effectManager,
+		*mp_itemDropManager,
 		m_score
 	);
 }
