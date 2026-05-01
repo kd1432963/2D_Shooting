@@ -2,16 +2,17 @@
 
 #include"Application/Scene/Core/SceneBase.h"
 
-#include"Application/Chara/Player.h"
 
 
 
+class Player;
 class EnemyManager;
 class EnemySpawner;
 class BulletManager;
 class UIManager;
 class EffectManager;
 class ItemDropManager;
+class WaveManager;
 
 //********************************************************
 // ゲームシーンのクラス
@@ -73,7 +74,7 @@ private:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// プレイヤー
 	//+++++++++++++++++++++++++++++++++++++++++
-	Player m_player;
+	Player* mp_player=nullptr;
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// 敵
@@ -100,4 +101,9 @@ private:
 	// Item
 	//+++++++++++++++++++++++++++++++++++++++++
 	ItemDropManager* mp_itemDropManager = nullptr;
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// Wave
+	//+++++++++++++++++++++++++++++++++++++++++
+	WaveManager* mp_waveManager = nullptr;
 };

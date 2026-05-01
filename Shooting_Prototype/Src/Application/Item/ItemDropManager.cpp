@@ -6,15 +6,15 @@
 
 void ItemDropManager::DropItemRandom(const Math::Vector2& p)
 {
-	int r = RandomRange(1, 7);
+	int r = RandomRange(0, 2);
 
-	std::unique_ptr<ItemBase>item;
+	std::unique_ptr<ItemBase>item=nullptr;
 
-	if (r < 5)
+	if (r < 2)
 	{
 		item = std::make_unique<HomingItem>(p);
 	}
-	else if (r < 8)
+	else if (r < 3)
 	{
 		item = std::make_unique<PiercingItem>(p);
 	}
@@ -23,7 +23,7 @@ void ItemDropManager::DropItemRandom(const Math::Vector2& p)
 
 	}
 
-	m_itemDropList.push_back(std::move(item));
+	if(item)m_itemDropList.push_back(std::move(item));
 }
 
 void ItemDropManager::Update()

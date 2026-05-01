@@ -7,7 +7,7 @@ HomingItem::HomingItem(const Math::Vector2& p)
 {
 	//=== ”»’è ==============================
 
-	hitbox = std::make_unique<RectHitBox>(10, 10);
+	hitbox = std::make_unique<RectHitBox>(12, 14);
 	if (hitbox)
 	{
 		hitbox->pos = p;

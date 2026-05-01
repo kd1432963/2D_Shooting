@@ -6,6 +6,7 @@
 
 #include"Application/GameObject/HitBox.h"
 
+#include"Application/Chara/Player.h"
 #include"Application/Enemy/EnemyManager.h"
 #include"Application/Enemy/EnemySpawner.h"
 #include"Application/Bullet/BulletManager.h"
@@ -13,22 +14,30 @@
 #include"Application/Effect/EffectManager.h"
 #include"Application/Collision/CollisionManager.h"
 #include"Application/Item/ItemDropManager.h"
+#include"WaveManager.h"
 
 #include"Application/Effect/HitEffect/HitEffect.h"
 #include"Application/Effect/ExplosionEffect/ExplosionEffect.h"
 
 GameScene::GameScene()
 {
+	mp_player			= new Player();
 	mp_enemyManager		= new EnemyManager();
 	mp_enemySpawner		= new EnemySpawner();
 	mp_bulletManager	= new BulletManager();
 	mp_uiManager		= new UIManager();
 	mp_effectManager	= new EffectManager();
 	mp_itemDropManager	= new ItemDropManager();
+	mp_waveManager		= new WaveManager();
 }
 
 GameScene::~GameScene()
 {
+	if (mp_player)
+	{
+		delete mp_player;
+		mp_player = nullptr;
+	}
 	if (mp_enemyManager)
 	{
 		delete mp_enemyManager;
@@ -59,6 +68,11 @@ GameScene::~GameScene()
 		delete mp_itemDropManager;
 		mp_itemDropManager = nullptr;
 	}
+	if (mp_waveManager)
+	{
+		delete mp_waveManager;
+		mp_waveManager = nullptr;
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -67,10 +81,10 @@ GameScene::~GameScene()
 void GameScene::OnEnter()
 {
 	// 敵生成
-	mp_enemySpawner->SpawnWave1(*mp_enemyManager);
+	mp_enemySpawner->StartWave(1);
 
 	// ホーミング用に登録
-	mp_bulletManager->SetPlayer(&m_player);
+	mp_bulletManager->SetPlayer(mp_player);
 	mp_bulletManager->SetEnemyManager(mp_enemyManager);
 
 	m_score = 0;
@@ -105,21 +119,8 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
-	static int a = 0;
-
-	++a;
-
-	if (a == 20)
-	{
-		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
-		a = 0;
-	}
-
-
-	if (KEY.IsPress('M'))
-	{
-		mp_enemySpawner->RandomSpawn(*mp_enemyManager);
-	}
+	mp_waveManager->Update(*mp_enemyManager,*mp_enemySpawner);
+	mp_enemySpawner->Update(*mp_enemyManager);
 
 	if (KEY.IsTrigger(VK_RETURN))
 	{
@@ -127,12 +128,12 @@ void GameScene::Update()
 	}
 
 	// プレイヤー行動決定
-	m_player.Action();
+	mp_player->Action();
 
 	// 玉発射
-	if (m_player.WantToShot())
+	if (mp_player->WantToShot())
 	{
-		m_player.Shot(*mp_bulletManager);
+		mp_player->Shot(*mp_bulletManager);
 	}
 
 	// 敵行動決定
@@ -182,7 +183,7 @@ void GameScene::Update()
 	mp_enemyManager->Update();
 
 	// プレイヤー更新
-	m_player.Update();
+	mp_player->Update();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -224,12 +225,12 @@ void GameScene::Draw2D()
 	mp_effectManager->Draw2D();
 
 	// プレイヤー描画
-	m_player.Draw2D();
+	mp_player->Draw2D();
 
 	// UI 描画
-	mp_uiManager->Draw2D(m_score,m_player.GetItemStockManager(),m_player.GetItemRecast());
+	mp_uiManager->Draw2D(m_score,mp_player->GetItemStockManager(),mp_player->GetItemRecast());
 
-	SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
+	//SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -237,8 +238,7 @@ void GameScene::Draw2D()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::ImGuiUpdate()
 {
-	ImGui::Text("%.2f", m_player.GetItemRecast());
-	ImGui::Text("%.2f", m_player.GetItemRecast()/5.0f);
+
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -247,7 +247,7 @@ void GameScene::ImGuiUpdate()
 void GameScene::CheckCollision()
 {
 	CollisionManager::CheckAll(
-		m_player,
+		*mp_player,
 		*mp_enemyManager,
 		*mp_bulletManager,
 		*mp_effectManager,

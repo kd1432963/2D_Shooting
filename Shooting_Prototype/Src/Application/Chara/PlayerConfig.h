@@ -3,10 +3,10 @@
 namespace PlayerConst
 {
 	constexpr int kHp = 50;
-	constexpr int kAtk = 25;
+	constexpr int kAtk = 5;
 	constexpr int kDef = 5;
 
-	constexpr float kPosX = 0.0f;
+	constexpr float kPosX = -450.0f;
 	constexpr float kPosY = 0.0f;
 	constexpr float kScaleX = 2.0f;
 	constexpr float kScaleY = 2.0f;

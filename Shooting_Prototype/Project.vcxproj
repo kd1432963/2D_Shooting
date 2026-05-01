@@ -195,6 +195,7 @@
     <ClInclude Include="Src\Application\main.h" />
     <ClInclude Include="Src\Application\Scene\Core\SceneBase.h" />
     <ClInclude Include="Src\Application\Scene\GameMain\GameScene.h" />
+    <ClInclude Include="Src\Application\Scene\GameMain\WaveManager.h" />
     <ClInclude Include="Src\Application\Scene\Result\ResultScene.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\Title\TitleScene.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="Src\Application\Item\PiercingItem.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\Application\Scene\GameMain\GameScene.cpp" />
+    <ClCompile Include="Src\Application\Scene\GameMain\WaveManager.cpp" />
     <ClCompile Include="Src\Application\Scene\Result\ResultScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\Title\TitleScene.cpp" />

@@ -2,25 +2,58 @@
 
 #include "Enemy1/Enemy1.h"
 
-//+++++++++++++++++++++++++++++++++++++++++
-// Wave1
-//+++++++++++++++++++++++++++++++++++++++++
-void EnemySpawner::SpawnWave1(EnemyManager& manager)
+EnemySpawner::EnemySpawner()
 {
-	RandomSpawn(manager);
-	RandomSpawn(manager);
-	RandomSpawn(manager);
+	LoadCSV("_Data/EnemyData/EnemySpawnData.csv");
 }
 
-//+++++++++++++++++++++++++++++++++++++++++
-// Wave2
-//+++++++++++++++++++++++++++++++++++++++++
-void EnemySpawner::SpawnWave2(EnemyManager& manager)
+//======================================
+// Wave開始
+//======================================
+void EnemySpawner::StartWave(int wave)
 {
-	manager.AddEnemy<Enemy1>();
-	manager.AddEnemy<Enemy1>();
-	manager.AddEnemy<Enemy1>();
-	manager.AddEnemy<Enemy1>();
+    m_currentWave = wave;
+    m_timer = 0;
+
+    // そのwaveの開始位置までindexを進める
+    m_index = 0;
+
+    while (m_index < m_events.size())
+    {
+        if (m_events[m_index].wave >= m_currentWave)
+            break;
+
+        m_index++;
+    }
+}
+
+//======================================
+// 毎フレーム
+//======================================
+void EnemySpawner::Update(EnemyManager& manager)
+{
+    m_timer++;
+
+    while (m_index < m_events.size())
+    {
+        const auto& e = m_events[m_index];
+
+        if (e.wave != m_currentWave) break;
+
+        if (e.time > m_timer) break;
+
+        // 出現
+        switch (e.type)
+        {
+        case 0:
+            manager.AddEnemy<Enemy1>(Math::Vector2{ e.x, e.y });
+            break;
+
+            // 将来ここにEnemy2とか追加
+        }
+
+        m_index++;
+    }
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -34,4 +67,28 @@ void EnemySpawner::RandomSpawn(EnemyManager& manager)
 			RandomRangeF(-200.0f, 200.0f)
 		}
 	);
+}
+
+void EnemySpawner::LoadCSV(const std::string& path)
+{
+	std::ifstream file(path);
+	std::string line;
+
+    std::getline(file, line);
+
+	while (std::getline(file, line))
+	{
+		std::stringstream ss(line);
+		std::string item;
+
+		SpawnEvent e;
+
+		std::getline(ss, item, ','); e.wave = std::stoi(item);
+		std::getline(ss, item, ','); e.time = std::stoi(item);
+		std::getline(ss, item, ','); e.type = std::stoi(item);
+		std::getline(ss, item, ','); e.x = std::stof(item);
+		std::getline(ss, item, ','); e.y = std::stof(item);
+
+		m_events.push_back(e);
+	}
 }

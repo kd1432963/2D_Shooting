@@ -339,6 +339,9 @@
     <ClInclude Include="Src\Application\Item\PiercingItem.h">
       <Filter>Src\Application\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\GameMain\WaveManager.h">
+      <Filter>Src\Application\Scene\GameMain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -499,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Item\PiercingItem.cpp">
       <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\GameMain\WaveManager.cpp">
+      <Filter>Src\Application\Scene\GameMain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
