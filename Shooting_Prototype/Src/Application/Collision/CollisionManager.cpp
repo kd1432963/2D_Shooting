@@ -56,7 +56,7 @@ void CollisionManager::CheckAll(
     {
         if (item->GetHitBox()->IsHit(*player.GetHitBox()))
         {
-            //player.GetItem(item->GetItemType());
+            player.GetItem(item->GetItemType());
             item->SetDead();
         }
     }

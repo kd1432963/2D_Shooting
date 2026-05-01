@@ -19,12 +19,12 @@
 
 GameScene::GameScene()
 {
-	mp_enemyManager = new EnemyManager();
-	mp_enemySpawner = new EnemySpawner();
-	mp_bulletManager = new BulletManager();
-	mp_uiManager = new UIManager();
-	mp_effectManager = new EffectManager();
-	mp_itemDropManager = new ItemDropManager();
+	mp_enemyManager		= new EnemyManager();
+	mp_enemySpawner		= new EnemySpawner();
+	mp_bulletManager	= new BulletManager();
+	mp_uiManager		= new UIManager();
+	mp_effectManager	= new EffectManager();
+	mp_itemDropManager	= new ItemDropManager();
 }
 
 GameScene::~GameScene()
@@ -227,7 +227,7 @@ void GameScene::Draw2D()
 	m_player.Draw2D();
 
 	// UI •`‰æ
-	mp_uiManager->Draw2D(m_score);
+	mp_uiManager->Draw2D(m_score,m_player.GetItemStockManager());
 
 	SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
 }

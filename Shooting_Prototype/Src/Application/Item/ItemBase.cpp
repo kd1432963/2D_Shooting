@@ -1,5 +1,10 @@
 #include "ItemBase.h"
 
+ItemBase::ItemBase(ItemType t)
+	:type(t)
+{
+}
+
 void ItemBase::Update()
 {
 	UpdatePos();

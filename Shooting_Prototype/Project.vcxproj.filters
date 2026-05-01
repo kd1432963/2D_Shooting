@@ -327,6 +327,9 @@
     <ClInclude Include="Src\Application\Item\ItemStockManager.h">
       <Filter>Src\Application\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Item\ItemType.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -477,6 +480,9 @@
       <Filter>Src\Application\Item</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Item\ItemDropManager.cpp">
+      <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\ItemStockManager.cpp">
       <Filter>Src\Application\Item</Filter>
     </ClCompile>
   </ItemGroup>

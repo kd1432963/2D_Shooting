@@ -6,6 +6,8 @@
 
 #include"Application/GameObject/RectHitBox.h"
 
+#include"Application/Item/ItemStockManager.h"
+
 using namespace PlayerConst;
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -13,11 +15,13 @@ using namespace PlayerConst;
 //+++++++++++++++++++++++++++++++++++++++++
 Player::Player()
 {
-	hitbox = std::make_unique<RectHitBox>(10,5);
+	hitbox = std::make_unique<RectHitBox>(10, 5);
 	if (hitbox)
 	{
 		hitbox->pos = { kPosX, kPosY };
 	}
+
+	m_itemManager = new ItemStockManager();
 
 	tex = ASSET.GetTexture("Player");
 	rect = ASSET.GetRectangle("Player");
@@ -33,6 +37,15 @@ Player::Player()
 	status.maxHp = kHp;
 
 	UpdateMatrix();
+}
+
+Player::~Player()
+{
+	if (m_itemManager)
+	{
+		delete m_itemManager;
+		m_itemManager = nullptr;
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -64,10 +77,15 @@ void Player::MoveInput()
 {
 	move = { 0.0f, 0.0f };
 
-	if (KEY.IsPress('W')) move.y += kWalkPow;
-	else if (KEY.IsPress('A')) move.x -= kWalkPow;
-	else if (KEY.IsPress('S')) move.y -= kWalkPow;
-	else if (KEY.IsPress('D')) move.x += kWalkPow;
+	if (KEY.IsPress('W')) move.y += 1.0f;
+	if (KEY.IsPress('A')) move.x -= 1.0f;
+	if (KEY.IsPress('S')) move.y -= 1.0f;
+	if (KEY.IsPress('D')) move.x += 1.0f;
+
+	// ³‹K‰»
+	move.Normalize();
+
+	move *= kWalkPow;
 
 	float fPosX = pos.x + move.x;
 	float fPosY = pos.y + move.y;
@@ -151,4 +169,9 @@ void Player::Shot(BulletManager& b)
 	b.Add(cfg, m_shotMode);
 
 	m_wantToShot = false;
+}
+
+void Player::GetItem(ItemType type)
+{
+	m_itemManager->AddItem(type);
 }

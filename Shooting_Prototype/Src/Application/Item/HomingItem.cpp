@@ -3,6 +3,7 @@
 #include"Application/GameObject/RectHitBox.h"
 
 HomingItem::HomingItem(const Math::Vector2& p)
+	:ItemBase(ItemType::Homing)
 {
 	//=== ”»’è ==============================
 
