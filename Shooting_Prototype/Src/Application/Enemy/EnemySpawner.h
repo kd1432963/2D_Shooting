@@ -2,6 +2,8 @@
 
 #include "EnemyManager.h"
 
+class Player;
+
 class EnemySpawner
 {
 public:
@@ -12,7 +14,7 @@ public:
 	void StartWave(int wave);
 
 	// –ˆƒtƒŒ[ƒ€ŒÄ‚Ô
-	void Update(EnemyManager& manager);
+	void Update(EnemyManager& manager, Player* player);
 
 	
 

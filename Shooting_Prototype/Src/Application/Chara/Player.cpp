@@ -32,7 +32,6 @@ Player::Player()
 	move = { 0.0f, 0.0f };
 
 	status.atk = kAtk;
-	status.def = kDef;
 	status.hp = kHp;
 	status.maxHp = kHp;
 

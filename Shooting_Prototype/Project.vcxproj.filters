@@ -112,6 +112,9 @@
     <Filter Include="Src\Application\Bullet\PiercingBullet">
       <UniqueIdentifier>{005e2333-aef9-4bef-9e71-b3230a2a69c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Enemy\Enemy2">
+      <UniqueIdentifier>{0cdd24c3-c0a0-416c-86f9-4b15c8633278}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -342,6 +345,12 @@
     <ClInclude Include="Src\Application\Scene\GameMain\WaveManager.h">
       <Filter>Src\Application\Scene\GameMain</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy2\Eneny2.h">
+      <Filter>Src\Application\Enemy\Enemy2</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy2\Enemy2Config.h">
+      <Filter>Src\Application\Enemy\Enemy2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -505,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\GameMain\WaveManager.cpp">
       <Filter>Src\Application\Scene\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Enemy\Enemy2\Enemy2.cpp">
+      <Filter>Src\Application\Enemy\Enemy2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

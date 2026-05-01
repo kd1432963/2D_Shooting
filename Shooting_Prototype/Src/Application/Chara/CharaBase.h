@@ -54,7 +54,6 @@ protected:
 		int hp		= 0;
 		int maxHp	= 0;
 		int atk		= 0;
-		int def		= 0;
 	};
 
 protected:
@@ -62,7 +61,7 @@ protected:
 	//**********************************
 	// ‹¤’Êƒf[ƒ^
 	//**********************************
-	Status status = {};
+	Status status;
 
 	Math::Rectangle rect = {};
 

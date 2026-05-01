@@ -2,13 +2,13 @@
 
 #include "Application/Enemy/EnemyBase.h"
 
-class BulletManager;
+class Player;
 
-class Enemy1 : public EnemyBase
+class Enemy2 : public EnemyBase
 {
 public:
 
-	Enemy1(const Math::Vector2& p);
+	Enemy2(const Math::Vector2& p,Player*player);
 
 public:
 
@@ -19,14 +19,11 @@ public:
 	void Action() override;
 	void Draw2D() override;
 
-public:
-
-	//**********************************
-	// UŒ‚ˆ—
-	//**********************************
-	void Shot(BulletManager& b) override;
-
 private:
 
-	int t = 0;
+	Player* mp_player = nullptr;
+
+
+	Math::Vector2 velocity = {};
+
 };

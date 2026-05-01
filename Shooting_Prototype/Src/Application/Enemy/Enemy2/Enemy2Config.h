@@ -1,8 +1,8 @@
 #pragma once
 
-namespace Enemy1Const
+namespace Enemy2Const
 {
-	constexpr int kHp = 50;
+	constexpr int kHp = 500;
 	constexpr int kAtk = 5;
 
 	constexpr float kPosX = 0.0f;
@@ -11,7 +11,7 @@ namespace Enemy1Const
 	constexpr float kScaleY = 1.0f;
 	constexpr float kRadius = 32.0f;
 
-	constexpr float kWalkPow = 5.0f;
+	constexpr float kMovePow = 3.0f;
 
 	constexpr float kShotPow = 8.0f;
 }

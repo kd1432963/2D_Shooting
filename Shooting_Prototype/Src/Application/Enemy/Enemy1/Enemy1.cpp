@@ -11,30 +11,6 @@ using namespace Enemy1Const;
 //+++++++++++++++++++++++++++++++++++++++++
 // èâä˙âª
 //+++++++++++++++++++++++++++++++++++++++++
-Enemy1::Enemy1()
-{
-	hitbox = std::make_unique<CircleHitBox>(kRadius);
-	if (hitbox)
-	{
-		hitbox->pos = { kPosX, kPosY };
-	}
-
-	tex = ASSET.GetTexture("Enemy1");
-	rect = ASSET.GetRectangle("Enemy1");
-
-	pos = { kPosX, kPosY };
-	scale = { kScaleX, kScaleY };
-	rotate = 0.0f;
-	move = { 0.0f, 0.0f };
-
-	status.hp = kHp;
-	status.maxHp = kHp;
-	status.atk = kAtk;
-	status.def = kDef;
-
-	UpdateMatrix();
-}
-
 Enemy1::Enemy1(const Math::Vector2&p)
 {
 	hitbox = std::make_unique<CircleHitBox>(kRadius);
@@ -54,7 +30,6 @@ Enemy1::Enemy1(const Math::Vector2&p)
 	status.hp = kHp;
 	status.maxHp = kHp;
 	status.atk = kAtk;
-	status.def = kDef;
 
 	UpdateMatrix();
 }

@@ -120,7 +120,7 @@ void GameScene::OnResume()
 void GameScene::Update()
 {
 	mp_waveManager->Update(*mp_enemyManager,*mp_enemySpawner);
-	mp_enemySpawner->Update(*mp_enemyManager);
+	mp_enemySpawner->Update(*mp_enemyManager,mp_player);
 
 	if (KEY.IsTrigger(VK_RETURN))
 	{

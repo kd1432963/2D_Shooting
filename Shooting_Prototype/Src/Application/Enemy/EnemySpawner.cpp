@@ -1,6 +1,7 @@
 #include "EnemySpawner.h"
 
 #include "Enemy1/Enemy1.h"
+#include "Enemy2/Eneny2.h"
 
 EnemySpawner::EnemySpawner()
 {
@@ -12,48 +13,51 @@ EnemySpawner::EnemySpawner()
 //======================================
 void EnemySpawner::StartWave(int wave)
 {
-    m_currentWave = wave;
-    m_timer = 0;
+	m_currentWave = wave;
+	m_timer = 0;
 
-    // そのwaveの開始位置までindexを進める
-    m_index = 0;
+	// そのwaveの開始位置までindexを進める
+	m_index = 0;
 
-    while (m_index < m_events.size())
-    {
-        if (m_events[m_index].wave >= m_currentWave)
-            break;
+	while (m_index < m_events.size())
+	{
+		if (m_events[m_index].wave >= m_currentWave)
+			break;
 
-        m_index++;
-    }
+		m_index++;
+	}
 }
 
 //======================================
 // 毎フレーム
 //======================================
-void EnemySpawner::Update(EnemyManager& manager)
+void EnemySpawner::Update(EnemyManager& manager, Player* player)
 {
-    m_timer++;
+	m_timer++;
 
-    while (m_index < m_events.size())
-    {
-        const auto& e = m_events[m_index];
+	while (m_index < m_events.size())
+	{
+		const auto& e = m_events[m_index];
 
-        if (e.wave != m_currentWave) break;
+		if (e.wave != m_currentWave) break;
 
-        if (e.time > m_timer) break;
+		if (e.time > m_timer) break;
 
-        // 出現
-        switch (e.type)
-        {
-        case 0:
-            manager.AddEnemy<Enemy1>(Math::Vector2{ e.x, e.y });
-            break;
+		// 出現
+		switch (e.type)
+		{
+		case 0:
+			manager.AddEnemy<Enemy1>(Math::Vector2{ e.x, e.y });
+			break;
 
-            // 将来ここにEnemy2とか追加
-        }
+			// 将来ここにEnemy2とか追加
+		case 1:
+			manager.AddEnemy<Enemy2>(Math::Vector2{ e.x,e.y }, player);
+			break;
+		}
 
-        m_index++;
-    }
+		m_index++;
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -74,7 +78,7 @@ void EnemySpawner::LoadCSV(const std::string& path)
 	std::ifstream file(path);
 	std::string line;
 
-    std::getline(file, line);
+	std::getline(file, line);
 
 	while (std::getline(file, line))
 	{
