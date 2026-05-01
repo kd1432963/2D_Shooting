@@ -76,6 +76,17 @@ void Player::Update()
 		}
 	}
 
+	// ŠÑ’ÊŽžŠÔŒ¸­
+	if (m_piercingTime > 0.0f)
+	{
+		m_piercingTime -= 1.0f / 60.0f;
+		if (m_piercingTime <= 0.0f)
+		{
+			m_shotMode = BulletType::Straight;
+			m_piercingTime = 0.0f;
+		}
+	}
+
 	UpdateMatrix();
 }
 
@@ -180,6 +191,10 @@ void Player::UseItemEffect(ItemType type)
 		m_shotMode = BulletType::Homing;
 		m_homingTime = 3.0f;
 		break;
+
+	case ItemType::Piercing:
+		m_shotMode = BulletType::Piercing;
+		m_piercingTime = 2.5f;
 	default:
 		break;
 	}
@@ -216,6 +231,10 @@ void Player::Shot(BulletManager& b)
 
 	case BulletType::Homing:
 		cfg.texTag = "Homing";
+		break;
+
+	case BulletType::Piercing:
+		cfg.texTag = "Piercing";
 		break;
 	}
 

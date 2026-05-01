@@ -165,6 +165,7 @@
     <ClInclude Include="Src\Application\Bullet\BulletOwner.h" />
     <ClInclude Include="Src\Application\Bullet\BulletType.h" />
     <ClInclude Include="Src\Application\Bullet\HomingBullet\HomingBullet.h" />
+    <ClInclude Include="Src\Application\Bullet\PiercingBullet\PiercingBullet.h" />
     <ClInclude Include="Src\Application\Bullet\StraightBullet\StraightBullet.h" />
     <ClInclude Include="Src\Application\Chara\CharaBase.h" />
     <ClInclude Include="Src\Application\Chara\Player.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Src\Application\Item\ItemDropManager.h" />
     <ClInclude Include="Src\Application\Item\ItemStockManager.h" />
     <ClInclude Include="Src\Application\Item\ItemType.h" />
+    <ClInclude Include="Src\Application\Item\PiercingItem.h" />
     <ClInclude Include="Src\Application\main.h" />
     <ClInclude Include="Src\Application\Scene\Core\SceneBase.h" />
     <ClInclude Include="Src\Application\Scene\GameMain\GameScene.h" />
@@ -229,6 +231,7 @@
     <ClCompile Include="Src\Application\Bullet\BulletBase.cpp" />
     <ClCompile Include="Src\Application\Bullet\BulletManager.cpp" />
     <ClCompile Include="Src\Application\Bullet\HomingBullet\HomingBullet.cpp" />
+    <ClCompile Include="Src\Application\Bullet\PiercingBullet\PiercingBullet.cpp" />
     <ClCompile Include="Src\Application\Bullet\StraightBullet\StraightBullet.cpp" />
     <ClCompile Include="Src\Application\Chara\CharaBase.cpp" />
     <ClCompile Include="Src\Application\Chara\Player.cpp" />
@@ -247,6 +250,7 @@
     <ClCompile Include="Src\Application\Item\ItemBase.cpp" />
     <ClCompile Include="Src\Application\Item\ItemDropManager.cpp" />
     <ClCompile Include="Src\Application\Item\ItemStockManager.cpp" />
+    <ClCompile Include="Src\Application\Item\PiercingItem.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\Application\Scene\GameMain\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\Result\ResultScene.cpp" />

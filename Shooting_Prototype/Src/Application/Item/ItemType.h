@@ -3,6 +3,7 @@
 enum class ItemType
 {
 	Homing,
+	Piercing,
 
 	Count
 };

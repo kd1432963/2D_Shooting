@@ -74,12 +74,10 @@ void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecas
 			case ItemType::Homing:
 				texName = "HomingItem";
 				break;
-				/*  case ItemType::
-					  texName = "";
-					  break;
-				  case ItemType::
-					  texName = "";
-					  break;*/
+				
+			case ItemType::Piercing:
+				texName = "PiercingItem";
+				break;
 			}
 
 			if (texName)

@@ -109,6 +109,9 @@
     <Filter Include="Src\Application\Item">
       <UniqueIdentifier>{48beacb1-91dc-40d1-a326-d5d5507a4214}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Bullet\PiercingBullet">
+      <UniqueIdentifier>{005e2333-aef9-4bef-9e71-b3230a2a69c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -330,6 +333,12 @@
     <ClInclude Include="Src\Application\Item\ItemType.h">
       <Filter>Src\Application\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\PiercingBullet\PiercingBullet.h">
+      <Filter>Src\Application\Bullet\PiercingBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Item\PiercingItem.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -483,6 +492,12 @@
       <Filter>Src\Application\Item</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Item\ItemStockManager.cpp">
+      <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Bullet\PiercingBullet\PiercingBullet.cpp">
+      <Filter>Src\Application\Bullet\PiercingBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\PiercingItem.cpp">
       <Filter>Src\Application\Item</Filter>
     </ClCompile>
   </ItemGroup>

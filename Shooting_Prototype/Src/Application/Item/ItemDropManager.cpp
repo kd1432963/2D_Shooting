@@ -2,9 +2,11 @@
 
 #include"HomingItem.h"
 
-void ItemDropManager::DropItemRandom(const Math::Vector2&p)
+#include"PiercingItem.h"
+
+void ItemDropManager::DropItemRandom(const Math::Vector2& p)
 {
-	int r = RandomRange(1, 4);
+	int r = RandomRange(1, 7);
 
 	std::unique_ptr<ItemBase>item;
 
@@ -14,7 +16,7 @@ void ItemDropManager::DropItemRandom(const Math::Vector2&p)
 	}
 	else if (r < 8)
 	{
-
+		item = std::make_unique<PiercingItem>(p);
 	}
 	else
 	{

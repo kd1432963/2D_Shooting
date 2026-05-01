@@ -5,6 +5,7 @@
 #include "Application/Bullet/BulletConfig.h"
 #include "Application/Bullet/StraightBullet/StraightBullet.h"
 #include "Application/Bullet/HomingBullet/HomingBullet.h"
+#include"Application/Bullet/PiercingBullet/PiercingBullet.h"
 
 //+++++++++++++++++++++++++++++++++++++++++
 // ’Ç‰Á
@@ -71,6 +72,11 @@ std::unique_ptr<BulletBase> BulletManager::CreateBullet(const BulletConfig& cfg,
 		auto b = std::make_unique<HomingBullet>(cfg);
 		b->SetPlayer(mp_player);
 		b->SetEnemyManager(mp_enemyManager);
+		return b;
+	}
+	case BulletType::Piercing:
+	{
+		auto b = std::make_unique<PiercingBullet>(cfg);
 		return b;
 	}
 	}

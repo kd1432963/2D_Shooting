@@ -3,5 +3,6 @@
 enum class BulletType
 {
 	Straight,
-	Homing
+	Homing,
+	Piercing
 };

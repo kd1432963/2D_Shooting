@@ -10,7 +10,7 @@ void ItemStockManager::UseItem()
 {
     if (m_items.empty()) return;
 
-    ItemType t = m_items.back();
-    m_items.pop_back();
+    ItemType t = m_items.front();
+    m_items.erase(m_items.begin());
 }
 

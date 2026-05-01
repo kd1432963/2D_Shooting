@@ -76,5 +76,6 @@ private:
 
 
 	float m_homingTime = 0.0f;
+	float m_piercingTime = 0.0f;
 	float m_itemRecast = 0.0f;
 };

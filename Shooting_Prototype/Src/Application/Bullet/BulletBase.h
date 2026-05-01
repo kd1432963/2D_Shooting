@@ -34,7 +34,7 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	// セッター
 	//+++++++++++++++++++++++++++++++++++++++++
-	void SetDead() { isDead = true; }
+	virtual void SetDead() { isDead = true; }
 
 protected:
 
