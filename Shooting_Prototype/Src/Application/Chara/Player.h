@@ -37,6 +37,7 @@ public:
 
 
 	void GetItem(ItemType type);
+	float GetItemRecast() const{ return m_itemRecast; }
 
 	const ItemStockManager& GetItemStockManager()const { return *m_itemManager; }
 
@@ -52,6 +53,9 @@ private:
 
 	// 発射入力
 	void ShotInput();
+
+	// アイテム消費による効果
+	void UseItemEffect(ItemType type);
 
 private:
 
@@ -69,4 +73,8 @@ private:
 	// クールダウン
 	//**********************************
 	float m_shotRecast = 0.0f;
+
+
+	float m_homingTime = 0.0f;
+	float m_itemRecast = 0.0f;
 };

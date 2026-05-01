@@ -227,7 +227,7 @@ void GameScene::Draw2D()
 	m_player.Draw2D();
 
 	// UI •`‰æ
-	mp_uiManager->Draw2D(m_score,m_player.GetItemStockManager());
+	mp_uiManager->Draw2D(m_score,m_player.GetItemStockManager(),m_player.GetItemRecast());
 
 	SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
 }
@@ -237,7 +237,8 @@ void GameScene::Draw2D()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::ImGuiUpdate()
 {
-
+	ImGui::Text("%.2f", m_player.GetItemRecast());
+	ImGui::Text("%.2f", m_player.GetItemRecast()/5.0f);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

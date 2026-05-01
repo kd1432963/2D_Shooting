@@ -54,6 +54,28 @@ Player::~Player()
 void Player::Update()
 {
 	UpdatePos();
+
+	// アイテム使用リキャスト減少
+	if (m_itemRecast > 0.0f)
+	{
+		m_itemRecast -= 1.0f / 60.0f;
+		if (m_itemRecast <= 0.0f)
+		{
+			m_itemRecast = 0.0f;
+		}
+	}
+
+	// ホーミング時間減少
+	if (m_homingTime > 0.0f)
+	{
+		m_homingTime -= 1.0f / 60.0f;
+		if (m_homingTime <= 0.0f)
+		{
+			m_shotMode = BulletType::Straight;
+			m_homingTime = 0.0f;
+		}
+	}
+
 	UpdateMatrix();
 }
 
@@ -66,6 +88,21 @@ void Player::Action()
 		--m_shotRecast;
 
 	MoveInput();
+
+	//=============================
+	// 右クリックで先頭アイテム使用
+	//=============================
+	if (MOUSE.IsTriggerRight())
+	{
+		if (m_itemRecast <= 0.0f && m_itemManager && m_itemManager->HasItem())
+		{
+			ItemType type = m_itemManager->Get(0);
+			m_itemManager->UseItem();
+			UseItemEffect(type);
+			m_itemRecast = 5.0f;
+		}
+	}
+
 	ChangeShotMode();
 	ShotInput();
 }
@@ -121,14 +158,30 @@ void Player::ShotInput()
 	if (MOUSE.IsPressLeft() && m_shotRecast <= 0.0f)
 	{
 		m_wantToShot = true;
-		m_shotMode = BulletType::Straight;
+		//m_shotMode = BulletType::Straight;
 		m_shotRecast = kShotRecastTime;
 	}
-	else if (MOUSE.IsPressRight() && m_shotRecast <= 0.0f)
+	/*else if (MOUSE.IsPressRight() && m_shotRecast <= 0.0f)
 	{
 		m_wantToShot = true;
 		m_shotMode = BulletType::Homing;
 		m_shotRecast = kShotRecastTime;
+	}*/
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// アイテム使用効果
+//+++++++++++++++++++++++++++++++++++++++++
+void Player::UseItemEffect(ItemType type)
+{
+	switch (type)
+	{
+	case ItemType::Homing:
+		m_shotMode = BulletType::Homing;
+		m_homingTime = 3.0f;
+		break;
+	default:
+		break;
 	}
 }
 
