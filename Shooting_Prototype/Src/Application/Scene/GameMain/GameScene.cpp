@@ -228,9 +228,7 @@ void GameScene::Draw2D()
 	mp_player->Draw2D();
 
 	// UI •`‰æ
-	mp_uiManager->Draw2D(m_score,mp_player->GetItemStockManager(),mp_player->GetItemRecast());
-
-	//SHADER.m_spriteShader.DrawString(0, 0, "Game", Math::Vector4(1, 1, 1, 1));
+	mp_uiManager->Draw2D(m_score,mp_player->GetItemStockManager(),mp_player->GetItemRecast(),mp_player->GetHp());
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

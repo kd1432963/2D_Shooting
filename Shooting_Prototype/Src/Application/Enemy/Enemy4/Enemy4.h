@@ -4,11 +4,11 @@
 
 class BulletManager;
 
-class Enemy1 : public EnemyBase
+class Enemy4 : public EnemyBase
 {
 public:
 
-	Enemy1(const Math::Vector2& p);
+	Enemy4(const Math::Vector2& p);
 
 public:
 

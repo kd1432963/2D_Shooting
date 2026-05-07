@@ -2,6 +2,8 @@
 
 #include "Enemy1/Enemy1.h"
 #include "Enemy2/Eneny2.h"
+#include"Enemy3/Enemy3.h"
+#include"Enemy4/Enemy4.h"
 
 EnemySpawner::EnemySpawner()
 {
@@ -50,9 +52,16 @@ void EnemySpawner::Update(EnemyManager& manager, Player* player)
 			manager.AddEnemy<Enemy1>(Math::Vector2{ e.x, e.y });
 			break;
 
-			// «—ˆ‚±‚±‚ÉEnemy2‚Æ‚©’Ç‰Á
 		case 1:
 			manager.AddEnemy<Enemy2>(Math::Vector2{ e.x,e.y }, player);
+			break;
+
+		case 2:
+			manager.AddEnemy<Enemy3>(Math::Vector2{ e.x,e.y }, player);
+			break;
+
+		case 3:
+			manager.AddEnemy<Enemy4>(Math::Vector2{ e.x,e.y });
 			break;
 		}
 

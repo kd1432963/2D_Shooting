@@ -38,19 +38,32 @@ void CollisionManager::CheckAll(
         }
     }
 
-    // --- 敵弾 vs プレイヤー ---
-    for (auto& b : bullets)
+    if (!player.IsInvincible())
     {
-        if (b->GetOwner() != BulletOwner::Enemy)
-            continue;
-
-        if (b->GetHitBox()->IsHit(*player.GetHitBox()))
+        // --- 敵 vs プレイヤー ---
+        for (auto& e : enemies)
         {
-            player.TakeDamage(b->GetAtk());
-            b->SetDead();
+            if (e->GetHitBox()->IsHit(*player.GetHitBox()))
+            {
+                player.TakeDamage(e->GetAtk());
+                break;
+            }
+        }
+
+        // --- 敵弾 vs プレイヤー ---
+        for (auto& b : bullets)
+        {
+            if (b->GetOwner() != BulletOwner::Enemy)
+                continue;
+
+            if (b->GetHitBox()->IsHit(*player.GetHitBox()))
+            {
+                player.TakeDamage(b->GetAtk());
+                b->SetDead();
+                break;
+            }
         }
     }
-
     // --- プレイヤー vs アイテムー ---
     for (auto& item : items)
     {

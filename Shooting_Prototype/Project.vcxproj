@@ -180,6 +180,10 @@
     <ClInclude Include="Src\Application\Enemy\Enemy1\Enemy1Config.h" />
     <ClInclude Include="Src\Application\Enemy\Enemy2\Enemy2Config.h" />
     <ClInclude Include="Src\Application\Enemy\Enemy2\Eneny2.h" />
+    <ClInclude Include="Src\Application\Enemy\Enemy3\Enemy3.h" />
+    <ClInclude Include="Src\Application\Enemy\Enemy3\Enemy3Config.h" />
+    <ClInclude Include="Src\Application\Enemy\Enemy4\Enemy4.h" />
+    <ClInclude Include="Src\Application\Enemy\Enemy4\Enemy4Config.h" />
     <ClInclude Include="Src\Application\Enemy\EnemyBase.h" />
     <ClInclude Include="Src\Application\Enemy\EnemyManager.h" />
     <ClInclude Include="Src\Application\Enemy\EnemySpawner.h" />
@@ -245,6 +249,8 @@
     <ClCompile Include="Src\Application\Effect\HitEffect\HitEffect.cpp" />
     <ClCompile Include="Src\Application\Enemy\Enemy1\Enemy1.cpp" />
     <ClCompile Include="Src\Application\Enemy\Enemy2\Enemy2.cpp" />
+    <ClCompile Include="Src\Application\Enemy\Enemy3\Enemy3.cpp" />
+    <ClCompile Include="Src\Application\Enemy\Enemy4\Enemy4.cpp" />
     <ClCompile Include="Src\Application\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Src\Application\Enemy\EnemySpawner.cpp" />
     <ClCompile Include="Src\Application\GameObject\CircleHitBox.cpp" />

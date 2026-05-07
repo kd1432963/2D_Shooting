@@ -25,8 +25,24 @@ public:
 public:
 
 	//**********************************
+	// システム側のキル
+	//**********************************
+	bool IsSystemDead()const { return isSystemDead; }
+	void SystemKill() { isSystemDead = true; }
+
+public:
+
+	//**********************************
 	// 攻撃処理（必要な敵のみ使用）
 	//**********************************
 	virtual void Shot(BulletManager& bulletManager) {}
 
+protected:
+
+	//**********************************
+	// 敵共通変数
+	//**********************************
+
+	Math::Vector2 basePos = {};
+	bool isSystemDead = false;
 };

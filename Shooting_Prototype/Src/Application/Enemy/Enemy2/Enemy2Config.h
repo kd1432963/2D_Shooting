@@ -2,8 +2,8 @@
 
 namespace Enemy2Const
 {
-	constexpr int kHp = 500;
-	constexpr int kAtk = 5;
+	constexpr int kHp = 150;
+	constexpr int kAtk = 1;
 
 	constexpr float kPosX = 0.0f;
 	constexpr float kPosY = 0.0f;

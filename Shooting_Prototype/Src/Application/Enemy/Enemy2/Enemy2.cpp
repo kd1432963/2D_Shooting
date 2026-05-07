@@ -40,6 +40,17 @@ Enemy2::Enemy2(const Math::Vector2& p, Player* player)
 void Enemy2::Update()
 {
 	UpdatePos();
+
+	// YÀ•W‚Ì‰æ–Ê§Œä
+	pos.y = Clamp(pos.y, -241.5f + 15.0f, 241.5f - 15.0f);
+	hitbox->pos = pos;
+
+	// XÀ•W‚Ì‰æ–Ê§Œä
+	if (pos.x < -640 - 15)
+	{
+		SystemKill();
+	}
+
 	UpdateMatrix();
 }
 
@@ -56,7 +67,7 @@ void Enemy2::Action()
 		desired.Normalize();
 		desired *= kMovePow;
 
-		velocity += (desired - velocity) * 0.075f;
+		velocity += (desired - velocity) * 0.035f;
 
 		move = velocity;
 	}
@@ -68,4 +79,10 @@ void Enemy2::Action()
 void Enemy2::Draw2D()
 {
 	DrawChara();
+
+	std::string hp = std::to_string(status.hp);
+	SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
+	SHADER.m_spriteShader.DrawString(pos.x, pos.y+20, hp.c_str(), Math::Color(1, 1, 1, 1));
+	SHADER.m_spriteShader.End();
+	SHADER.m_spriteShader.Begin();
 }

@@ -9,7 +9,7 @@ public:
 	UIManager() { Init(); }
 
 	void Update();
-	void Draw2D(int score, const ItemStockManager& stock,float itemRecast);
+	void Draw2D(int score, const ItemStockManager& stock,float itemRecast,int hp);
 
 private:
 

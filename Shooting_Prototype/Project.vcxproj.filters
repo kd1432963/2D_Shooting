@@ -115,6 +115,12 @@
     <Filter Include="Src\Application\Enemy\Enemy2">
       <UniqueIdentifier>{0cdd24c3-c0a0-416c-86f9-4b15c8633278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Enemy\Enemy3">
+      <UniqueIdentifier>{00368a88-a05c-49a0-b949-a9d04b3b79e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Enemy\Enemy4">
+      <UniqueIdentifier>{d0962484-f0e7-4036-87c2-0473a96e4a98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -351,6 +357,18 @@
     <ClInclude Include="Src\Application\Enemy\Enemy2\Enemy2Config.h">
       <Filter>Src\Application\Enemy\Enemy2</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy3\Enemy3.h">
+      <Filter>Src\Application\Enemy\Enemy3</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy3\Enemy3Config.h">
+      <Filter>Src\Application\Enemy\Enemy3</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy4\Enemy4.h">
+      <Filter>Src\Application\Enemy\Enemy4</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Enemy4\Enemy4Config.h">
+      <Filter>Src\Application\Enemy\Enemy4</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -517,6 +535,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Enemy\Enemy2\Enemy2.cpp">
       <Filter>Src\Application\Enemy\Enemy2</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Enemy\Enemy3\Enemy3.cpp">
+      <Filter>Src\Application\Enemy\Enemy3</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Enemy\Enemy4\Enemy4.cpp">
+      <Filter>Src\Application\Enemy\Enemy4</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

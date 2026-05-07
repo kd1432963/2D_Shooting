@@ -1,17 +1,17 @@
-#include "Enemy1.h"
+ï»¿#include "Enemy4.h"
+#include "Enemy4Config.h"
 
-#include "Enemy1Config.h"
+#include "Application/GameObject/RectHitBox.h"
 #include "Application/Bullet/BulletManager.h"
 #include "Application/Bullet/BulletConfig.h"
 #include "Application/Bullet/BulletType.h"
-#include"Application/GameObject/RectHitBox.h"
 
-using namespace Enemy1Const;
+using namespace Enemy4Const;
 
 //+++++++++++++++++++++++++++++++++++++++++
-// ‰Šú‰»
+// åˆæœŸåŒ–
 //+++++++++++++++++++++++++++++++++++++++++
-Enemy1::Enemy1(const Math::Vector2& p)
+Enemy4::Enemy4(const Math::Vector2& p)
 {
 	hitbox = std::make_unique<RectHitBox>(15, 15);
 	if (hitbox)
@@ -19,14 +19,13 @@ Enemy1::Enemy1(const Math::Vector2& p)
 		hitbox->pos = p;
 	}
 
-	tex = ASSET.GetTexture("Enemy1");
-	rect = ASSET.GetRectangle("Enemy1");
+	tex = ASSET.GetTexture("Enemy4");
+	rect = ASSET.GetRectangle("Enemy4");
 
 	pos = p;
 	basePos = p;
 	scale = { kScaleX, kScaleY };
 	rotate = 0.0f;
-	move = { 0.0f, 0.0f };
 
 	status.hp = kHp;
 	status.maxHp = kHp;
@@ -36,18 +35,18 @@ Enemy1::Enemy1(const Math::Vector2& p)
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// XV
+// æ›´æ–°
 //+++++++++++++++++++++++++++++++++++++++++
-void Enemy1::Update()
+void Enemy4::Update()
 {
 	UpdateAnim();
 	UpdatePos();
 
-	// YÀ•W‚Ì‰æ–Ê§Œä
+	// Yåº§æ¨™ã®ç”»é¢åˆ¶å¾¡
 	pos.y = Clamp(pos.y, -241.5f + 15.0f, 241.5f - 15.0f);
 	hitbox->pos = pos;
 
-	// XÀ•W‚Ì‰æ–Ê§Œä
+	// Xåº§æ¨™ã®ç”»é¢åˆ¶å¾¡
 	if (pos.x < -640 - 15)
 	{
 		SystemKill();
@@ -57,28 +56,28 @@ void Enemy1::Update()
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// s“®
+// è¡Œå‹•
 //+++++++++++++++++++++++++++++++++++++++++
-void Enemy1::Action()
+void Enemy4::Action()
 {
-	move = { 0.0f, 0.0f };
+	m_aliveTime++;
+	m_shotWait++;
 
-	++m_shotWait;
-	++m_aliveTime;
+	// å·¦ã¸ã‚†ã£ãã‚Šç§»å‹•
+	move.x = -1.5f;
 
-	move.x = -1.0f; // ‚Ù‚ÚŒÅ’è
+	// æ³¢ã®é€Ÿã•
+	float speed = 0.05f;
+	// æŒ¯ã‚Œå¹…
+	float amplitude = 100.0f;
 
-	// ”g‚Ì‘¬‚³
-	float speed = 0.1f;
-	// U‚ê•
-	float amplitude = 25.0f;
-
-	// –Ú•WÀ•W‚Í 25 ~ -25
+	// ç›®æ¨™åº§æ¨™ã¯ 100 ~ -100
 	float targetY = basePos.y + sinf(m_aliveTime * speed) * amplitude;
 
 	move.y = targetY - pos.y;
 
-	if (m_shotWait > 120)
+	// å¼¾ã‚’æ’ƒã¤
+	if (m_shotWait > 90)
 	{
 		wantToShot = true;
 		m_shotWait = 0;
@@ -86,24 +85,23 @@ void Enemy1::Action()
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// •`‰æ
+// æç”»
 //+++++++++++++++++++++++++++++++++++++++++
-void Enemy1::Draw2D()
+void Enemy4::Draw2D()
 {
 	CalcDrawRect();
-
 	DrawChara();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// UŒ‚
+// æ”»æ’ƒ
 //+++++++++++++++++++++++++++++++++++++++++
-void Enemy1::Shot(BulletManager& b)
+void Enemy4::Shot(BulletManager& b)
 {
 	BulletConfig cfg;
-	cfg.texTag = "Enemy1Bullet";
+	cfg.texTag = "Enemy4Bullet";
 	cfg.pos = pos;
-	cfg.move = { -4, 0 };
+	cfg.move = { -3.0f, 0.0f }; // Enemy1 ã‚ˆã‚Šé…ã„
 	cfg.atk = status.atk;
 	cfg.owner = BulletOwner::Enemy;
 

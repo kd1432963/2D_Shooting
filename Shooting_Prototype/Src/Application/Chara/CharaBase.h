@@ -27,9 +27,12 @@ public:
 	//**********************************
 	// 状態取得・操作
 	//**********************************
-	bool WantToShot() const { return m_wantToShot; }
+	bool WantToShot() const { return wantToShot; }
 
-	void TakeDamage(int damage)
+	int GetAtk()const { return status.atk; }
+	int GetHp()const { return status.hp; }
+
+	virtual void TakeDamage(int damage)
 	{
 		status.hp -= damage;
 		if (status.hp < 0) status.hp = 0;
@@ -44,6 +47,12 @@ protected:
 	//**********************************
 	void DrawChara();
 
+	//**********************************
+	// アニメーション
+	//**********************************
+	void UpdateAnim();
+	void CalcDrawRect();
+
 protected:
 
 	//**********************************
@@ -51,9 +60,9 @@ protected:
 	//**********************************
 	struct Status
 	{
-		int hp		= 0;
-		int maxHp	= 0;
-		int atk		= 0;
+		int hp = 0;
+		int maxHp = 0;
+		int atk = 0;
 	};
 
 protected:
@@ -65,5 +74,8 @@ protected:
 
 	Math::Rectangle rect = {};
 
-	bool m_wantToShot = false;
+	bool wantToShot = false;
+
+	int animFrame = 0;
+	int animTimer = 0;
 };

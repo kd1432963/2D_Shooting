@@ -86,6 +86,20 @@ void Player::Update()
 		}
 	}
 
+	// 無敵時間減少
+	if (m_isInvincible)
+	{
+		m_invincibleTimer -= 1.0f / 60.0f;
+
+		if (m_invincibleTimer <= 0.0f)
+		{
+			m_isInvincible = false;
+			m_invincibleTimer = 0.0f;
+		}
+
+		m_blinkTimer += 1.0f / 60.0f;
+	}
+
 	UpdateMatrix();
 }
 
@@ -112,8 +126,6 @@ void Player::Action()
 			m_itemRecast = 5.0f;
 		}
 	}
-
-	ChangeShotMode();
 	ShotInput();
 }
 
@@ -150,33 +162,15 @@ void Player::MoveInput()
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
-// 入力：ショットモード変更
-//+++++++++++++++++++++++++++++++++++++++++
-void Player::ChangeShotMode()
-{
-	/*if (MOUSE.IsPressRight())
-		m_shotMode = BulletType::Homing;
-	else if (MOUSE.IsPressLeft())
-		m_shotMode = BulletType::Straight;*/
-}
-
-//+++++++++++++++++++++++++++++++++++++++++
 // 入力：発射判定
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::ShotInput()
 {
 	if (MOUSE.IsPressLeft() && m_shotRecast <= 0.0f)
 	{
-		m_wantToShot = true;
-		//m_shotMode = BulletType::Straight;
+		wantToShot = true;
 		m_shotRecast = kShotRecastTime;
 	}
-	/*else if (MOUSE.IsPressRight() && m_shotRecast <= 0.0f)
-	{
-		m_wantToShot = true;
-		m_shotMode = BulletType::Homing;
-		m_shotRecast = kShotRecastTime;
-	}*/
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -204,8 +198,17 @@ void Player::UseItemEffect(ItemType type)
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Draw2D()
 {
-	DrawChara();
-
+	if (m_isInvincible)
+	{
+		if (sin(m_blinkTimer * 30.0f) > 0)
+		{
+			DrawChara();
+		}
+	}
+	else
+	{
+		DrawChara();
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -213,10 +216,12 @@ void Player::Draw2D()
 //+++++++++++++++++++++++++++++++++++++++++
 void Player::Shot(BulletManager& b)
 {
+	Math::Vector2 muzzuleOffset = { 8.0f,0.0f };
+
 	BulletConfig cfg =
 	{
 		"Straight",
-		pos,
+		pos+muzzuleOffset,
 		{kShotPow, 0.0f},
 		status.atk,
 		BulletOwner::Player
@@ -239,7 +244,21 @@ void Player::Shot(BulletManager& b)
 
 	b.Add(cfg, m_shotMode);
 
-	m_wantToShot = false;
+	wantToShot = false;
+}
+
+void Player::TakeDamage(int damage)
+{
+	if (m_isInvincible) return;
+
+	status.hp -= damage;
+
+	if (status.hp <= 0)status.hp = 0;
+
+	m_isInvincible = true;
+	m_invincibleTimer = kInvincibleDuration;
+
+	m_blinkTimer = 0.0f;
 }
 
 void Player::GetItem(ItemType type)

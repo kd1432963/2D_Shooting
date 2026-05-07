@@ -34,10 +34,13 @@ public:
 	void Shot(BulletManager& b);
 
 
+	void TakeDamage(int damage)override;
 
 
 	void GetItem(ItemType type);
 	float GetItemRecast() const{ return m_itemRecast; }
+
+	bool IsInvincible()const { return m_isInvincible; }
 
 	const ItemStockManager& GetItemStockManager()const { return *m_itemManager; }
 
@@ -47,9 +50,6 @@ private:
 	// 入力処理
 	//**********************************
 	void MoveInput();
-
-	// 弾モード変更
-	void ChangeShotMode();
 
 	// 発射入力
 	void ShotInput();
@@ -74,8 +74,15 @@ private:
 	//**********************************
 	float m_shotRecast = 0.0f;
 
-
+	//=== アイテム系 ===================
 	float m_homingTime = 0.0f;
 	float m_piercingTime = 0.0f;
 	float m_itemRecast = 0.0f;
+
+	//=== 無敵管理 =====================
+	bool m_isInvincible = false;
+	float m_invincibleTimer = 0.0f;
+
+	//=== 点滅用 =======================
+	float m_blinkTimer = 0.0f;
 };

@@ -10,7 +10,7 @@ void UIManager::Update()
 }
 
 
-void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecast)
+void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecast, int hp)
 {
 	// BOX 仮表示
 	SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
@@ -48,9 +48,9 @@ void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecas
 	SHADER.m_spriteShader.End();
 	SHADER.m_spriteShader.Begin();
 
-	// ============================
-	//  アイテムストック描画
-	// ============================
+	//============================
+	// アイテムストック描画
+	//============================
 
 	const int maxSlots = 3;
 	const float startX = -150;   // 左端
@@ -74,7 +74,7 @@ void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecas
 			case ItemType::Homing:
 				texName = "HomingItem";
 				break;
-				
+
 			case ItemType::Piercing:
 				texName = "PiercingItem";
 				break;
@@ -108,5 +108,18 @@ void UIManager::Draw2D(int score, const ItemStockManager& stock, float itemRecas
 
 		SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
 		SHADER.m_spriteShader.DrawBox(0, centerY, 225, height, &Math::Color(1, 1, 1, 0.5f));
+	}
+
+	//============================
+	// プレイヤーヒットポイント描画
+	//============================
+	{
+		for (int i = 0; i < hp; ++i)
+		{
+			Math::Matrix S = Math::Matrix::CreateScale(0.15f);
+			Math::Matrix T = Math::Matrix::CreateTranslation(-575.0f + (i * 64), 285.0f, 0.0f);
+			SHADER.m_spriteShader.SetMatrix(S * T);
+			SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("HPIcon"), ASSET.GetRectangle("HPIcon"));
+		}
 	}
 }

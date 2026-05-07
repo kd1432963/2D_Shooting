@@ -58,7 +58,7 @@ void EnemyManager::DeleteDead()
 		std::remove_if(
 			m_enemies.begin(),
 			m_enemies.end(),
-			[](const auto& e) { return e->IsDead(); }
+			[](const auto& e) { return e->IsDead() || e->IsSystemDead(); }
 		),
 		m_enemies.end()
 	);
