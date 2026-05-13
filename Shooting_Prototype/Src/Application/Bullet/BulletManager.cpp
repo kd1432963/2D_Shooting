@@ -3,6 +3,7 @@
 #include "Application/Enemy/EnemyManager.h"
 
 #include "Application/Bullet/BulletConfig.h"
+#include"Application/Bullet/NormalBullet/NormalBullet.h"
 #include "Application/Bullet/StraightBullet/StraightBullet.h"
 #include "Application/Bullet/HomingBullet/HomingBullet.h"
 #include"Application/Bullet/PiercingBullet/PiercingBullet.h"
@@ -64,6 +65,9 @@ std::unique_ptr<BulletBase> BulletManager::CreateBullet(const BulletConfig& cfg,
 {
 	switch (type)
 	{
+	case BulletType::Normal:
+		return std::make_unique<NormalBullet>(cfg);
+
 	case BulletType::Straight:
 		return std::make_unique<StraightBullet>(cfg);
 

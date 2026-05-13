@@ -2,13 +2,19 @@
 
 #include"Application/Scene/Core/SceneBase.h"
 
+class UIManager;
+class Button;
+
 //********************************************************
 // リザルトシーンのクラス
-// 
-// ・開始時に必ず最初に生成されるシーン
 //********************************************************
 class ResultScene :public SceneBase
 {
+public:
+
+	ResultScene() {};
+	ResultScene(int score) { m_score = score; }
+
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
@@ -39,4 +45,27 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	bool BlocksBelowUpdate() override { return true; }
 	bool BlocksBelowDraw()override { return false; }
+
+private:
+
+	void DrawScore();
+	void DrawRank();
+	void DrawButton();
+
+public:
+
+	UIManager* mp_uiManager = nullptr;
+
+	// 経過時間
+	int m_time = 0;
+	float m_bottomY = Screen::Height;
+
+	int m_score = 0;
+
+	std::string m_rank = "";
+	Math::Color m_color = {};
+	Math::Rectangle m_rect = {};
+
+	Button* mp_restartBtn = nullptr;
+	Button* mp_backBtn = nullptr;
 };

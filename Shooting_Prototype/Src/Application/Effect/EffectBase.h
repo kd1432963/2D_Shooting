@@ -12,6 +12,6 @@ public:
 
 protected:
 	bool isDead = false;
-	int animFrame = 0;
+	float animFrame = 0;
 	Math::Rectangle rect = {};
 };

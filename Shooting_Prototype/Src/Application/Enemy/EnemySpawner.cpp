@@ -4,10 +4,12 @@
 #include "Enemy2/Eneny2.h"
 #include"Enemy3/Enemy3.h"
 #include"Enemy4/Enemy4.h"
+#include"Boss/Boss.h"
+#include"Application/Effect/EffectManager.h"
 
-EnemySpawner::EnemySpawner()
+EnemySpawner::EnemySpawner(const std::string& path)
 {
-	LoadCSV("_Data/EnemyData/EnemySpawnData.csv");
+	LoadCSV(path);
 }
 
 //======================================
@@ -28,6 +30,12 @@ void EnemySpawner::StartWave(int wave)
 
 		m_index++;
 	}
+}
+
+void EnemySpawner::SpawnBoss(EnemyManager& manager,EffectManager*effect,Player*p)
+{
+	auto boss=manager.AddEnemy<Boss>(Math::Vector2{ Screen::Right + 200, 0 },p);
+	boss->SetEffectManager(effect);
 }
 
 //======================================
@@ -68,6 +76,7 @@ void EnemySpawner::Update(EnemyManager& manager, Player* player)
 		m_index++;
 	}
 }
+
 
 //+++++++++++++++++++++++++++++++++++++++++
 // ƒ‰ƒ“ƒ_ƒ€¶¬

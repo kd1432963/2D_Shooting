@@ -10,6 +10,7 @@ using namespace Enemy3Const;
 // 初期化
 //+++++++++++++++++++++++++++++++++++++++++
 Enemy3::Enemy3(const Math::Vector2& p, Player* player)
+    :EnemyBase(EnemyType::Enemy3)
 {
     mp_player = player;
 
@@ -22,7 +23,7 @@ Enemy3::Enemy3(const Math::Vector2& p, Player* player)
     tex = ASSET.GetTexture("Enemy3");
     rect = ASSET.GetRectangle("Enemy3");
 
-    pos = { 640,p.y };
+    pos = p;
     scale = { kScaleX, kScaleY };
     rotate = 0.0f;
 
@@ -43,15 +44,40 @@ void Enemy3::Update()
     UpdateAnim();
     UpdatePos();
 
-    // Y座標の画面制御
-    pos.y = Clamp(pos.y, -241.5f + 15.0f, 241.5f - 15.0f);
-    hitbox->pos = pos;
+    const float left = -640.0f + 15.0f;
+    const float right = 640.0f - 15.0f;
+    const float top = -241.5f + 15.0f;
+    const float bottom = 241.5f - 15.0f;
 
-    // X座標の画面制御
-    if (pos.x < -640 - 15)
+    //========================
+    // X反射
+    //========================
+    if (pos.x < left)
     {
-        SystemKill();
+        pos.x = left;
+        velocity.x *= -0.5f;
     }
+    else if (pos.x > right)
+    {
+        pos.x = right;
+        velocity.x *= -0.5f;
+    }
+
+    //========================
+    // Y反射
+    //========================
+    if (pos.y < top)
+    {
+        pos.y = top;
+        velocity.y *= -0.5f;
+    }
+    else if (pos.y > bottom)
+    {
+        pos.y = bottom;
+        velocity.y *= -0.5f;
+    }
+
+    hitbox->pos = pos;
 
     UpdateMatrix();
 }
@@ -61,6 +87,9 @@ void Enemy3::Update()
 //+++++++++++++++++++++++++++++++++++++++++
 void Enemy3::Action()
 {
+    //========================
+   // 待機状態
+   //========================
     if (!isCharging)
     {
         waitTimer++;
@@ -68,6 +97,7 @@ void Enemy3::Action()
         move.x = 0.0f;
         move.y = sinf(waitTimer * 0.1f) * 0.5f;
 
+        // 1秒後に突進開始
         if (waitTimer > 60 && mp_player)
         {
             Math::Vector2 dir = mp_player->GetPos() - pos;
@@ -76,11 +106,30 @@ void Enemy3::Action()
             velocity = dir * kChargeSpeed;
 
             isCharging = true;
+
+            chargeTimer = 0;
+            waitTimer = 0;
         }
     }
+
+    //========================
+    // 突進状態
+    //========================
     else
     {
+        chargeTimer++;
+
         move = velocity;
+
+        if (chargeTimer > 180)
+        {
+            isCharging = false;
+
+            chargeTimer = 0;
+
+            move = { 0.0f, 0.0f };
+            velocity = { 0.0f, 0.0f };
+        }
     }
 }
 

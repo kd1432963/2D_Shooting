@@ -12,6 +12,7 @@ using namespace Enemy4Const;
 // 初期化
 //+++++++++++++++++++++++++++++++++++++++++
 Enemy4::Enemy4(const Math::Vector2& p)
+	:EnemyBase(EnemyType::Enemy4)
 {
 	hitbox = std::make_unique<RectHitBox>(15, 15);
 	if (hitbox)

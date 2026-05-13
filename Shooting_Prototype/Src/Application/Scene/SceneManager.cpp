@@ -114,31 +114,31 @@ void SceneManager::Draw2D()
 //+++++++++++++++++++++++++++++++++++++++++
 void SceneManager::ImGuiUpdate()
 {
-	//=== ウィンドウの初期位置・サイズを設定 ===========================
+	////=== ウィンドウの初期位置・サイズを設定 ===========================
 
-	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_Always);
-	ImGui::SetNextWindowSize(ImVec2(250, 725), ImGuiSetCond_Always);
+	//ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_Always);
+	//ImGui::SetNextWindowSize(ImVec2(250, 725), ImGuiSetCond_Always);
 
-	//=== 動きを止めて、サイズも変更しない =============================
+	////=== 動きを止めて、サイズも変更しない =============================
 
-	ImGuiWindowFlags flag = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
+	//ImGuiWindowFlags flag = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
 
-	//=== 画面生成 =================================================
+	////=== 画面生成 =================================================
 
-	ImGui::Begin("Debug Window", nullptr, flag);
+	//ImGui::Begin("Debug Window", nullptr, flag);
 
-	//=== ライン ===================================================
+	////=== ライン ===================================================
 
-	ImGui::Separator();
+	//ImGui::Separator();
 
-	if (!mp_sceneStack.empty())
-	{
-		mp_sceneStack.back()->ImGuiUpdate();
-	}
+	//if (!mp_sceneStack.empty())
+	//{
+	//	mp_sceneStack.back()->ImGuiUpdate();
+	//}
 
-	//=== 画面終了 ==================================================
+	////=== 画面終了 ==================================================
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

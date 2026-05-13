@@ -10,6 +10,7 @@ using namespace Enemy2Const;
 // ‰Šú‰»
 //+++++++++++++++++++++++++++++++++++++++++
 Enemy2::Enemy2(const Math::Vector2& p, Player* player)
+	:EnemyBase(EnemyType::Enemy2)
 {
 	mp_player = player;
 
@@ -63,9 +64,11 @@ void Enemy2::Action()
 
 	if (mp_player)
 	{
+		float Bonus = mp_player->GetPos().x > pos.x ? 2.5f : 1.0f;
+
 		Math::Vector2 desired = mp_player->GetPos() - pos;
 		desired.Normalize();
-		desired *= kMovePow;
+		desired *= kMovePow*Bonus;
 
 		velocity += (desired - velocity) * 0.035f;
 
@@ -82,7 +85,7 @@ void Enemy2::Draw2D()
 
 	std::string hp = std::to_string(status.hp);
 	SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
-	SHADER.m_spriteShader.DrawString(pos.x, pos.y+20, hp.c_str(), Math::Color(1, 1, 1, 1));
+	SHADER.m_spriteShader.DrawString(pos.x, pos.y + 20, hp.c_str(), Math::Color(1, 1, 1, 1));
 	SHADER.m_spriteShader.End();
 	SHADER.m_spriteShader.Begin();
 }

@@ -18,26 +18,22 @@
 
 #include"Application/Effect/HitEffect/HitEffect.h"
 #include"Application/Effect/ExplosionEffect/ExplosionEffect.h"
+#include"Application/Effect/AfterBurstEffect/AfterBurstEffect.h"
 
 GameScene::GameScene()
 {
-	mp_player			= new Player();
-	mp_enemyManager		= new EnemyManager();
-	mp_enemySpawner		= new EnemySpawner();
-	mp_bulletManager	= new BulletManager();
-	mp_uiManager		= new UIManager();
-	mp_effectManager	= new EffectManager();
-	mp_itemDropManager	= new ItemDropManager();
-	mp_waveManager		= new WaveManager();
+	mp_player = std::make_shared<Player>();
+	mp_enemyManager = new EnemyManager();
+	mp_enemySpawner = new EnemySpawner("_Data/EnemyData/EnemySpawnDataNormal.csv");
+	mp_bulletManager = new BulletManager();
+	mp_uiManager = new UIManager();
+	mp_effectManager = new EffectManager();
+	mp_itemDropManager = new ItemDropManager();
+	mp_waveManager = new WaveManager();
 }
 
 GameScene::~GameScene()
 {
-	if (mp_player)
-	{
-		delete mp_player;
-		mp_player = nullptr;
-	}
 	if (mp_enemyManager)
 	{
 		delete mp_enemyManager;
@@ -84,9 +80,10 @@ void GameScene::OnEnter()
 	mp_enemySpawner->StartWave(1);
 
 	// ホーミング用に登録
-	mp_bulletManager->SetPlayer(mp_player);
+	mp_bulletManager->SetPlayer(mp_player.get());
 	mp_bulletManager->SetEnemyManager(mp_enemyManager);
 
+	// スコア初期化
 	m_score = 0;
 }
 
@@ -119,70 +116,154 @@ void GameScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::Update()
 {
-	mp_waveManager->Update(*mp_enemyManager,*mp_enemySpawner);
-	mp_enemySpawner->Update(*mp_enemyManager,mp_player);
-
-	if (KEY.IsTrigger(VK_RETURN))
+	//--- 死んでたら --------------------------------------------------
+	if (mp_player->IsDead())
 	{
-		SCENE_MANAGER.RequestChange(std::make_unique<ResultScene>());
+		Math::Vector2 pos = mp_player->GetPos();
+
+		if (!m_deadAnimFlg)
+		{
+			mp_effectManager->AddEffect(std::make_unique<ExplosionEffect>(pos, true));
+			m_deadAnimFlg = true;
+		}
+		mp_effectManager->Update();
+		if (mp_effectManager->IsEmpty())
+		{
+			SCENE_MANAGER.RequestPush(std::make_unique<ResultScene>(m_score));
+		}
+		return;
 	}
 
-	// プレイヤー行動決定
+	//--- Boss Warning ------------------------------------------------
+	if (mp_waveManager->IsBossWarning())
+	{
+		if (++m_warningTime == 300)
+			mp_waveManager->SetBossStarted();
+	}
+
+	//--- Wave Update -------------------------------------------------
+	if (mp_waveManager->Update(*mp_enemyManager, *mp_enemySpawner, mp_effectManager, mp_player.get()))
+	{
+		// 全滅ボーナス
+		mp_effectManager->SpawnScoreEffect({ 0,0 }, 3000, "EnemyWipe");
+		m_score += 3000;
+	}
+
+	//--- MidBoss Quick Kill Bonus -----------------------------------
+	if (mp_enemyManager->IsMidBossAlive())
+	{
+		++m_MidBossAliveTime;
+	}
+	else if (m_MidBossAliveTime > 0)
+	{
+		int bonus = std::max(0, 5000 - std::max(0, (m_MidBossAliveTime - 500) * 3));
+		if (bonus > 0)
+		{
+			mp_effectManager->SpawnScoreEffect({ -100,0 }, bonus, "QuickKill");
+			m_score += bonus;
+		}
+		m_MidBossAliveTime = 0;
+	}
+
+	if (mp_enemyManager->IsBossAlive())
+	{
+		++m_bossAliveTime;
+	}
+	else if (m_bossAliveTime > 0)
+	{
+		int bonus = std::max(0, 50000 - std::max(0, (m_bossAliveTime - 7200) * 2));
+		if (bonus > 0)
+		{
+			mp_effectManager->SpawnScoreEffect({ -150,100 }, bonus, "QuickKill");
+			m_score += bonus;
+		}
+		m_bossAliveTime = 0;
+	}
+
+	//--- Enemy Spawner ----------------------------------------------
+	mp_enemySpawner->Update(*mp_enemyManager, mp_player.get());
+
+	//--- Scene Change ------------------------------------------------
+	if (KEY.IsTrigger(VK_RETURN) ||
+		(mp_waveManager->IsWaveAllClear() && mp_effectManager->IsEmpty()))
+	{
+		SCENE_MANAGER.RequestPush(std::make_unique<ResultScene>(777777));
+	}
+
+	//--- Player ------------------------------------------------------
 	mp_player->Action();
-
-	// 玉発射
 	if (mp_player->WantToShot())
-	{
 		mp_player->Shot(*mp_bulletManager);
-	}
 
-	// 敵行動決定
+	//--- Enemy -------------------------------------------------------
 	mp_enemyManager->Action();
-
 	mp_enemyManager->Shot(*mp_bulletManager);
 
-
-	// 弾更新
+	//--- Bullets / Items --------------------------------------------
 	mp_bulletManager->Update();
-
-	// アイテム更新
 	mp_itemDropManager->Update();
 
-	// 当たり判定
+	//--- Collision ---------------------------------------------------
 	CheckCollision();
 
-	// エフェクト更新
+	//--- Effects -----------------------------------------------------
 	mp_effectManager->Update();
 
-	// 死亡処理
+	//--- Cleanup -----------------------------------------------------
 	mp_bulletManager->DeleteDead();
 	mp_itemDropManager->DeleteDead();
 
-	// エネミーは消す前にエフェクトをたく
+	// 敵死亡処理（エフェクト・アイテム・スコア）
 	for (auto& e : mp_enemyManager->GetEnemies())
 	{
 		if (e->IsDead())
 		{
-			auto effect = std::make_unique<ExplosionEffect>(e->GetPos());
-			mp_effectManager->AddEffect(std::move(effect));
-			m_score += 50;
+			++m_enemyKillCnt;
 
-			if (RandomChance(0.1f))
+			Math::Vector2 pos = e->GetPos();
+			int addScore = 100;
+
+			mp_effectManager->AddEffect(std::make_unique<ExplosionEffect>(pos));
+			mp_effectManager->AddEffect(std::make_unique<AfterBurstEffect>(pos));
+
+			if (RandomChance(0.1f) || m_enemyKillCnt == 1 || m_enemyKillCnt % 12 == 0)
+				mp_itemDropManager->DropItemRandom(pos);
+
+			if (e->GetType() == EnemyType::Enemy2)
 			{
-				mp_itemDropManager->DropItemRandom(e->GetPos());
+				addScore = 1000;
+				mp_itemDropManager->DropHealItem(pos);
+			}
+			if (e->GetType() == EnemyType::Boss)
+			{
+				addScore = 30000;
+				mp_effectManager->SpawnScoreEffect(pos + Math::Vector2{ -150,200 }, addScore);
+				m_score += addScore;
+			}
+			else
+			{
+				mp_effectManager->SpawnScoreEffect({ pos.x,pos.y - 30 }, addScore);
+				m_score += addScore;
+			}
+		}
+
+		// ホーミングターゲット解除
+		if (e->IsDead() || e->IsSystemDead())
+		{
+			CharaBase* dead = e.get();
+			for (auto& b : mp_bulletManager->GetBullets())
+			{
+				if (b->IsHoming() && b->GetTarget() == dead)
+					b->ClearTarget();
 			}
 		}
 	}
 
 	mp_enemyManager->DeleteDead();
 
-	// UI 更新
+	//--- UI / Final Updates -----------------------------------------
 	mp_uiManager->Update();
-
-	// 敵更新
 	mp_enemyManager->Update();
-
-	// プレイヤー更新
 	mp_player->Update();
 }
 
@@ -212,23 +293,43 @@ void GameScene::Draw2D()
 	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("BackGround1"), ASSET.GetRectangle("BackGround1"));
 	//===================================================================================================
 
-	// 敵描画
-	mp_enemyManager->Draw2D();
-
-	// アイテム描画
 	mp_itemDropManager->Draw2D();
-
-	// 弾描画
 	mp_bulletManager->Draw2D();
-
-	// エフェクト描画
+	mp_enemyManager->Draw2D();
 	mp_effectManager->Draw2D();
-
-	// プレイヤー描画
 	mp_player->Draw2D();
 
-	// UI 描画
-	mp_uiManager->Draw2D(m_score,mp_player->GetItemStockManager(),mp_player->GetItemRecast(),mp_player->GetHp());
+	//--- UI ----------------------------------------------------------
+	if (SCENE_MANAGER.GetTopScene() == this)
+	{
+		mp_uiManager->DrawGameUI(
+			m_score,
+			mp_player->GetItemStockManager(),
+			*mp_player.get(),
+			mp_waveManager->GetWave(),
+			mp_waveManager->IsBossWarning()
+		);
+	}
+
+	//--- Boss HP Bar -------------------------------------------------
+	if (mp_enemyManager->IsMidBossAlive() || mp_enemyManager->IsBossAlive())
+	{
+		float alpha = 1.0f;
+
+		// HP Bar Width
+		int width = mp_enemyManager->IsMidBossAlive() ? 200 : 400;
+
+		// 重なっていれば視認性のために透明度を下げる
+		Math::Vector2 p = mp_player->GetPos();
+		if (p.x > -width - 10 && p.x < width + 10 && p.y < 230 && p.y > 195)alpha = 0.3f;
+
+		mp_uiManager->DrawHPBar(
+			mp_enemyManager->GetBossHP(),
+			mp_enemyManager->GetBossMaxHP(),
+			width,
+			alpha
+		);
+	}
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

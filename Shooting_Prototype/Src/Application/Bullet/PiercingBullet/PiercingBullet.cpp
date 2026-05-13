@@ -31,9 +31,8 @@ void PiercingBullet::Update()
 {
 	UpdatePos();
 
-	// ‰æ–ÊŠO‚ÅÁ‚·iã‰º‚à‘Î‰žj
-	if (pos.x >= 640 + radius || pos.x <= -640 - radius ||
-		pos.y >= 360 + radius || pos.y <= -360 - radius)
+	if (pos.x >= Screen::Right + radius + 100 || pos.x <= Screen::Left - radius - 100 ||
+		pos.y >= Screen::Top + radius || pos.y <= Screen::Bottom - radius)
 	{
 		isDead = true;
 	}

@@ -32,7 +32,7 @@ public:
 
 protected:
 
-	ItemType type = ItemType::Homing;
+	ItemType type = ItemType::None;
 	bool isDead = false;
 	Math::Rectangle rect = {};
 };

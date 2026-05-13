@@ -31,6 +31,7 @@ public:
 
 	int GetAtk()const { return status.atk; }
 	int GetHp()const { return status.hp; }
+	int GetMaxHp()const { return status.maxHp; }
 
 	virtual void TakeDamage(int damage)
 	{
@@ -38,7 +39,7 @@ public:
 		if (status.hp < 0) status.hp = 0;
 	}
 
-	bool IsDead() const { return status.hp <= 0; }
+	virtual bool IsDead() const { return status.hp <= 0; }
 
 protected:
 

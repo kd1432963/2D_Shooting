@@ -7,6 +7,7 @@ class ItemDropManager
 public:
 
 	void DropItemRandom(const Math::Vector2& p);
+	void DropHealItem(const Math::Vector2& p);
 
 	void Update();
 	void Draw2D();

@@ -4,6 +4,8 @@
 
 #include"PiercingItem.h"
 
+#include"HealItem.h"
+
 void ItemDropManager::DropItemRandom(const Math::Vector2& p)
 {
 	int r = RandomRange(0, 2);
@@ -18,12 +20,15 @@ void ItemDropManager::DropItemRandom(const Math::Vector2& p)
 	{
 		item = std::make_unique<PiercingItem>(p);
 	}
-	else
-	{
-
-	}
 
 	if(item)m_itemDropList.push_back(std::move(item));
+}
+
+void ItemDropManager::DropHealItem(const Math::Vector2& p)
+{
+	std::unique_ptr<HealItem>item = std::make_unique<HealItem>(p);;
+
+	if (item)m_itemDropList.push_back(std::move(item));
 }
 
 void ItemDropManager::Update()

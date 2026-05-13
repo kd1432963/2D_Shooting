@@ -65,16 +65,24 @@ private:
 	//+++++++++++++++++++++++++++++++++++++++++
 	void CheckCollision();
 
+
 private:
 
 	int m_score = 0;
+	int m_MidBossAliveTime = 0;
+	int m_bossAliveTime = 0;
+	int m_warningTime = 0;
+
+	int m_enemyKillCnt = 0;
+
+	bool m_deadAnimFlg = false;
 
 private:
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// ÉvÉåÉCÉÑÅ[
 	//+++++++++++++++++++++++++++++++++++++++++
-	Player* mp_player=nullptr;
+	std::shared_ptr<Player> mp_player=nullptr;
 
 	//+++++++++++++++++++++++++++++++++++++++++
 	// ìG

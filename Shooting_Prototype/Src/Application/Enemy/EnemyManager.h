@@ -45,7 +45,16 @@ public:
 		return m_enemies;
 	}
 
+	int GetBossHP()const { return m_bossHP; }
+	int GetBossMaxHP()const { return m_bossMaxHP; }
+
+	bool IsMidBossAlive();
+	bool IsBossAlive();
+
 private:
 
 	std::vector<std::unique_ptr<EnemyBase>> m_enemies;
+
+	int m_bossHP = 0;
+	int m_bossMaxHP = 0;
 };

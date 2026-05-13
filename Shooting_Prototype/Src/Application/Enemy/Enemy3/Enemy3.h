@@ -24,6 +24,8 @@ private:
 	Player* mp_player = nullptr;
 
 	int waitTimer = 0;
+	int chargeTimer = 0;
+
 	bool isCharging = false;
 
 	Math::Vector2 velocity = {};

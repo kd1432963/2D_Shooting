@@ -2,11 +2,16 @@
 
 #include "Application/Chara/CharaBase.h"
 
+#include"EnemyType.h"
+
 class BulletManager;
 
 class EnemyBase : public CharaBase
 {
 public:
+
+	EnemyBase(EnemyType t)
+		:type(t){ }
 
 	//**********************************
 	// 仮想デストラクタ
@@ -25,6 +30,13 @@ public:
 public:
 
 	//**********************************
+	// 敵の種類のゲッター
+	//**********************************
+	EnemyType GetType()const { return type; }
+
+public:
+
+	//**********************************
 	// システム側のキル
 	//**********************************
 	bool IsSystemDead()const { return isSystemDead; }
@@ -37,6 +49,7 @@ public:
 	//**********************************
 	virtual void Shot(BulletManager& bulletManager) {}
 
+
 protected:
 
 	//**********************************
@@ -45,4 +58,5 @@ protected:
 
 	Math::Vector2 basePos = {};
 	bool isSystemDead = false;
+	EnemyType type = EnemyType::None;
 };

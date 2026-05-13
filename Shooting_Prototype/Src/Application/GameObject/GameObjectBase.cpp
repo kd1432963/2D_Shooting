@@ -36,7 +36,12 @@ void GameObjectBase::DebugDraw()
 {
 	if (hitbox)
 	{
-		//hitbox->Draw();
+
+#if _DEBUG
+
+	hitbox->Draw();
+
+#endif
 	}
 }
 

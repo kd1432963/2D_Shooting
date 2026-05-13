@@ -12,6 +12,7 @@ public:
 
     
     Math::Vector2 pos;
+    Math::Vector2 offset;
 
     HitBoxBase(Type t) : type(t) {}
     virtual ~HitBoxBase() = default;

@@ -2,6 +2,9 @@
 
 #include"Application/Scene/Core/SceneBase.h"
 
+class UIManager;
+class Button;
+
 //********************************************************
 // タイトルシーンのクラス
 // 
@@ -39,4 +42,15 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	bool BlocksBelowUpdate() override { return true; }
 	bool BlocksBelowDraw()override { return false; }
+
+
+public:
+
+	//+++++++++++++++++++++++++++++++++++++++++
+	// UIManager 
+	//+++++++++++++++++++++++++++++++++++++++++
+	UIManager* mp_uiManager = nullptr;
+
+	Button* mp_startBtn = nullptr;
+	Button* mp_exitBtn = nullptr;
 };

@@ -12,6 +12,7 @@ using namespace Enemy1Const;
 // ‰Šú‰»
 //+++++++++++++++++++++++++++++++++++++++++
 Enemy1::Enemy1(const Math::Vector2& p)
+	:EnemyBase(EnemyType::Enemy1)
 {
 	hitbox = std::make_unique<RectHitBox>(15, 15);
 	if (hitbox)
@@ -61,6 +62,14 @@ void Enemy1::Update()
 //+++++++++++++++++++++++++++++++++++++++++
 void Enemy1::Action()
 {
+	// ‰ŠúƒtƒŒ[ƒ€‚Å‚Í“®‚©‚³‚È‚¢
+	if (m_aliveTime == 0)
+	{
+		move = { 0, 0 };
+		++m_aliveTime;
+		return;
+	}
+
 	move = { 0.0f, 0.0f };
 
 	++m_shotWait;

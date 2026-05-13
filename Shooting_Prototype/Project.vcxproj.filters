@@ -121,6 +121,18 @@
     <Filter Include="Src\Application\Enemy\Enemy4">
       <UniqueIdentifier>{d0962484-f0e7-4036-87c2-0473a96e4a98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Effect\ScoreEffect">
+      <UniqueIdentifier>{e49f608a-5300-4c11-a192-489715fb8d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Enemy\Boss">
+      <UniqueIdentifier>{2ae63676-7f36-4c3f-b053-8ef692b9b3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Bullet\NormalBullet">
+      <UniqueIdentifier>{cc252436-2510-472e-b451-be3b5e9767eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Effect\AfterBurstEffect">
+      <UniqueIdentifier>{15e38520-2d69-49ac-8a07-e13360567aec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -369,6 +381,30 @@
     <ClInclude Include="Src\Application\Enemy\Enemy4\Enemy4Config.h">
       <Filter>Src\Application\Enemy\Enemy4</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\EnemyType.h">
+      <Filter>Src\Application\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Item\HealItem.h">
+      <Filter>Src\Application\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Effect\ScoreEffect\ScoreEffect.h">
+      <Filter>Src\Application\Effect\ScoreEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Boss\Boss.h">
+      <Filter>Src\Application\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Enemy\Boss\BossConfig.h">
+      <Filter>Src\Application\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Bullet\NormalBullet\NormalBullet.h">
+      <Filter>Src\Application\Bullet\NormalBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\UI\Button\Button.h">
+      <Filter>Src\Application\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Effect\AfterBurstEffect\AfterBurstEffect.h">
+      <Filter>Src\Application\Effect\AfterBurstEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -541,6 +577,24 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Enemy\Enemy4\Enemy4.cpp">
       <Filter>Src\Application\Enemy\Enemy4</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Item\HealItem.cpp">
+      <Filter>Src\Application\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Effect\ScoreEffect\ScoreEffect.cpp">
+      <Filter>Src\Application\Effect\ScoreEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Enemy\Boss\Boss.cpp">
+      <Filter>Src\Application\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Bullet\NormalBullet\NormalBullet.cpp">
+      <Filter>Src\Application\Bullet\NormalBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\Button\Button.cpp">
+      <Filter>Src\Application\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Effect\AfterBurstEffect\AfterBurstEffect.cpp">
+      <Filter>Src\Application\Effect\AfterBurstEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

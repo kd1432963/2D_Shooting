@@ -39,8 +39,12 @@ public:
 
 	void GetItem(ItemType type);
 	float GetItemRecast() const{ return m_itemRecast; }
+	float GetHomingTime() const{ return m_homingTime; }
+	float GetPiercingTime() const{ return m_piercingTime; }
 
 	bool IsInvincible()const { return m_isInvincible; }
+
+	bool CanUseItem() const;
 
 	const ItemStockManager& GetItemStockManager()const { return *m_itemManager; }
 

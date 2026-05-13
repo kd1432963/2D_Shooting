@@ -27,6 +27,12 @@ public:
 	void SetPlayer(Player* p) { mp_player = p; }
 	void SetEnemyManager(EnemyManager* e) { mp_enemyManager = e; }
 
+public:
+
+	bool HomingBullet::IsHoming() const { return true; }
+	CharaBase* HomingBullet::GetTarget() const { return m_target; }
+	void HomingBullet::ClearTarget() { m_target = nullptr; }
+
 private:
 
 	CharaBase* FindTarget();

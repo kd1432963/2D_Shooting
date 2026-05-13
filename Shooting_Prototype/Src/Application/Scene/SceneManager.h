@@ -21,7 +21,7 @@ public:
 	//**********************************
 	// コマンドリクエスト
 	//**********************************
-	void RequestChange(std::unique_ptr<SceneBase>newScene, float feadTime = 1.0f);	// シーンを変更したい
+	void RequestChange(std::unique_ptr<SceneBase>newScene, float feadTime = 0.5f);	// シーンを変更したい
 	void RequestPush(std::unique_ptr<SceneBase>newScene);							// シーンを積みたい
 	void RequestPop();																// シーンを戻したい
 
@@ -34,6 +34,18 @@ public:
 	void ProcessCommand();	// コマンド実行
 	void Draw2D();			// 描画処理
 	void ImGuiUpdate();		// デバック画面更新
+
+public:
+
+	//**********************************
+	// 最上位シーンの場合 true になる
+	//**********************************
+	SceneBase* GetTopScene()
+	{
+		if (mp_sceneStack.empty()) return nullptr;
+		return mp_sceneStack.back().get();
+	}
+
 
 private:
 

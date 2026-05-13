@@ -7,6 +7,37 @@
 //
 //===============================================
 
+#pragma once
+
+//===============================================
+//
+// 画面全体の座標系
+//
+//===============================================
+namespace Screen
+{
+    constexpr int Width = 1280;
+    constexpr int Height = 720;
+
+    constexpr int Top       = +360;
+    constexpr int Bottom    = -360;
+    constexpr int Left      = -640;
+    constexpr int Right     = +640;
+}
+
+//===============================================
+//
+// ゲームプレイ領域
+//
+//===============================================
+namespace GameArea
+{
+    constexpr float Top     = +241.5f;   
+    constexpr float Bottom  = -241.5f;
+    constexpr float Left    = -640;
+    constexpr float Right   = +640;
+}
+
 
 //===============================================
 //

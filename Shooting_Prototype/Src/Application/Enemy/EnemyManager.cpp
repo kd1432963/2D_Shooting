@@ -63,3 +63,37 @@ void EnemyManager::DeleteDead()
 		m_enemies.end()
 	);
 }
+
+//+++++++++++++++++++++++++++++++++++++++++
+// 中ボスがいるかどうか
+//+++++++++++++++++++++++++++++++++++++++++
+bool EnemyManager::IsMidBossAlive()
+{
+	for (auto& e : m_enemies)
+	{
+		if (e->GetType() == EnemyType::Enemy2)
+		{
+			m_bossHP = e->GetHp();
+			m_bossMaxHP = e->GetMaxHp();
+			return true;
+		}
+	}
+	return false;
+}
+
+//+++++++++++++++++++++++++++++++++++++++++
+// ボスがいるかどうか
+//+++++++++++++++++++++++++++++++++++++++++
+bool EnemyManager::IsBossAlive()
+{
+	for (auto& e : m_enemies)
+	{
+		if (e->GetType() == EnemyType::Boss)
+		{
+			m_bossHP = e->GetHp();
+			m_bossMaxHP = e->GetMaxHp();
+			return true;
+		}
+	}
+	return false;
+}

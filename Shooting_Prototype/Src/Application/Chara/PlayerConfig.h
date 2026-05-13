@@ -17,4 +17,6 @@ namespace PlayerConst
 	constexpr float kShotPow = 10.0f;
 
 	constexpr float kInvincibleDuration = 1.0f;
+	constexpr float kHomingRecast = 3.5f;
+	constexpr float kPiercingRecast = 3.0f;
 }

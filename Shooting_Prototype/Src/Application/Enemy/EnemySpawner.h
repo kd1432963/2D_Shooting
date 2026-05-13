@@ -3,15 +3,18 @@
 #include "EnemyManager.h"
 
 class Player;
+class EffectManager;
 
 class EnemySpawner
 {
 public:
 
-	EnemySpawner();
+	EnemySpawner(const std::string& path);
 
 	// Wave開始
 	void StartWave(int wave);
+
+	void SpawnBoss(EnemyManager& manager, EffectManager* effect, Player* p);
 
 	// 毎フレーム呼ぶ
 	void Update(EnemyManager& manager, Player* player);

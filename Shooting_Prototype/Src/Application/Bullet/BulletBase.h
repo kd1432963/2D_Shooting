@@ -3,6 +3,8 @@
 #include "Application/GameObject/GameObjectBase.h"
 #include "BulletOwner.h"
 
+class CharaBase;
+
 class BulletBase : public GameObjectBase
 {
 public:
@@ -35,6 +37,12 @@ public:
 	// セッター
 	//+++++++++++++++++++++++++++++++++++++++++
 	virtual void SetDead() { isDead = true; }
+
+public:
+
+	virtual bool IsHoming() const { return false; }
+	virtual CharaBase* GetTarget() const { return nullptr; }
+	virtual void ClearTarget() {}
 
 protected:
 

@@ -43,7 +43,7 @@ protected:
 	//**********************************
 	// デバッグ描画
 	//**********************************
-	void DebugDraw();
+	virtual void DebugDraw();
 
 protected:
 
