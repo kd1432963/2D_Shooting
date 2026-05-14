@@ -76,6 +76,8 @@ GameScene::~GameScene()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::OnEnter()
 {
+	SOUND.PlayBGM("GameBGM");
+
 	// 敵生成
 	mp_enemySpawner->StartWave(1);
 
@@ -92,7 +94,7 @@ void GameScene::OnEnter()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::OnExit()
 {
-
+	SOUND.StopBGM();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -100,7 +102,7 @@ void GameScene::OnExit()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::OnPause()
 {
-
+	SOUND.StopBGM();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -108,7 +110,7 @@ void GameScene::OnPause()
 //+++++++++++++++++++++++++++++++++++++++++
 void GameScene::OnResume()
 {
-
+	SOUND.ResumeBGM();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -123,6 +125,8 @@ void GameScene::Update()
 
 		if (!m_deadAnimFlg)
 		{
+			SOUND.StopBGM();
+			SOUND.PlaySE("DeadSE");
 			mp_effectManager->AddEffect(std::make_unique<ExplosionEffect>(pos, true));
 			m_deadAnimFlg = true;
 		}
@@ -137,8 +141,14 @@ void GameScene::Update()
 	//--- Boss Warning ------------------------------------------------
 	if (mp_waveManager->IsBossWarning())
 	{
+		if(m_warningTime==1)
+		SOUND.StopBGM();
+
 		if (++m_warningTime == 300)
+		{
 			mp_waveManager->SetBossStarted();
+			SOUND.PlayBGM("BossBGM");
+		}
 	}
 
 	//--- Wave Update -------------------------------------------------
@@ -147,6 +157,8 @@ void GameScene::Update()
 		// 全滅ボーナス
 		mp_effectManager->SpawnScoreEffect({ 0,0 }, 3000, "EnemyWipe");
 		m_score += 3000;
+
+		SOUND.PlaySE("BonusSE");
 	}
 
 	//--- MidBoss Quick Kill Bonus -----------------------------------
@@ -161,6 +173,7 @@ void GameScene::Update()
 		{
 			mp_effectManager->SpawnScoreEffect({ -100,0 }, bonus, "QuickKill");
 			m_score += bonus;
+			SOUND.PlaySE("BonusSE");
 		}
 		m_MidBossAliveTime = 0;
 	}
@@ -176,18 +189,24 @@ void GameScene::Update()
 		{
 			mp_effectManager->SpawnScoreEffect({ -150,100 }, bonus, "QuickKill");
 			m_score += bonus;
+			SOUND.PlaySE("BonusSE");
 		}
 		m_bossAliveTime = 0;
 	}
+
+	
 
 	//--- Enemy Spawner ----------------------------------------------
 	mp_enemySpawner->Update(*mp_enemyManager, mp_player.get());
 
 	//--- Scene Change ------------------------------------------------
-	if (KEY.IsTrigger(VK_RETURN) ||
-		(mp_waveManager->IsWaveAllClear() && mp_effectManager->IsEmpty()))
+	if (KEY.IsTrigger(VK_RETURN))
 	{
 		SCENE_MANAGER.RequestPush(std::make_unique<ResultScene>(777777));
+	}
+	if (mp_waveManager->IsWaveAllClear() && mp_effectManager->IsEmpty())
+	{
+		SCENE_MANAGER.RequestPush(std::make_unique<ResultScene>(m_score));
 	}
 
 	//--- Player ------------------------------------------------------

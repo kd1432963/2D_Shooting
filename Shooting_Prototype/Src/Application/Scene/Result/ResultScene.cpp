@@ -14,17 +14,23 @@
 //+++++++++++++++++++++++++++++++++++++++++
 void ResultScene::OnEnter()
 {
+	SOUND.PlaySE("DrumRollSE");
+
 	mp_uiManager = new UIManager();
 
 	mp_restartBtn = new Button("", { 0,600 }, { 1.1f,1.1f }, { 130,25 });
 	mp_restartBtn->onClick = []()
 		{
+			SOUND.StopBGM();
+			SOUND.PlaySE("StartSE");
 			SCENE_MANAGER.RequestChange(std::make_unique<GameScene>());
 		};
 	
 	mp_backBtn = new Button("", { 0,600 }, { 1.0f,1.0f }, { 75,22.5f });
 	mp_backBtn->onClick = []()
 		{
+			SOUND.StopBGM();
+			SOUND.PlaySE("StartSE");
 			SCENE_MANAGER.RequestChange(std::make_unique<TitleScene>());
 		};
 }
@@ -74,6 +80,11 @@ void ResultScene::OnResume()
 void ResultScene::Update()
 {
 	++m_time;
+
+	if (m_time == 250)
+	{
+		SOUND.PlayBGM("ResultBGM");
+	}
 
 	float t = m_time / 60.0f;
 	if (t > 1.0f)
@@ -167,6 +178,8 @@ void ResultScene::Draw2D()
 
 	// UI 描画
 	mp_uiManager->DrawResultUI(100);
+
+	MOUSE.Draw2D();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -188,9 +201,9 @@ void ResultScene::DrawScore()
 
 	int fixed = 0;
 
-	if (m_time > 80)
+	if (m_time > 40)
 	{
-		fixed = std::min(6, (m_time - 80) / 30);
+		fixed = std::min(6, (m_time - 40) / 25);
 	}
 
 	// ラベル
@@ -257,7 +270,7 @@ void ResultScene::DrawScore()
 
 		float scale = 0.83f;
 
-		int appearFrame = 80 + (6 - i) * 30;
+		int appearFrame = 40 + (6 - i) * 25;
 
 		if (m_time >= appearFrame &&
 			m_time < appearFrame + 8)
@@ -266,13 +279,13 @@ void ResultScene::DrawScore()
 
 			float e = 1.0f - fabsf(t * 2.0f - 1.0f);
 
-			scale = 0.83f + e * 1.5f;
+			scale = 0.83f + e * 1.6f;
 		}
 
 		float x = startX + i * 66;
 
 		// 調整;;
-		if (num == '1')
+		if (num == '1'&&i!=0)
 		{
 			x += 5;
 		}
@@ -296,7 +309,7 @@ void ResultScene::DrawScore()
 		// 確定している桁
 		if (i >= 6 - fixed)
 		{
-			col = Math::Color(1.0f, 0.3f, 0.3f, 1.0f);   // 例：黄色っぽく
+			col = Math::Color(1.0f, 1.0f, 1.0f, 1.0f);   // 例：黄色っぽく
 		}
 		else
 		{
@@ -316,7 +329,7 @@ void ResultScene::DrawRank()
 	Math::Rectangle rect = {};
 	Math::Color color = {};
 
-	if (m_time < 300)
+	if (m_time < 250)
 	{
 		int index = m_time % 6;
 
@@ -341,7 +354,7 @@ void ResultScene::DrawRank()
 
 	float scale = 1.0f;
 
-	int appearFrame = 300 - 30;
+	int appearFrame = 250 - 30;
 
 	if (m_time >= appearFrame &&
 		m_time < appearFrame + 30)

@@ -1,9 +1,14 @@
 #include "SceneManager.h"
 
 #include"Title/TitleScene.h"
+#include"GameMain/GameScene.h"
 
 SceneManager::SceneManager()
 {
+	// カーソルカウント調整用
+	ShowCursor(false);
+
+
 	PushScene(std::move(std::make_unique<TitleScene>()));
 }
 

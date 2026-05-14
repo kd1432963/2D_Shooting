@@ -10,6 +10,8 @@ void ItemStockManager::UseItem()
 {
     if (m_items.empty()) return;
 
+    SOUND.PlaySE("UseItemSE");
+
     ItemType t = m_items.front();
     m_items.erase(m_items.begin());
 }

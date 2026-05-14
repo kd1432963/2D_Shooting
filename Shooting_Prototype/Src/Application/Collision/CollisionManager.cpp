@@ -50,6 +50,9 @@ void CollisionManager::CheckAll(
 								itemDropMgr.DropItemRandom(boss->GetPos());
 							}
 
+							if (RandomChance(0.2f))
+							SOUND.PlaySE("HitSE");
+
 							goto NEXT_ENEMY;
 						}
 					}
@@ -77,6 +80,9 @@ void CollisionManager::CheckAll(
 
 					effectMgr.SpawnScoreEffect(e->GetPos(), addScore);
 					score += addScore;
+
+					if(RandomChance(0.3f))
+					SOUND.PlaySE("HitSE");
 				}
 			}
 

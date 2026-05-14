@@ -109,8 +109,7 @@ void Boss::Action()
 		// ™X‚É—‚¿‚Ä‚¢‚­‚Ì‚ÍŠm’è
 		move.y += -1;
 
-		// 100F‚Å“§–¾‰»
-		m_alpha = 1.0f - (m_deathAnimTime / 300.0f);
+		m_alpha = 1.0f - (m_deathAnimTime /250.0f);
 
 		m_alpha = Clamp(m_alpha, 0.0f, 1.0f);
 
@@ -127,6 +126,7 @@ void Boss::Action()
 
 				auto e = std::make_unique<ExplosionEffect>(effectPos);
 				effect->AddEffect(std::move(e));
+				SOUND.PlaySE("BossDeadSE");
 			}
 		}
 

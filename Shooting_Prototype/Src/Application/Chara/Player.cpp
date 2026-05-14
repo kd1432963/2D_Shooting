@@ -126,7 +126,7 @@ void Player::Action()
 			m_itemRecast = 5.0f;
 		}
 	}
-	else if (KEY.IsTrigger(VK_SHIFT))
+	/*else if (KEY.IsTrigger(VK_SHIFT))
 	{
 		if (m_itemRecast <= 0.0f && m_itemManager && m_itemManager->HasItem())
 		{
@@ -135,7 +135,7 @@ void Player::Action()
 			UseItemEffect(type);
 			m_itemRecast = 5.0f;
 		}
-	}
+	}*/
 	ShotInput();
 }
 
@@ -151,10 +151,10 @@ void Player::MoveInput()
 	if (KEY.IsPress('S')) move.y -= 1.0f;
 	if (KEY.IsPress('D')) move.x += 1.0f;
 
-	if (KEY.IsPress(VK_UP)) move.y += 1.0f;
-	if (KEY.IsPress(VK_LEFT)) move.x -= 1.0f;
-	if (KEY.IsPress(VK_DOWN)) move.y -= 1.0f;
-	if (KEY.IsPress(VK_RIGHT)) move.x += 1.0f;
+	//if (KEY.IsPress(VK_UP)) move.y += 1.0f;
+	//if (KEY.IsPress(VK_LEFT)) move.x -= 1.0f;
+	//if (KEY.IsPress(VK_DOWN)) move.y -= 1.0f;
+	//if (KEY.IsPress(VK_RIGHT)) move.x += 1.0f;
 
 	// ê≥ãKâª
 	move.Normalize();
@@ -187,11 +187,11 @@ void Player::ShotInput()
 		wantToShot = true;
 		m_shotRecast = kShotRecastTime;
 	}
-	else if (KEY.IsPress(VK_SPACE) && m_shotRecast <= 0.0f)
+	/*else if (KEY.IsPress(VK_SPACE) && m_shotRecast <= 0.0f)
 	{
 		wantToShot = true;
 		m_shotRecast = kShotRecastTime;
-	}
+	}*/
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -267,6 +267,8 @@ void Player::Shot(BulletManager& b)
 	}
 
 	b.Add(cfg, m_shotMode);
+
+	SOUND.PlaySE("ShotSE");
 
 	wantToShot = false;
 }

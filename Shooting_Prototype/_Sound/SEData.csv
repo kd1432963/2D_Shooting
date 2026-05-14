@@ -1,5 +1,12 @@
 ﻿タグ名,ファイルパス,個別音量設定
-Sample,_Sound/Sample/Sample.wav,1.0f
-Click,_Sound/Sample/Click.wav,0.1f
-Hover,_Sound/Sample/Hover.wav,1.0f
-Trigger,_Sound/Sample/Trigger.wav,1.0f
+ShotSE,_Sound/SE/ShotSE.wav,0.2f
+ExplosionSE,_Sound/SE/ExplosionSE.wav,0.2f
+DeadSE,_Sound/SE/DeadSE.wav,0.2f
+BossDeadSE,_Sound/SE/BossDeadSE.wav,0.2f
+UseItemSE,_Sound/SE/UseItemSE.wav,0.2f
+EnemyShotSE,_Sound/SE/EnemyShot.wav,0.1f
+HitSE,_Sound/SE/HitSE.wav,0.2f
+StartSE,_Sound/SE/StartSE.wav,1.0f
+BonusSE,_Sound/SE/BonusSE.wav,0.2f
+DrumRollSE,_Sound/SE/DrumRollSE.wav,1.0f
+HoverSE,_Sound/SE/HoverSE.wav,1.0f

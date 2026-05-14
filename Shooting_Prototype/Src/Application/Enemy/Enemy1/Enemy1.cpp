@@ -118,5 +118,7 @@ void Enemy1::Shot(BulletManager& b)
 
 	b.Add(cfg, BulletType::Straight);
 
+	SOUND.PlaySE("EnemyShotSE");
+
 	wantToShot = false;
 }

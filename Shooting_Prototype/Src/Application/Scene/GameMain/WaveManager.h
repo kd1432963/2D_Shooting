@@ -22,7 +22,7 @@ public:
 
 private:
 
-	static const int kMaxWave = 1;
+	static const int kMaxWave = 15;
 
 	int m_wave = 0;
 	int m_waveTimer = 0;

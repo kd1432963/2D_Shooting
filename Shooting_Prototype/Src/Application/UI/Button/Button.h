@@ -52,4 +52,6 @@ private:
 
 	bool m_isHover = false;
 	bool m_isPressed = false;
+	bool m_prevHover = false;
+
 };

@@ -8,24 +8,43 @@
 
 #include"Application/UI/Button/Button.h"
 
+#include"Application/main.h"
+
+#include"Application/Enemy/EnemyManager.h"
+#include"Application/Enemy/Enemy1/Enemy1.h"
+#include"Application/Enemy/Enemy4/Enemy4.h"
+
 //+++++++++++++++++++++++++++++++++++++++++
 // シーンができたときに一度だけ通る関数
 //+++++++++++++++++++++++++++++++++++++++++
 void TitleScene::OnEnter()
 {
+	SOUND.PlayBGM("TitleBGM");
+
 	mp_uiManager = new UIManager();
 
 	mp_startBtn = new Button("STARTButton", { 0.0f,-110.0f }, { 0.45f,0.45f }, { 138,32 });
 	mp_startBtn->onClick = []()
 		{
-			SCENE_MANAGER.RequestChange(std::make_unique<GameScene>());
+			SOUND.StopBGM();
+			SOUND.PlaySE("StartSE");
+			SCENE_MANAGER.RequestChange(std::make_unique<GameScene>(),0.75f);
 		};
+	
 
 	mp_exitBtn = new Button("EXITButton", { 0.0f,-210.0f }, { 0.45f,0.45f }, { 125,32 });
 	mp_exitBtn->onClick = []()
 		{
-			SCENE_MANAGER.RequestChange(std::make_unique<GameScene>());
+			APP.End();
 		};
+	
+
+	mp_enemyManager = new EnemyManager();
+
+	// 画面上部のランダム位置に出す
+	float y = RandomRangeF(GameArea::Bottom, GameArea::Top);
+	mp_enemyManager->AddEnemy<Enemy1>(Math::Vector2{ Screen::Right + 10, y });
+
 }
 
 //+++++++++++++++++++++++++++++++++++++++++
@@ -42,6 +61,16 @@ void TitleScene::OnExit()
 	{
 		delete mp_startBtn;
 		mp_startBtn = nullptr;
+	}
+	if (mp_exitBtn)
+	{
+		delete mp_exitBtn;
+		mp_exitBtn = nullptr;
+	}
+	if (mp_enemyManager)
+	{
+		delete mp_enemyManager;
+		mp_enemyManager = nullptr;
 	}
 }
 
@@ -66,10 +95,26 @@ void TitleScene::OnResume()
 //+++++++++++++++++++++++++++++++++++++++++
 void TitleScene::Update()
 {
-	if (KEY.IsTrigger(VK_RETURN))
+	// 背景用の敵スポーン
+	if (++m_time >= 300)   // 1000Fごとに生成
 	{
-		SCENE_MANAGER.RequestChange(std::make_unique<GameScene>());
+		m_time = 0;
+
+		// 画面上部のランダム位置に出す
+		float y = RandomRangeF(GameArea::Bottom, GameArea::Top);
+
+		int type = RandomRange(0, 1);
+
+		switch (type)
+		{
+		case 0:mp_enemyManager->AddEnemy<Enemy1>(Math::Vector2{ Screen::Right + 10, y }); break;
+		case 1:mp_enemyManager->AddEnemy<Enemy4>(Math::Vector2{ Screen::Right + 10, y }); break;
+		}
 	}
+	
+	
+	mp_enemyManager->Action();
+	mp_enemyManager->Update();
 
 	mp_uiManager->Update();
 
@@ -117,6 +162,8 @@ void TitleScene::Draw2D()
 	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("TitleBack"), ASSET.GetRectangle("TitleBack"));
 
 
+	mp_enemyManager->Draw2D();
+
 	//===================================================================================================
 
 	//=== タイトルロゴ ==================================================================================
@@ -138,6 +185,8 @@ void TitleScene::Draw2D()
 
 	mp_startBtn->Draw();
 	mp_exitBtn->Draw();
+
+	MOUSE.Draw2D();
 }
 
 //+++++++++++++++++++++++++++++++++++++++++

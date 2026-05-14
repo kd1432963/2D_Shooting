@@ -17,7 +17,7 @@ void ItemBase::Update()
 void ItemBase::Draw2D()
 {
 	SHADER.m_spriteShader.SetMatrix(mat);
-	SHADER.m_spriteShader.DrawTex(tex, rect);
+	SHADER.m_spriteShader.DrawTex(tex,0,0,&rect,&Math::Color(1,1,1,1));
 
 	DebugDraw();
 }

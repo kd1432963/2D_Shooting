@@ -18,107 +18,11 @@ void Button::Update()
 
 	m_isHover = OnHover();
 
-	//=== 重なっていれば呼び出す ==================================
-
-	if (m_isHover)
+	//=== ホバーした瞬間だけ音を鳴らす ==============================
+	if (m_isHover && !m_prevHover)
 	{
-		if (onHover)
-		{
-			onHover();
-		}
+		SOUND.PlaySE("HoverSE");
 	}
-
-	//=== 重なっていなければ呼び出す ==============================
-
-	else
-	{
-		if (offHover)
-		{
-			offHover();
-		}
-	}
-
-	//=== ホバー中にクリックすれば押下中 ==================================
-
-	if (m_isHover && MOUSE.IsPressLeft())
-	{
-		m_isPressed = true;
-	}
-
-	//=== 離されたらクリック成立 ===========================================
-
-	if (m_isPressed && MOUSE.IsReleaseLeft())
-	{
-		if (m_isHover && onClick)onClick();
-		m_isPressed = false;
-	}
-
-	//=== 外に出たらクリックキャンセル ======================================
-
-	if (m_isPressed && !m_isHover && MOUSE.IsPressLeft())m_isPressed = false;
-
-	//=== 押下中は色を変える ================================================
-
-	m_color = m_isPressed ?
-		Math::Color(0.9f, 0.9f, 0.9f, 1.0f) :
-		Math::Color(1.0f, 1.0f, 1.0f, 1.0f);
-
-	//=== ボタンらしく大きさを変える ============================
-
-	constexpr float kDiff = 0.05f;
-	constexpr float kSpeed = 0.01f;
-
-	if (m_isPressed)
-	{
-		// 押されていたら元の拡大率から
-		// 変化する最大値になるまで小さくする
-		if (m_scale.x > m_baseScale.x - kDiff)
-		{
-			m_scale.x -= kSpeed;
-			m_scale.y -= kSpeed;
-		}
-	}
-	else if (m_isHover)
-	{
-		// ホバー中は元の拡大率から
-		// 変化する最大値になるまで大きくする
-		if (m_scale.x < m_baseScale.x + kDiff)
-		{
-			m_scale.x += kSpeed;
-			m_scale.y += kSpeed;
-		}
-	}
-	else if (!m_isHover)
-	{
-		// ホバーされていなければ
-		// 元の拡大率に戻っていく
-		// 戻れば終わり
-		if (m_scale == m_baseScale)
-		{
-			return;
-		}
-
-		if (m_scale.x > m_baseScale.x)
-		{
-			m_scale.x -= kSpeed;
-			m_scale.y -= kSpeed;
-		}
-		else if (m_scale.x < m_baseScale.x)
-		{
-			m_scale.x += kSpeed;
-			m_scale.y += kSpeed;
-		}
-	}
-}
-
-void Button::Update(const Math::Vector2& p)
-{
-
-	m_pos = p;
-
-	//=== マウスが重なっているか ==================================
-
-	m_isHover = OnHover();
 
 	//=== 重なっていれば呼び出す ==================================
 
@@ -186,6 +90,93 @@ void Button::Update(const Math::Vector2& p)
 	m_scale.x += (targetScale - m_scale.x) * kLerp;
 
 	m_scale.y = m_scale.x;
+
+	m_prevHover = m_isHover;
+}
+
+void Button::Update(const Math::Vector2& p)
+{
+
+	m_pos = p;
+
+	//=== マウスが重なっているか ==================================
+
+	m_isHover = OnHover();
+
+	//=== ホバーした瞬間だけ音を鳴らす ==============================
+	if (m_isHover && !m_prevHover)
+	{
+		SOUND.PlaySE("HoverSE");
+	}
+
+	//=== 重なっていれば呼び出す ==================================
+
+	if (m_isHover)
+	{
+		if (onHover)
+		{
+			onHover();
+		}
+	}
+
+	//=== 重なっていなければ呼び出す ==============================
+
+	else
+	{
+		if (offHover)
+		{
+			offHover();
+		}
+	}
+
+	//=== ホバー中にクリックすれば押下中 ==================================
+
+	if (m_isHover && MOUSE.IsPressLeft())
+	{
+		m_isPressed = true;
+	}
+
+	//=== 離されたらクリック成立 ===========================================
+
+	if (m_isPressed && MOUSE.IsReleaseLeft())
+	{
+		if (m_isHover && onClick)onClick();
+		m_isPressed = false;
+	}
+
+	//=== 外に出たらクリックキャンセル ======================================
+
+	if (m_isPressed && !m_isHover && MOUSE.IsPressLeft())m_isPressed = false;
+
+	//=== 押下中は色を変える ================================================
+
+	m_color = m_isPressed ?
+		Math::Color(0.9f, 0.9f, 0.9f, 1.0f) :
+		Math::Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+	//=== ボタンらしく大きさを変える ============================
+
+	constexpr float kDiff = 0.02f;
+	constexpr float kLerp = 0.15f;
+
+	// 目標拡大率
+	float targetScale = m_baseScale.x;
+
+	if (m_isPressed)
+	{
+		targetScale -= kDiff;
+	}
+	else if (m_isHover)
+	{
+		targetScale += kDiff;
+	}
+
+	// 補間
+	m_scale.x += (targetScale - m_scale.x) * kLerp;
+
+	m_scale.y = m_scale.x;
+
+	m_prevHover = m_isHover;
 }
 
 void Button::Draw()

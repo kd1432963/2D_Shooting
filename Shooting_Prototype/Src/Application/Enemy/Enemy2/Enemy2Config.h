@@ -7,8 +7,8 @@ namespace Enemy2Const
 
 	constexpr float kPosX = 0.0f;
 	constexpr float kPosY = 0.0f;
-	constexpr float kScaleX = 1.0f;
-	constexpr float kScaleY = 1.0f;
+	constexpr float kScaleX = 8.0f;
+	constexpr float kScaleY = 8.0f;
 	constexpr float kRadius = 32.0f;
 
 	constexpr float kMovePow = 3.0f;

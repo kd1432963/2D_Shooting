@@ -92,6 +92,10 @@ bool EnemyManager::IsBossAlive()
 		{
 			m_bossHP = e->GetHp();
 			m_bossMaxHP = e->GetMaxHp();
+
+			// ‚Ù‚ñ‚Ü‚É‚²‚ß‚ñ‚È‚³‚¢
+			if (m_bossHP <= 0)SOUND.StopBGM();
+
 			return true;
 		}
 	}

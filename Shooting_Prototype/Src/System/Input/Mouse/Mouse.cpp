@@ -59,3 +59,12 @@ void c_Mouse::Update()
 
 	m_wheel = APP.m_window.GetMouseWheelVal();
 }
+
+void c_Mouse::Draw2D()
+{
+	Math::Matrix S = Math::Matrix::CreateScale(0.25f, 0.25f, 1.0f);
+	Math::Matrix T = Math::Matrix::CreateTranslation(m_pos.x + 9, m_pos.y - 22, 0);
+
+	SHADER.m_spriteShader.SetMatrix(S * T);
+	SHADER.m_spriteShader.DrawTex(ASSET.GetTexture("Mouse"), ASSET.GetRectangle("Mouse"));
+}

@@ -36,3 +36,6 @@
 
 // アセットマネージャー
 #include"AssetManager/AssetManager.h"
+
+// サウンドプレイヤー
+#include"Sound/SoundPlayer.h"

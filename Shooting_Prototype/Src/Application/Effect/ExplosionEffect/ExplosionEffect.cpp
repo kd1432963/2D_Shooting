@@ -3,12 +3,15 @@
 ExplosionEffect::ExplosionEffect(const Math::Vector2& pos)
 	:m_pos(pos)
 {
+	SOUND.PlaySE("ExplosionSE");
+
 	rect = ASSET.GetRectangle("ExplosionEffect");
 }
 
 ExplosionEffect::ExplosionEffect(const Math::Vector2& pos, bool isPlayer)
 	:m_pos(pos)
 {
+	SOUND.PlaySE("ExplosionSE");
 	rect = ASSET.GetRectangle("ExplosionEffect");
 	m_isPlayer = isPlayer;
 }

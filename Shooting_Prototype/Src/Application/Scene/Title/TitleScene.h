@@ -3,6 +3,7 @@
 #include"Application/Scene/Core/SceneBase.h"
 
 class UIManager;
+class EnemyManager;
 class Button;
 
 //********************************************************
@@ -43,7 +44,6 @@ public:
 	bool BlocksBelowUpdate() override { return true; }
 	bool BlocksBelowDraw()override { return false; }
 
-
 public:
 
 	//+++++++++++++++++++++++++++++++++++++++++
@@ -51,6 +51,10 @@ public:
 	//+++++++++++++++++++++++++++++++++++++++++
 	UIManager* mp_uiManager = nullptr;
 
+	EnemyManager* mp_enemyManager = nullptr;
+
 	Button* mp_startBtn = nullptr;
 	Button* mp_exitBtn = nullptr;
+
+	int m_time = 0;
 };

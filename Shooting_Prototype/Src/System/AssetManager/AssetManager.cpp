@@ -154,11 +154,18 @@ std::shared_ptr<KdSoundEffect> c_AssetManager::GetBGM(const std::string& tag)
 float c_AssetManager::GetDefaltVol(const std::string& tag)
 {
 	//キー(string)から数値を探して値を返す
-	auto it = m_BGMMap.find(tag);
-	if (it != m_BGMMap.end())
+	auto itSE = m_SEMap.find(tag);
+	if (itSE != m_SEMap.end())
 	{
-		return (it->second.defaultVol);
+		return itSE->second.defaultVol;
 	}
+
+	auto itBGM = m_BGMMap.find(tag);
+	if (itBGM != m_BGMMap.end())
+	{
+		return itBGM->second.defaultVol;
+	}
+
 	return 1.0f;
 }
 

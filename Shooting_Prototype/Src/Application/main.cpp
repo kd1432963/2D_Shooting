@@ -109,6 +109,8 @@ bool Application::Init(int w, int h)
 // アプリケーション終了
 void Application::Release()
 {
+	SOUND.Shutdown();
+
 	D3D.GetSwapChain()->SetFullscreenState(FALSE, 0);
 
 	// imgui解放
@@ -211,7 +213,8 @@ void Application::Execute()
 		// ゲーム更新処理
 		SCENE_MANAGER.Update();
 		
-
+		// Sound 情報更新処理
+		SOUND.Update();
 
 		// ゲーム描画処理
 		SHADER.m_spriteShader.Begin();

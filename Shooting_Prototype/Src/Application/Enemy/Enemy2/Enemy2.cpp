@@ -1,7 +1,7 @@
 #include"Eneny2.h"
 #include "Enemy2Config.h"
 
-#include"Application/GameObject/CircleHitBox.h"
+#include"Application/GameObject/RectHitBox.h"
 #include"Application/Chara/Player.h"
 
 using namespace Enemy2Const;
@@ -13,8 +13,7 @@ Enemy2::Enemy2(const Math::Vector2& p, Player* player)
 	:EnemyBase(EnemyType::Enemy2)
 {
 	mp_player = player;
-
-	hitbox = std::make_unique<CircleHitBox>(kRadius);
+	hitbox = std::make_unique<RectHitBox>(32, 32);
 	if (hitbox)
 	{
 		hitbox->pos = p;
@@ -40,6 +39,7 @@ Enemy2::Enemy2(const Math::Vector2& p, Player* player)
 //+++++++++++++++++++++++++++++++++++++++++
 void Enemy2::Update()
 {
+	UpdateAnim();
 	UpdatePos();
 
 	// Yç¿ïWÇÃâÊñ êßå‰
@@ -81,11 +81,15 @@ void Enemy2::Action()
 //+++++++++++++++++++++++++++++++++++++++++
 void Enemy2::Draw2D()
 {
-	DrawChara();
+	CalcDrawRect();
 
-	std::string hp = std::to_string(status.hp);
-	SHADER.m_spriteShader.SetMatrix(Math::Matrix::Identity);
-	SHADER.m_spriteShader.DrawString(pos.x, pos.y + 20, hp.c_str(), Math::Color(1, 1, 1, 1));
-	SHADER.m_spriteShader.End();
-	SHADER.m_spriteShader.Begin();
+	SHADER.m_spriteShader.SetMatrix(mat);
+	Math::Color color = {};
+
+	float t = ToFloat(status.hp) / status.maxHp;
+
+	color = { 1,1,1,1};
+	SHADER.m_spriteShader.DrawTex(tex,0,0, &rect,&color);
+
+	DebugDraw();
 }

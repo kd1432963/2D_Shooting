@@ -75,6 +75,7 @@ void UIManager::DrawGameUI(int score, const ItemStockManager& stock, Player& pla
 	}
 
 	// アイテム枠
+	SHADER.m_spriteShader.DrawBox(0, -300, 225, 50, &Math::Color(0, 0, 0, 1), true);
 	SHADER.m_spriteShader.DrawBox(0, -300, 225, 50, &color, false);
 	SHADER.m_spriteShader.DrawLine(-225, -285, 225, -285, &Math::Color(1, 1, 1, 1));
 

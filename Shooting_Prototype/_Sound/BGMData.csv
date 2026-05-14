@@ -1,2 +1,5 @@
 ﻿タグ名,ファイルパス,個別音量設定
-Sample,_Sound/Sample/Slash.wav,1.0f
+GameBGM,_Sound/BGM/GameBGM.wav,0.3f
+BossBGM,_Sound/BGM/BossBGM.wav,0.3f
+TitleBGM,_Sound/BGM/TitleBGM.wav,0.3f
+ResultBGM,_Sound/BGM/ResultBGM.wav,0.3f

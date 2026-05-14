@@ -42,7 +42,7 @@ public:
 	float GetHomingTime() const{ return m_homingTime; }
 	float GetPiercingTime() const{ return m_piercingTime; }
 
-	bool IsInvincible()const { return m_isInvincible; }
+	bool IsInvincible()const { return m_isInvincible||m_isDebugInvincible; }
 
 	bool CanUseItem() const;
 
@@ -85,6 +85,7 @@ private:
 
 	//=== ñ≥ìGä«óù =====================
 	bool m_isInvincible = false;
+	bool m_isDebugInvincible = false;
 	float m_invincibleTimer = 0.0f;
 
 	//=== ì_ñ≈óp =======================
